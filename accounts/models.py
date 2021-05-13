@@ -44,9 +44,9 @@ class Like(models.Model):
 
     # relatioships
     user = models.ForeignKey(
-        User, related_name='user_unreads', on_delete=models.CASCADE)
+        User, related_name='user_likes', on_delete=models.CASCADE)
     article = models.ForeignKey(
-        Article, related_name='article_unreads', on_delete=models.CASCADE)
+        Article, related_name='article_likes', on_delete=models.CASCADE)
 
 
 class Private(models.Model):
