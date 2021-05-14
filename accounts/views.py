@@ -27,9 +27,43 @@ def views_register(request):
 @authentication_classes([])
 @permission_classes([AllowAny])
 def views_login(request):
-    # get request user name and
-    # check if empty
-    # find if user exists
-    # serialize user
-    # return user data
-    pass
+    if request.method == 'POST':
+
+        # get data from request object
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        # check if requested fields are empty
+        if (username is None) or (password is None):
+            raise exceptions.AuthenticationFailed(
+                'username or password is required.'
+            )
+        # find username match in DB
+        user = User.objects.filter(username=username).first()
+
+        # if unable to find user in DB
+        if user is None:
+            raise exceptions.AuthenticationFailed(
+                'user not found.'
+            )
+
+        if not user.check_password(password):
+            raise exceptions.AuthenticationFaile(
+                'invalid password.'
+            )
+
+        # serialize user data
+        serialzed_user = UserSerializer(user).data
+
+        # delete password from user object
+        del serialzed_user['password']
+
+        # generate tokens
+        tokens = RefreshToken.for_user(user)
+
+        # return user object and tokens
+        return Response({
+            'refresh': str(tokens),
+            'access': str(tokens.access),
+            'user': serialzed_user
+        })
