@@ -64,6 +64,6 @@ def views_login(request):
         # return user object and tokens
         return Response({
             'refresh': str(tokens),
-            'access': str(tokens.access),
+            'access': str(tokens.access_token),
             'user': serialzed_user
         })
