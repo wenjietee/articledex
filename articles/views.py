@@ -25,12 +25,14 @@ def views_index(request):
 def views_create(request):
     
     if request.method == 'POST':
+        # set current user in data
         request.data['user'] = request.user.pk
+
+        # save article
         article = ArticleSerializer(data=request.data)
-       
         if article.is_valid():
             article.save()
-            return Response({'message': 'article created.'})
+            return Response(article.data)
 
         else:
             raise exceptions.ValidationError()
@@ -39,18 +41,20 @@ def views_create(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def views_show(request, id):
+    # get article by uuid
     article = Article.objects.get(pk=id)
 
+    # delete article
     if request.method == 'DELETE':
         article.delete()
         return Response({'message': 'article deleted.'})
 
+    # edit article
     if request.method == 'PUT':
-        request.data['user'] = request.user.pk
-        serializer = ArticleSerializer(data=request.data)
+        serializer = ArticleSerializer(instance=article, data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
 
     serializer = ArticleSerializer(article, many=False)
-
+    
     return Response(serializer.data)
