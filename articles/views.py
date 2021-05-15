@@ -13,7 +13,7 @@ def views_index(request):
     pass
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
     pass
@@ -21,5 +21,5 @@ def views_create(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def views_show(request, id):
+def views_show(request):
     pass
