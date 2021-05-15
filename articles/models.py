@@ -32,7 +32,7 @@ class Article(models.Model):
     description = models.TextField()
 
     # relationships
-    tags = models.ManyToManyField(Tag, related_name='tags',  blank=True)
+    tags = models.ManyToManyField(Tag, related_name='tags', blank=True)
     user = models.ForeignKey(
         User, related_name='user', on_delete=models.CASCADE)
 

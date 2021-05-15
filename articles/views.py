@@ -5,6 +5,7 @@ from rest_framework import exceptions
 from .models import *
 from .serializers import *
 from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 
@@ -22,13 +23,13 @@ def views_index(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
-
+    
     if request.method == 'POST':
+        request.data['user'] = request.user.pk
         article = ArticleSerializer(data=request.data)
-        print(article)
+       
         if article.is_valid():
             article.save()
-
             return Response({'message': 'article created.'})
 
         else:
@@ -45,7 +46,8 @@ def views_show(request, id):
         return Response({'message': 'article deleted.'})
 
     if request.method == 'PUT':
-        serializer = ArticleSerializer(instance=article, data=request.data)
+        request.data['user'] = request.user.pk
+        serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
 
