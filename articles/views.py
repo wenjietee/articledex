@@ -25,9 +25,10 @@ def views_create(request):
 
     if request.method == 'POST':
         article = ArticleSerializer(data=request.data)
-
+        print(article)
         if article.is_valid():
             article.save()
+
             return Response({'message': 'article created.'})
 
         else:
