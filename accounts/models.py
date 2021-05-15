@@ -13,7 +13,7 @@ class Profile(models.Model):
         editable=False
     )
     description = models.TextField()
-    image = models.CharField(max_length=2083)
+    image = models.CharField(max_length=2083,default='https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png')
 
     # relationships
     user = models.OneToOneField(
