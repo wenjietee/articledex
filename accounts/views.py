@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from .serializers import *
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import exceptions
@@ -24,7 +24,6 @@ def views_register(request):
 
 
 @api_view(['POST'])
-@authentication_classes([])
 @permission_classes([AllowAny])
 def views_login(request):
     if request.method == 'POST':
