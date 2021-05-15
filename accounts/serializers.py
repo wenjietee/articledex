@@ -26,7 +26,6 @@ class UserSerializer(serializers.ModelSerializer):
         # create user's profile
         Profile.objects.create(
             description='',
-            image='',
             user=user
         )
 
