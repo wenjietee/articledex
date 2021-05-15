@@ -73,7 +73,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -105,7 +105,7 @@ ROOT_URLCONF = 'articledex.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "client/build")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,21 +126,21 @@ WSGI_APPLICATION = 'articledex.wsgi.application'
 
 DATABASES = {
     # MacOS
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'articledex',
-    #     'USERNAME': 'fsywj',
-    #     'PORT': 5432
-    # },
-    # Windows
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'articledex',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
-    }
+        'USERNAME': 'fsywj',
+        'PORT': 5432
+    },
+    # Windows
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'articledex',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432'
+    # }
 }
 
 # Password validation
@@ -180,13 +180,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-# static files linked
-STATIC_ROOT = os.path.join(BASE_DIR, '/static')
-STATICFILES_DIR = os.path.join(BASE_DIR, '/static')
-
-# Media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
