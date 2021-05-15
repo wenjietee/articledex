@@ -19,6 +19,9 @@ class Profile(models.Model):
     user = models.OneToOneField(
         User, related_name='profile', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.username}\'s profile'
+
 
 class Unread(models.Model):
     id = models.UUIDField(
@@ -34,6 +37,8 @@ class Unread(models.Model):
     article = models.ForeignKey(
         Article, related_name='article_unreads', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.username}\'s unreads'
 
 class Like(models.Model):
     id = models.UUIDField(
@@ -48,6 +53,8 @@ class Like(models.Model):
     article = models.ForeignKey(
         Article, related_name='article_likes', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.username}\'s liked articles'
 
 class Private(models.Model):
     id = models.UUIDField(
@@ -63,6 +70,8 @@ class Private(models.Model):
     article = models.ForeignKey(
         Article, related_name='article_privates', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.username}\'s private articles'
 
 class Local(models.Model):
     id = models.UUIDField(
@@ -77,3 +86,6 @@ class Local(models.Model):
         User, related_name='user_locals', on_delete=models.CASCADE)
     article = models.ForeignKey(
         Article, related_name='article_locals', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.username}\'s local articles'
