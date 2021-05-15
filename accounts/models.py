@@ -13,7 +13,7 @@ class Profile(models.Model):
         editable=False
     )
     description = models.TextField()
-    image = models.ImageField(upload_to='profile')
+    image = models.CharField(max_length=2083)
 
     # relationships
     user = models.OneToOneField(
