@@ -38,7 +38,7 @@ class Unread(models.Model):
         Article, related_name='article_unreads', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user.username}\'s unreads'
+        return f'{self.user.username}\'s unread articles'
 
 class Like(models.Model):
     id = models.UUIDField(
