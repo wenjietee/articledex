@@ -133,14 +133,14 @@ DATABASES = {
         'PORT': 5432
     },
     # Windows
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'articledex',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'postgres',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432'
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'articledex',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    }
 }
 
 # Password validation

@@ -10,6 +10,7 @@ from rest_framework import exceptions
 
 # Create your views here.
 
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def views_register(request):
@@ -66,6 +67,7 @@ def views_login(request):
             'user': serialzed_user
         })
 
+
 @api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def views_profile(request):
@@ -74,10 +76,21 @@ def views_profile(request):
 
     # edit profile
     if request.method == 'PUT':
-        serializer = ProfileSerializer(instance=profile, data=request.data,partial=True)
+        serializer = ProfileSerializer(
+            instance=profile, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
 
     serializer = ProfileSerializer(profile, many=False)
-    
+
     return Response(serializer.data)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def views_actions(request):
+    if request.method == 'POST':
+        return Response({'message': 'post'})
+
+    elif request.method == 'GET':
+        return Response({'message': 'get'})
