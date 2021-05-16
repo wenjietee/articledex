@@ -5,24 +5,31 @@ from .models import *
 
 
 class TagSerializer(serializers.ModelSerializer):
-    articles = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='title'
-    )
-
     class Meta:
         model = Tag
         fields = '__all__'
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+
     tags = serializers.SlugRelatedField(
         many=True,
-        queryset=Tag.objects.all(),
-        slug_field='text'
+        read_only=True,
+        slug_field='name'
     )
 
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = ('url', 'title', 'article_type',
+                  'content', 'description', 'tags', 'user')
+
+        def create(self, validated_data):
+            tags = validated_data.pop('tags')
+
+            article = Article.objects.create(**validated_data)
+
+            for tag in tags:
+                Tag.objects.get_or_create(name=tag)
+                article.tags.add(tag)
+
+            return article
