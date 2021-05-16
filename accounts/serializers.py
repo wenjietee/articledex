@@ -52,12 +52,13 @@ class UserSerializer(serializers.ModelSerializer):
     user_privates = PrivateSerializer(many=True, read_only=True)
     user_locals = LocalSerializer(many=True, read_only=True)
     user_likes = LikeSerializer(many=True, read_only=True)
+    profile = ProfileSerializer(read_only=True)
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username',
                   'email', 'password', 'user_unreads',
-                  'user_privates', 'user_locals', 'user_likes')
+                  'user_privates', 'user_locals', 'user_likes', 'profile')
         write_only_fields = ('password',)
         read_only_fields = ('id',)
 
