@@ -38,7 +38,7 @@ def views_create(request):
             raise exceptions.ValidationError()
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['POST', 'GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def views_show(request, id):
     # get article by uuid
@@ -55,6 +55,9 @@ def views_show(request, id):
             instance=article, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+
+    # # like article
+    # if request.method == 'POST' and request.GET['like']:
 
     serializer = ArticleSerializer(article, many=False)
 
