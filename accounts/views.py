@@ -86,6 +86,19 @@ def views_profile(request):
     return Response(serializer.data)
 
 
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
+def views_user_stats(request):
+
+    # serialize user data
+    user = get_user_model().objects.get(pk=request.user.id)
+    u = UserSerializer(instance=user).data
+    # delete password from user object
+    del u['password']
+
+    return Response(u)
+
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def views_actions(request):

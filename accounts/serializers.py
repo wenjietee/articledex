@@ -10,45 +10,12 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username',
-                  'email', 'password')
-        write_only_fields = ('password',)
-        read_only_fields = ('id',)
-
-    def create(self, validated_data):
-        user = super().create(validated_data)
-        # hash user password
-        user.set_password(validated_data['password'])
-        user.save()
-
-        # create user's profile
-        Profile.objects.create(
-            description='',
-            user=user
-        )
-
-        return user
-
-
 class UnreadSerializer(serializers.ModelSerializer):
 
     article = ArticleSerializer(read_only=True)
 
     class Meta:
         model = Unread
-        fields = '__all__'
-
-
-class LikeSerializer(serializers.ModelSerializer):
-
-    article = ArticleSerializer(read_only=True)
-
-    class Meta:
-        model = Like
         fields = '__all__'
 
 
@@ -68,3 +35,42 @@ class LocalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Local
         fields = '__all__'
+
+
+class LikeSerializer(serializers.ModelSerializer):
+
+    article = ArticleSerializer(read_only=True)
+
+    class Meta:
+        model = Like
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    user_unreads = UnreadSerializer(many=True, read_only=True)
+    user_privates = PrivateSerializer(many=True, read_only=True)
+    user_locals = LocalSerializer(many=True, read_only=True)
+    user_likes = LikeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username',
+                  'email', 'password', 'user_unreads',
+                  'user_privates', 'user_locals', 'user_likes')
+        write_only_fields = ('password',)
+        read_only_fields = ('id',)
+
+    def create(self, validated_data):
+        user = super().create(validated_data)
+        # hash user password
+        user.set_password(validated_data['password'])
+        user.save()
+
+        # create user's profile
+        Profile.objects.create(
+            description='',
+            user=user
+        )
+
+        return user

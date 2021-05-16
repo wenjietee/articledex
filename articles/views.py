@@ -6,8 +6,6 @@ from .models import *
 from articles.serializers import *
 from accounts.serializers import *
 from django.shortcuts import render
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 
 
 # Create your views here.
