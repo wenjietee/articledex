@@ -56,8 +56,16 @@ def views_show(request, id):
         if serializer.is_valid():
             serializer.save()
 
-    # # like article
-    # if request.method == 'POST' and request.GET['like']:
+    # like/unlike article
+    if request.method == 'POST' and request.GET['action'] == 'like':
+        # create like object
+        Like.objects.create(article=article, user=request.user)
+        return Response({'message': 'articled liked.'})
+
+    if request.method == 'PUT' and request.GET['action'] == 'unlike':
+        # delete like object
+        Like.objects.get(article=article).delete()
+        return Response({'message': 'article unliked.'})
 
     serializer = ArticleSerializer(article, many=False)
 
