@@ -91,11 +91,51 @@ def views_profile(request):
     return Response(serialized_user)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
-def views_actions(request):
-    if request.method == 'POST':
-        return Response({'message': 'post'})
+def views_user_actions(request):
+
+    # get article id from url query
+    article_id = request.GET['article']
+
+    if request.method == 'PUT':
+
+        status_update = {'status': None}
+
+        # update unread status
+        if request.GET['action'] == 'unread':
+
+            unread = Unread.objects.get(article=article_id)
+            status_update['status'] = not unread.status
+            serializer = UnreadSerializer(
+                instance=unread, data=status_update, partial=True)
+
+            if serializer.is_valid():
+                serializer.save()
+
+        # update private status
+        if request.GET['action'] == 'private':
+
+            private = Private.objects.get(article=article_id)
+            status_update['status'] = not private.status
+            serializer = PrivateSerializer(
+                instance=private, data=status_update, partial=True)
+
+            if serializer.is_valid():
+                serializer.save()
+
+        # update local status
+        if request.GET['action'] == 'local':
+
+            local = Local.objects.get(article=article_id)
+            status_update['status'] = not local.status
+            serializer = LocalSerializer(
+                instance=local, data=status_update, partial=True)
+
+            if serializer.is_valid():
+                serializer.save()
+
+        return Response(serializer.data)
 
     elif request.method == 'GET':
         return Response({'message': 'get'})

@@ -13,7 +13,7 @@ class TagSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('url', 'article_type', 'title',
+        fields = ('id', 'url', 'article_type', 'title',
                   'content', 'description', 'user')
 
     def create(self, validated_data):
