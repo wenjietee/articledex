@@ -126,12 +126,12 @@ WSGI_APPLICATION = 'articledex.wsgi.application'
 
 DATABASES = {
     # MacOS
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'articledex',
-        'USERNAME': 'fsywj',
-        'PORT': 5432
-    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'articledex',
+    #     'USERNAME': 'fsywj',
+    #     'PORT': 5432
+    # },
     # Windows
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
