@@ -11,10 +11,14 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+
+    article_likes = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=True)
+
     class Meta:
         model = Article
         fields = ('id', 'url', 'article_type', 'title',
-                  'content', 'description', 'user')
+                  'content', 'description', 'user', 'article_likes')
 
     def create(self, validated_data):
 
