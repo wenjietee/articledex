@@ -3,10 +3,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import exceptions
 from .models import *
-from .serializers import *
+from articles.serializers import *
+from accounts.serializers import *
 from django.shortcuts import render
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 
 
 # Create your views here.
@@ -23,7 +22,7 @@ def views_index(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
-    
+
     if request.method == 'POST':
         # set current user in data
         request.data['user'] = request.user.pk
@@ -32,6 +31,7 @@ def views_create(request):
         article = ArticleSerializer(data=request.data)
         if article.is_valid():
             article.save()
+
             return Response(article.data)
 
         else:
@@ -51,10 +51,11 @@ def views_show(request, id):
 
     # edit article
     if request.method == 'PUT':
-        serializer = ArticleSerializer(instance=article, data=request.data,partial=True)
+        serializer = ArticleSerializer(
+            instance=article, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
 
     serializer = ArticleSerializer(article, many=False)
-    
+
     return Response(serializer.data)
