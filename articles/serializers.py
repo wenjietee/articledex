@@ -1,7 +1,7 @@
-from accounts.serializers import UserSerializer
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import *
+from accounts.models import *
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -12,24 +12,26 @@ class TagSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
 
-    tags = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='name'
-    )
+    article_likes = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=True)
 
     class Meta:
         model = Article
-        fields = ('url', 'title', 'article_type',
-                  'content', 'description', 'tags', 'user')
+        fields = ('id', 'url', 'article_type', 'title',
+                  'content', 'description', 'user', 'article_likes')
 
-        def create(self, validated_data):
-            tags = validated_data.pop('tags')
+    def create(self, validated_data):
 
-            article = Article.objects.create(**validated_data)
+        # create article
+        article = super().create(validated_data)
+        article.save()
 
-            for tag in tags:
-                Tag.objects.get_or_create(name=tag)
-                article.tags.add(tag)
+        # get user
+        user = User.objects.get(pk=article.user.pk)
 
-            return article
+        # init unread, private, local stats
+        Unread.objects.create(status=True, article=article, user=user)
+        Private.objects.create(status=False, article=article, user=user)
+        Local.objects.create(status=False, article=article, user=user)
+
+        return article

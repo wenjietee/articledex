@@ -3,10 +3,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import exceptions
 from .models import *
-from .serializers import *
+from articles.serializers import *
+from accounts.serializers import *
 from django.shortcuts import render
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 
 
 # Create your views here.
@@ -39,7 +38,7 @@ def views_create(request):
             raise exceptions.ValidationError()
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['POST', 'GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def views_show(request, id):
     # get article by uuid
@@ -56,6 +55,17 @@ def views_show(request, id):
             instance=article, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+
+    # like/unlike article
+    if request.method == 'POST' and request.GET['action'] == 'like':
+        # create like object
+        Like.objects.create(article=article, user=request.user)
+        return Response({'message': 'articled liked.'})
+
+    if request.method == 'PUT' and request.GET['action'] == 'unlike':
+        # delete like object
+        Like.objects.get(article=article).delete()
+        return Response({'message': 'article unliked.'})
 
     serializer = ArticleSerializer(article, many=False)
 
