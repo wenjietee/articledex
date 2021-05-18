@@ -1,26 +1,75 @@
 import './App.css';
 import Axios from './utils/Axios';
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
+import Landing from './pages/Landing';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import PublicRoute from './components/PublicRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-	async function login(username, password) {
+	const [user, setUser] = useState({ isAuth: false, userData: undefined });
+
+	// handle login
+	async function login(e, username, password) {
+		e.preventDefault();
+
 		try {
 			let { data } = await Axios.post('api/login/', {
 				username: username,
 				password: password,
 			});
 
+			// set tokens
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
+
+			// login user
+			setUser({ isAuth: true, userData: data.user });
 		} catch (error) {
 			console.log(error.response);
 		}
 	}
 
+	function logout(e) {
+		e.preventDefault();
+
+		// remove tokens
+		localStorage.removeItem('access');
+		localStorage.removeItem('refresh');
+
+		// logout user
+		setUser({ isAuth: false, userData: undefined });
+	}
 	return (
 		<div className='App'>
-			<button onClick={login}>Login</button>
+			<Router>
+				<Switch>
+					<Route
+						exact
+						path='/'
+						login={login}
+						render={(props) => (
+							<Landing {...props} user={user} login={login} />
+						)}
+					/>
+					<ProtectedRoute
+						exact
+						path='/home'
+						user={user}
+						logout={logout}
+						component={Home}
+					/>
+					<Route exact path='/404' component={NotFound} />
+					<Redirect to='/404' />
+				</Switch>
+			</Router>
 		</div>
 	);
 }

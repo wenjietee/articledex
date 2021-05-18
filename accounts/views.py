@@ -54,11 +54,17 @@ def views_login(request):
         # generate tokens
         tokens = RefreshToken.for_user(user)
 
+        # serialize user data
+        serialized_user = UserSerializer(user).data
+        
+        # delete password from user object
+        del serialized_user['password']
+
         # return user object and tokens
         return Response({
             'refresh': str(tokens),
             'access': str(tokens.access_token),
-  
+            'user':serialized_user
         })
 
 
