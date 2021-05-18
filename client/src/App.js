@@ -4,11 +4,11 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-	async function login() {
+	async function login(username, password) {
 		try {
 			let { data } = await Axios.post('api/login/', {
-				username: 'wenjie',
-				password: 'password',
+				username: username,
+				password: password,
 			});
 
 			localStorage.setItem('access', data.access);

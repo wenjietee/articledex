@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('accounts.urls')),
     path('api/articles/', include('articles.urls')),
-    path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     re_path('(^(?!(api|admin)).*$)',
             TemplateView.as_view(template_name='index.html'))
 ]
