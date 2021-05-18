@@ -1,18 +1,27 @@
 import './App.css';
+import Axios from './utils/Axios';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
+	async function login() {
+		try {
+			let { data } = await Axios.post('api/login/', {
+				username: 'wenjie',
+				password: 'password',
+			});
+
+			localStorage.setItem('access', data.access);
+			localStorage.setItem('refresh', data.refresh);
+		} catch (error) {
+			console.log(error.response);
+		}
+	}
+
 	return (
-		<>
-			<Router>
-				<div className='App'>
-					<Switch>
-						<Route path='/' exact component={Home} />
-					</Switch>
-				</div>
-			</Router>
-		</>
+		<div className='App'>
+			<button onClick={login}>Login</button>
+		</div>
 	);
 }
 
