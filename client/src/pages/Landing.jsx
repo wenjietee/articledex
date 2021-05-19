@@ -8,7 +8,7 @@ const Landing = (props) => {
 			<p>
 				<Link to='/home'>Articledex</Link>
 			</p>
-			<p>Logged in status: {props.user.isAuth}</p>
+			<p>Logged in status: {props.isAuth}</p>
 			<button onClick={props.login}>Log In</button>
 		</div>
 	);

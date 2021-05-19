@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const PublicRoute = ({ component: Component, user, ...rest }) => {
+const PublicRoute = ({ component: Component, isAuth, ...rest }) => {
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
-				!user.isAuth ? (
+				!isAuth ? (
 					<Component {...rest} {...props} />
 				) : (
 					<Redirect to='/home' />
