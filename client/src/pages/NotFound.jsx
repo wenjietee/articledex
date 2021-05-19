@@ -10,7 +10,12 @@ const NotFound = () => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Box pt={20}>
+			<Box
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				minHeight='100vh'
+			>
 				<Container fixed align='center'>
 					<Typography variant='h2' gutterBottom>
 						<strong>Oops!</strong>
