@@ -1,7 +1,8 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 
 const Login = () => {
@@ -14,7 +15,40 @@ const Login = () => {
 				justifyContent='center'
 				alignItems='center'
 				minHeight='100vh'
-			></Box>
+			>
+				<form action='' onSubmit=''>
+					<Typography variant='p' gutterBottom>
+						Have an Account?
+					</Typography>
+					<div>
+						<Box pt={2}>
+							<TextField
+								id='outlined-basic'
+								label='Username'
+								variant='outlined'
+							/>
+						</Box>
+					</div>
+					<div>
+						<Box pt={2}>
+							<TextField
+								id='outlined-basic'
+								label='Password'
+								variant='outlined'
+							/>
+						</Box>
+					</div>
+					<Box pt={2} align='center'>
+						<Button
+							variant='contained'
+							color='primary'
+							href='/home'
+						>
+							SIGN IN
+						</Button>
+					</Box>
+				</form>
+			</Box>
 		</React.Fragment>
 	);
 };
