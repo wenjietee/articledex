@@ -55,9 +55,9 @@ function App() {
 		setAuth(false);
 	}
 	return (
-		<div className='App'>
-			<main>
-				<Router>
+		<React.Fragment>
+			<Router>
+				<main>
 					<Switch>
 						<PublicRoute
 							exact
@@ -119,9 +119,9 @@ function App() {
 						<Route exact path='/404' component={NotFound} />
 						<Redirect to='/404' />
 					</Switch>
-				</Router>
-			</main>
-		</div>
+				</main>
+			</Router>
+		</React.Fragment>
 	);
 }
 
