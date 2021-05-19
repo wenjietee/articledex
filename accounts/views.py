@@ -54,17 +54,10 @@ def views_login(request):
         # generate tokens
         tokens = RefreshToken.for_user(user)
 
-        # serialize user data
-        serialized_user = UserSerializer(user).data
-        
-        # delete password from user object
-        del serialized_user['password']
-
         # return user object and tokens
         return Response({
             'refresh': str(tokens),
             'access': str(tokens.access_token),
-            'user':serialized_user
         })
 
 
@@ -85,6 +78,7 @@ def views_profile(request):
     # serialize user data
     user = get_user_model().objects.get(pk=request.user.id)
     serialized_user = UserSerializer(instance=user).data
+    
     # delete password from user object
     del serialized_user['password']
 
@@ -136,6 +130,3 @@ def views_user_actions(request):
                 serializer.save()
 
         return Response(serializer.data)
-
-    elif request.method == 'GET':
-        return Response({'message': 'get'})

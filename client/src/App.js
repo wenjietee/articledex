@@ -14,7 +14,7 @@ import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-	const [user, setUser] = useState({ isAuth: false, userData: undefined });
+	const [user, setUser] = useState({ isAuth: false });
 
 	// handle login
 	async function login(e, username, password) {
@@ -31,7 +31,7 @@ function App() {
 			localStorage.setItem('refresh', data.refresh);
 
 			// login user
-			setUser({ isAuth: true, userData: data.user });
+			setUser({ isAuth: true });
 		} catch (error) {
 			console.log(error.response);
 		}
@@ -45,7 +45,7 @@ function App() {
 		localStorage.removeItem('refresh');
 
 		// logout user
-		setUser({ isAuth: false, userData: undefined });
+		setUser({ isAuth: false });
 	}
 	return (
 		<div className='App'>
@@ -59,13 +59,7 @@ function App() {
 							<Landing {...props} user={user} login={login} />
 						)}
 					/>
-					<ProtectedRoute
-						exact
-						path='/home'
-						user={user}
-						logout={logout}
-						component={Home}
-					/>
+					<ProtectedRoute exact path='/home' component={Home} />
 					<Route exact path='/404' component={NotFound} />
 					<Redirect to='/404' />
 				</Switch>
