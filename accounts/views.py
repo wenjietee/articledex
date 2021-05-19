@@ -27,7 +27,7 @@ def views_register(request):
 @permission_classes([AllowAny])
 def views_login(request):
     if request.method == 'POST':
-
+        
         # get data from request object
         username = request.data.get('username')
         password = request.data.get('password')
@@ -47,15 +47,9 @@ def views_login(request):
             )
 
         if not user.check_password(password):
-            raise exceptions.AuthenticationFaile(
+            raise exceptions.AuthenticationFailed(
                 'invalid password.'
             )
-
-        # serialize user data
-        serialzed_user = UserSerializer(user).data
-
-        # delete password from user object
-        del serialzed_user['password']
 
         # generate tokens
         tokens = RefreshToken.for_user(user)
@@ -64,7 +58,6 @@ def views_login(request):
         return Response({
             'refresh': str(tokens),
             'access': str(tokens.access_token),
-            'user': serialzed_user
         })
 
 
@@ -85,6 +78,7 @@ def views_profile(request):
     # serialize user data
     user = get_user_model().objects.get(pk=request.user.id)
     serialized_user = UserSerializer(instance=user).data
+    
     # delete password from user object
     del serialized_user['password']
 
@@ -136,6 +130,3 @@ def views_user_actions(request):
                 serializer.save()
 
         return Response(serializer.data)
-
-    elif request.method == 'GET':
-        return Response({'message': 'get'})
