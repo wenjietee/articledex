@@ -37,7 +37,9 @@ function App() {
 			// login user
 			setAuth(true);
 		} catch (error) {
-			console.log(error.response);
+			alert(
+				`Error ${error.response.status}: ${error.response.data.detail}`
+			);
 		}
 	}
 

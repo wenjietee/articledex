@@ -1,8 +1,5 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 
 const Register = () => {
@@ -16,7 +13,7 @@ const Register = () => {
 				alignItems='center'
 				minHeight='100vh'
 			>
-				<form action='' onSubmit=''>
+				{/* <form action='' onSubmit=''>
 					<Typography variant='p' gutterBottom>
 						New User
 					</Typography>
@@ -26,6 +23,7 @@ const Register = () => {
 								id='outlined-basic'
 								label='Username'
 								variant='outlined'
+								onChange={handleChange}
 							/>
 						</Box>
 					</div>
@@ -35,6 +33,7 @@ const Register = () => {
 								id='outlined-basic'
 								label='Email'
 								variant='outlined'
+								onChange={handleChange}
 							/>
 						</Box>
 					</div>
@@ -44,6 +43,7 @@ const Register = () => {
 								id='outlined-basic'
 								label='Password'
 								variant='outlined'
+								onChange={handleChange}
 							/>
 						</Box>
 					</div>
@@ -53,19 +53,16 @@ const Register = () => {
 								id='outlined-basic'
 								label='Confirm Password'
 								variant='outlined'
+								onChange={handleChange}
 							/>
 						</Box>
 					</div>
 					<Box pt={2} align='center'>
-						<Button
-							variant='contained'
-							color='primary'
-							href='/home'
-						>
+						<Button variant='contained' color='primary'>
 							SIGN UP
 						</Button>
 					</Box>
-				</form>
+				</form> */}
 			</Box>
 		</React.Fragment>
 	);

@@ -24,7 +24,6 @@ const NotFound = () => {
 						<span>
 							<strong>404:</strong>
 							<small className='text-muted '>
-								{' '}
 								Page not found.
 							</small>
 						</span>
