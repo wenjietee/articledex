@@ -36,7 +36,7 @@ const RegistrationForm = (props) => {
 					setSubmitting(true);
 
 					// register user
-					//props.register(data);
+					props.registerUser(data);
 
 					// enable button
 					setSubmitting(false);
@@ -47,7 +47,6 @@ const RegistrationForm = (props) => {
 						<Typography variant='body1' gutterBottom>
 							New User
 						</Typography>
-						<pre>{JSON.stringify(values, null, 2)}</pre>
 						<div>
 							<Box pt={2}>
 								<Field
