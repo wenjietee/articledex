@@ -23,30 +23,25 @@ function App() {
 	const [isAuth, setAuth] = useState(false);
 
 	// handle login
-	async function login(e, username, password) {
-		e.preventDefault();
+	async function login(username, password) {
+		try {
+			let { data } = await Axios.post('api/login/', {
+				username: username,
+				password: password,
+			});
 
-		// try {
-		// 	let { data } = await Axios.post('api/login/', {
-		// 		username: username,
-		// 		password: password,
-		// 	});
+			// set tokens
+			localStorage.setItem('access', data.access);
+			localStorage.setItem('refresh', data.refresh);
 
-		// 	// set tokens
-		// 	localStorage.setItem('access', data.access);
-		// 	localStorage.setItem('refresh', data.refresh);
-
-		// 	// login user
-		// 	setAuth(true);
-		// } catch (error) {
-		// 	console.log(error.response);
-		// }
-		setAuth(true);
+			// login user
+			setAuth(true);
+		} catch (error) {
+			console.log(error.response);
+		}
 	}
 
-	function logout(e) {
-		e.preventDefault();
-
+	function logout() {
 		// remove tokens
 		localStorage.removeItem('access');
 		localStorage.removeItem('refresh');
