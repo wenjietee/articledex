@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +9,12 @@ const NotFound = () => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Box pt={20}>
+			<Box
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				minHeight='100vh'
+			>
 				<Container fixed align='center'>
 					<Typography variant='h2' gutterBottom>
 						<strong>Oops!</strong>
@@ -20,7 +24,6 @@ const NotFound = () => {
 						<span>
 							<strong>404:</strong>
 							<small className='text-muted '>
-								{' '}
 								Page not found.
 							</small>
 						</span>

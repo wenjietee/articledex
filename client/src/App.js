@@ -19,41 +19,38 @@ import NotFound from './pages/NotFound';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {
+const App = () => {
 	const [isAuth, setAuth] = useState(false);
 
 	// handle login
-	async function login(e, username, password) {
-		e.preventDefault();
+	const login = async (username, password) => {
+		try {
+			let { data } = await Axios.post('api/login/', {
+				username: username,
+				password: password,
+			});
 
-		// try {
-		// 	let { data } = await Axios.post('api/login/', {
-		// 		username: username,
-		// 		password: password,
-		// 	});
+			// set tokens
+			localStorage.setItem('access', data.access);
+			localStorage.setItem('refresh', data.refresh);
 
-		// 	// set tokens
-		// 	localStorage.setItem('access', data.access);
-		// 	localStorage.setItem('refresh', data.refresh);
+			// login user
+			setAuth(true);
+		} catch (error) {
+			alert(
+				`Error ${error.response.status}: ${error.response.data.detail}`
+			);
+		}
+	};
 
-		// 	// login user
-		// 	setAuth(true);
-		// } catch (error) {
-		// 	console.log(error.response);
-		// }
-		setAuth(true);
-	}
-
-	function logout(e) {
-		e.preventDefault();
-
+	const logout = () => {
 		// remove tokens
 		localStorage.removeItem('access');
 		localStorage.removeItem('refresh');
 
 		// logout user
 		setAuth(false);
-	}
+	};
 	return (
 		<React.Fragment>
 			<Router>
@@ -123,6 +120,6 @@ function App() {
 			</Router>
 		</React.Fragment>
 	);
-}
+};
 
 export default App;
