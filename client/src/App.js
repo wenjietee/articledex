@@ -19,11 +19,11 @@ import NotFound from './pages/NotFound';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {
+const App = () => {
 	const [isAuth, setAuth] = useState(false);
 
 	// handle login
-	async function login(username, password) {
+	const login = async (username, password) => {
 		try {
 			let { data } = await Axios.post('api/login/', {
 				username: username,
@@ -41,16 +41,16 @@ function App() {
 				`Error ${error.response.status}: ${error.response.data.detail}`
 			);
 		}
-	}
+	};
 
-	function logout() {
+	const logout = () => {
 		// remove tokens
 		localStorage.removeItem('access');
 		localStorage.removeItem('refresh');
 
 		// logout user
 		setAuth(false);
-	}
+	};
 	return (
 		<React.Fragment>
 			<Router>
@@ -120,6 +120,6 @@ function App() {
 			</Router>
 		</React.Fragment>
 	);
-}
+};
 
 export default App;

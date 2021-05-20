@@ -42,7 +42,7 @@ const RegistrationForm = (props) => {
 					setSubmitting(false);
 				}}
 			>
-				{({ values, isSubmitting }) => (
+				{({ isSubmitting }) => (
 					<Form>
 						<Typography variant='body1' gutterBottom>
 							New User

@@ -6,7 +6,7 @@ import RegistrationForm from '../components/RegistrationForm';
 
 const Register = () => {
 	// handle registration
-	async function registerUser(inputs) {
+	const registerUser = async (inputs) => {
 		try {
 			let { data } = await Axios.post('api/register/', {
 				username: inputs.username,
@@ -19,7 +19,7 @@ const Register = () => {
 				`Error ${error.response.status}: ${error.response.data.detail}`
 			);
 		}
-	}
+	};
 	return (
 		<React.Fragment>
 			<CssBaseline />
