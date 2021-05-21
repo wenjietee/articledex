@@ -11,7 +11,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Article from './pages/Article';
-import ArticleForm from './pages/ArticleForm';
+import ArticleCreate from './pages/ArticleCreate';
+import ArticleEdit from './pages/ArticleEdit';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Landing from './pages/Landing';
@@ -111,7 +112,7 @@ const App = () => {
 							exact
 							path='/article/create'
 							isAuth={isAuth}
-							component={ArticleForm}
+							component={ArticleCreate}
 						/>
 						<ProtectedRoute
 							exact
@@ -123,7 +124,7 @@ const App = () => {
 							exact
 							path='/article/:id/edit'
 							isAuth={isAuth}
-							component={ArticleForm}
+							component={ArticleEdit}
 						/>
 						<ProtectedRoute
 							exact
