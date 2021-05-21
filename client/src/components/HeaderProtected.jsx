@@ -74,11 +74,6 @@ const useStyles = makeStyles((theme) => ({
 		textDecoration: 'none',
 		color: '#ffffff',
 	},
-
-	other: {
-		textDecoration: 'none',
-		color: '#000000',
-	},
 }));
 
 // header component
