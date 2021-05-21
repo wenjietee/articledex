@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ArticleForm = () => {
+const ArticleCreate = () => {
 	return (
 		<div>
 			<h1>Article form</h1>
@@ -8,4 +8,4 @@ const ArticleForm = () => {
 	);
 };
 
-export default ArticleForm;
+export default ArticleCreate;
