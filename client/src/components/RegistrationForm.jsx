@@ -1,10 +1,18 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+
+// form styles
+const useStyles = makeStyles((theme) => ({
+	textField: {
+		width: '30em',
+	},
+}));
 
 // form schema
 const RegistrationSchema = Yup.object({
@@ -19,6 +27,7 @@ const RegistrationSchema = Yup.object({
 
 // form component
 const RegistrationForm = (props) => {
+	const classes = useStyles();
 	return (
 		<div>
 			<Formik
@@ -55,6 +64,7 @@ const RegistrationForm = (props) => {
 									label='Username'
 									type='input'
 									variant='outlined'
+									className={classes.textField}
 									as={TextField}
 								/>
 								<Typography color='error'>
@@ -70,6 +80,7 @@ const RegistrationForm = (props) => {
 									label='Email'
 									type='email'
 									variant='outlined'
+									className={classes.textField}
 									as={TextField}
 								/>
 								<Typography color='error'>
@@ -85,6 +96,7 @@ const RegistrationForm = (props) => {
 									label='Password'
 									type='password'
 									variant='outlined'
+									className={classes.textField}
 									as={TextField}
 								/>
 								<Typography color='error'>
@@ -100,6 +112,7 @@ const RegistrationForm = (props) => {
 									label='Confirm Password'
 									type='password'
 									variant='outlined'
+									className={classes.textField}
 									as={TextField}
 								/>
 								<Typography color='error'>
@@ -112,6 +125,7 @@ const RegistrationForm = (props) => {
 								variant='contained'
 								color='primary'
 								type='submit'
+								size='large'
 								disabled={isSubmitting}
 							>
 								SIGN UP
