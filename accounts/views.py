@@ -130,3 +130,8 @@ def views_user_actions(request):
                 serializer.save()
 
         return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def views_verify(request):
+    return Response({'detail':'verification successful.'})

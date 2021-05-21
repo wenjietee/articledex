@@ -1,6 +1,6 @@
 import './App.css';
 import Axios from './utils/Axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -25,6 +25,28 @@ import Footer from './components/Footer';
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
 
+	useEffect(() => {
+		const access = localStorage.getItem('access');
+
+		// Verify token
+		if (access) {
+			try {
+				Axios.get('api/verify/');
+
+				// verify auth
+				setAuth(true);
+			} catch (error) {
+				// logout user if auth failed
+				console.log(error);
+
+				logout();
+			}
+		} else {
+			setAuth(false);
+		}
+	}, []);
+
+	console.log(isAuth);
 	// handle login
 	const login = async (username, password) => {
 		try {
