@@ -64,6 +64,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	headerButton: {
 		margin: theme.spacing(0, 1),
+		width: '100%',
+		[theme.breakpoints.up('lg')]: {
+			width: '8em',
+		},
 	},
 
 	home: {
@@ -104,8 +108,8 @@ const HeaderProtected = (props) => {
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
+						startIcon={<AddIcon />}
 					>
-						<AddIcon />
 						ADD
 					</Button>
 					<Button
@@ -113,8 +117,8 @@ const HeaderProtected = (props) => {
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
+						startIcon={<AccountCircleIcon />}
 					>
-						<AccountCircleIcon />
 						PROFILE
 					</Button>
 					<Button
