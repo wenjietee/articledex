@@ -41,8 +41,8 @@ const ArticleForm = (props) => {
 					// disable button when submitting form
 					setSubmitting(true);
 
-					// create article
-					props.createArticle(data);
+					// submit data to server
+					props.handleSubmit(data);
 
 					// enable button
 					setSubmitting(false);

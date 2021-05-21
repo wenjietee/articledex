@@ -17,7 +17,7 @@ const ArticleCreate = () => {
 				alignItems='center'
 				minHeight='80vh'
 			>
-				<ArticleForm createArticle={createArticle} />
+				<ArticleForm handleSubmit={createArticle} />
 			</Box>
 		</React.Fragment>
 	);
