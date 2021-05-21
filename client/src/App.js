@@ -18,6 +18,7 @@ import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
+import HeaderPublic from './components/HeaderPublic';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
@@ -54,6 +55,7 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<Router>
+				<HeaderPublic />
 				<main>
 					<Switch>
 						<PublicRoute

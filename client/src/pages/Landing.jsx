@@ -1,16 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Box from '@material-ui/core/Box';
 
 const Landing = (props) => {
 	return (
-		<div>
+		<Box
+			display='flex'
+			justifyContent='center'
+			alignItems='center'
+			minHeight='100vh'
+		>
 			<h1>Landing</h1>
-			<p>
-				<Link to='/home'>Articledex</Link>
-			</p>
-			<p>Logged in status: {props.isAuth}</p>
-			<button onClick={props.login}>Log In</button>
-		</div>
+		</Box>
 	);
 };
 
