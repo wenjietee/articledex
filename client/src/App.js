@@ -31,7 +31,7 @@ const App = () => {
 		// Verify token
 		if (access) {
 			try {
-				Axios.get('api/verify/');
+				Axios.get(`api/verify/`);
 
 				// verify auth
 				setAuth(true);
