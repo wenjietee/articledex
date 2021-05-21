@@ -18,6 +18,9 @@ import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
+import HeaderPublic from './components/HeaderPublic';
+import HeaderProtected from './components/HeaderProtected';
+import Footer from './components/Footer';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
@@ -54,6 +57,11 @@ const App = () => {
 	return (
 		<React.Fragment>
 			<Router>
+				{isAuth ? (
+					<HeaderProtected logout={logout} />
+				) : (
+					<HeaderPublic />
+				)}
 				<main>
 					<Switch>
 						<PublicRoute
@@ -117,6 +125,7 @@ const App = () => {
 						<Redirect to='/404' />
 					</Switch>
 				</main>
+				<Footer />
 			</Router>
 		</React.Fragment>
 	);

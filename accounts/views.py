@@ -18,9 +18,9 @@ def views_register(request):
         user = UserSerializer(data=request.data)
         if user.is_valid():
             user.save()
-            return Response({'message': 'user registered!'})
+            return Response({'status':200,'message': 'user registered!'})
         else:
-            return Response({'message': 'user not registered!'})
+            return Response({'status':500,'message': 'user not registered!'})
 
 
 @api_view(['POST'])

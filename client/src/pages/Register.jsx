@@ -28,7 +28,7 @@ const Register = () => {
 				display='flex'
 				justifyContent='center'
 				alignItems='center'
-				minHeight='100vh'
+				minHeight='50vh'
 			>
 				<RegistrationForm registerUser={registerUser} />
 			</Box>
