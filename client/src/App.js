@@ -35,9 +35,10 @@ const App = () => {
 
 				// verify auth
 				setAuth(true);
+				console.log('verification success');
 			} catch (error) {
 				// logout user if auth failed
-				console.log(error);
+				console.log('verification', error);
 
 				logout();
 			}
@@ -46,7 +47,6 @@ const App = () => {
 		}
 	}, []);
 
-	console.log(isAuth);
 	// handle login
 	const login = async (username, password) => {
 		try {
@@ -106,13 +106,7 @@ const App = () => {
 							isAuth={isAuth}
 							component={Register}
 						/>
-						<ProtectedRoute
-							exact
-							path='/home'
-							logout={logout}
-							isAuth={isAuth}
-							component={Home}
-						/>
+
 						<ProtectedRoute
 							exact
 							path='/article/create'
@@ -142,6 +136,13 @@ const App = () => {
 							path='/profile/edit'
 							isAuth={isAuth}
 							component={ProfileEdit}
+						/>
+						<ProtectedRoute
+							exact
+							path='/home'
+							logout={logout}
+							isAuth={isAuth}
+							component={Home}
 						/>
 						<Route exact path='/404' component={NotFound} />
 						<Redirect to='/404' />
