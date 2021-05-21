@@ -15,7 +15,7 @@ const ArticleCreate = () => {
 				display='flex'
 				justifyContent='center'
 				alignItems='center'
-				minHeight='50vh'
+				minHeight='80vh'
 			>
 				<ArticleForm createArticle={createArticle} />
 			</Box>

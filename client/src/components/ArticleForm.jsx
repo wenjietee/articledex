@@ -10,14 +10,16 @@ import Box from '@material-ui/core/Box';
 // form styles
 const useStyles = makeStyles((theme) => ({
 	textField: {
-		width: '30em',
+		width: '40em',
 	},
 }));
 
 // form schema
 const articleSchema = Yup.object({
-	username: Yup.string().required(),
-	password: Yup.string().required(),
+	url: Yup.string().required(),
+	title: Yup.string().required(),
+	description: Yup.string(),
+	tags: Yup.string(),
 });
 
 // form component
@@ -26,7 +28,12 @@ const ArticleForm = (props) => {
 	return (
 		<div>
 			<Formik
-				initialValues={{ username: '', password: '' }}
+				initialValues={{
+					url: '',
+					title: '',
+					description: '',
+					tags: '',
+				}}
 				validationSchema={articleSchema}
 				validateOnChange={false}
 				validateOnBlur={false}
@@ -35,7 +42,7 @@ const ArticleForm = (props) => {
 					setSubmitting(true);
 
 					// create article
-					//props.createArticle(data);
+					props.createArticle(data);
 
 					// enable button
 					setSubmitting(false);
@@ -44,14 +51,14 @@ const ArticleForm = (props) => {
 				{({ isSubmitting }) => (
 					<Form>
 						<Typography variant='body1' gutterBottom>
-							Have an Account?
+							Save an Article
 						</Typography>
 						<div>
 							<Box pt={2}>
 								<Field
-									name='username'
-									placeholder='Username*'
-									label='Username*'
+									name='url'
+									placeholder='www.myarticle.com/'
+									label='URL*'
 									type='input'
 									variant='outlined'
 									className={classes.textField}
@@ -59,23 +66,69 @@ const ArticleForm = (props) => {
 								/>
 
 								<Typography color='error'>
-									<ErrorMessage name='username' />
+									<ErrorMessage name='url' />
 								</Typography>
 							</Box>
 						</div>
 						<div>
 							<Box pt={2}>
 								<Field
-									name='password'
-									label='Password*'
-									type='password'
+									name='article_type'
+									label='Article Type'
+									type='input'
+									variant='outlined'
+									className={classes.textField}
+									as={TextField}
+								/>
+
+								<Typography color='error'>
+									<ErrorMessage name='url' />
+								</Typography>
+							</Box>
+						</div>
+						<div>
+							<Box pt={2}>
+								<Field
+									name='title'
+									placeholder='article title'
+									label='Title*'
+									type='text'
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
 								/>
 								<Typography color='error'>
-									<ErrorMessage name='password' />
+									<ErrorMessage name='title' />
 								</Typography>
+							</Box>
+						</div>
+						<div>
+							<Box pt={2}>
+								<Field
+									name='description'
+									placeholder='Description'
+									label='Description'
+									type='text'
+									variant='outlined'
+									multiline
+									rows={10}
+									rowsMax={10}
+									className={classes.textField}
+									as={TextField}
+								/>
+							</Box>
+						</div>
+						<div>
+							<Box pt={2}>
+								<Field
+									name='tags'
+									placeholder='tags'
+									label='Tags'
+									type='text'
+									variant='outlined'
+									className={classes.textField}
+									as={TextField}
+								/>
 							</Box>
 						</div>
 						<Box pt={2} align='center'>
