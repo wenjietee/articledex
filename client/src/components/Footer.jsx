@@ -1,12 +1,37 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
-const Footer = (props) => {
+// footer styles
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	title: {
+		flexGrow: 1,
+		textAlign: 'center',
+	},
+	home: {
+		textDecoration: 'none',
+		color: '#000000',
+	},
+}));
+
+// footer component
+const Footer = () => {
+	const classes = useStyles();
 	return (
-		<div>
-			<h1>Home</h1>
-
-			<button onClick={props.logout}>Log Out</button>
-		</div>
+		<React.Fragment>
+			<AppBar position='static' color='transparent' elevation={0}>
+				<Toolbar>
+					<Typography variant='body2' className={classes.title}>
+						© 2021 Article Dex
+					</Typography>
+				</Toolbar>
+			</AppBar>
+		</React.Fragment>
 	);
 };
 

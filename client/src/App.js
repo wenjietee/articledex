@@ -20,6 +20,7 @@ import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 import HeaderPublic from './components/HeaderPublic';
 import HeaderProtected from './components/HeaderProtected';
+import Footer from './components/Footer';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
@@ -124,6 +125,7 @@ const App = () => {
 						<Redirect to='/404' />
 					</Switch>
 				</main>
+				<Footer />
 			</Router>
 		</React.Fragment>
 	);
