@@ -1,6 +1,6 @@
 import './App.css';
 import Axios from './utils/Axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -24,6 +24,28 @@ import Footer from './components/Footer';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
+
+	useEffect(() => {
+		const access = localStorage.getItem('access');
+
+		// Verify token
+		if (access) {
+			try {
+				Axios.get('api/verify/');
+
+				// verify auth
+				setAuth(true);
+				console.log('verification success');
+			} catch (error) {
+				// logout user if auth failed
+				console.log('verification', error);
+
+				logout();
+			}
+		} else {
+			setAuth(false);
+		}
+	}, []);
 
 	// handle login
 	const login = async (username, password) => {
@@ -84,13 +106,7 @@ const App = () => {
 							isAuth={isAuth}
 							component={Register}
 						/>
-						<ProtectedRoute
-							exact
-							path='/home'
-							logout={logout}
-							isAuth={isAuth}
-							component={Home}
-						/>
+
 						<ProtectedRoute
 							exact
 							path='/article/create'
@@ -120,6 +136,13 @@ const App = () => {
 							path='/profile/edit'
 							isAuth={isAuth}
 							component={ProfileEdit}
+						/>
+						<ProtectedRoute
+							exact
+							path='/home'
+							logout={logout}
+							isAuth={isAuth}
+							component={Home}
 						/>
 						<Route exact path='/404' component={NotFound} />
 						<Redirect to='/404' />

@@ -104,7 +104,6 @@ const HeaderProtected = (props) => {
 					</div>
 
 					<Button
-						color='white'
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
@@ -113,7 +112,6 @@ const HeaderProtected = (props) => {
 						ADD
 					</Button>
 					<Button
-						color='white'
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
@@ -122,7 +120,6 @@ const HeaderProtected = (props) => {
 						PROFILE
 					</Button>
 					<Button
-						color='white'
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
