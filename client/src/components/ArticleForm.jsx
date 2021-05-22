@@ -26,7 +26,7 @@ const articleSchema = Yup.object({
 // form component
 const ArticleForm = (props) => {
 	const classes = useStyles();
-	console.log('props', props);
+
 	return (
 		<div>
 			<Formik
@@ -51,7 +51,7 @@ const ArticleForm = (props) => {
 					setSubmitting(false);
 				}}
 			>
-				{({ isSubmitting }) => (
+				{({ isSubmitting, values }) => (
 					<Form>
 						<Typography variant='body1' gutterBottom>
 							Save an Article

@@ -55,7 +55,7 @@ const ArticleEdit = () => {
 				alignItems='center'
 				minHeight='80vh'
 			>
-				<ArticleForm props={article} handleSubmit={editArticle} />
+				<ArticleForm article={article} handleSubmit={editArticle} />
 			</Box>
 		</React.Fragment>
 	);
