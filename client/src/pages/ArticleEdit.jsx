@@ -8,7 +8,6 @@ import ArticleForm from '../components/ArticleForm';
 
 const ArticleEdit = () => {
 	const [article, setArticle] = useState();
-
 	useEffect(() => {
 		// fetched article
 		Axios.get(
@@ -63,7 +62,12 @@ const ArticleEdit = () => {
 						Edit an Article
 					</Typography>
 
-					<ArticleForm article={article} handleSubmit={editArticle} />
+					{article ? (
+						<ArticleForm
+							article={article}
+							handleSubmit={editArticle}
+						/>
+					) : undefined}
 				</Container>
 			</Box>
 		</React.Fragment>
