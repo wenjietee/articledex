@@ -51,11 +51,8 @@ const ArticleForm = (props) => {
 					setSubmitting(false);
 				}}
 			>
-				{({ isSubmitting, values }) => (
+				{({ isSubmitting }) => (
 					<Form>
-						<Typography variant='body1' gutterBottom>
-							Save an Article
-						</Typography>
 						<div>
 							<Box pt={2}>
 								<Field

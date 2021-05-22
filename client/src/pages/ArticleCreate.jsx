@@ -2,6 +2,8 @@ import Axios from '../utils/Axios';
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
 const ArticleCreate = () => {
@@ -39,7 +41,13 @@ const ArticleCreate = () => {
 				alignItems='center'
 				minHeight='80vh'
 			>
-				<ArticleForm handleSubmit={createArticle} />
+				<Container fixed align='center'>
+					<Typography variant='body1' gutterBottom>
+						Save an Article
+					</Typography>
+
+					<ArticleForm handleSubmit={createArticle} />
+				</Container>
 			</Box>
 		</React.Fragment>
 	);

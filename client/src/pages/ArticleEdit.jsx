@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Axios from '../utils/Axios';
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
 const ArticleEdit = () => {
@@ -26,6 +28,7 @@ const ArticleEdit = () => {
 		//let scrapedContent = undefined;
 		// webscraper activates here
 
+		// placeholder article to edit
 		try {
 			await Axios.put(
 				`${process.env.REACT_APP_URL}api/articles/show/cc18b4fe-35b2-4586-8ad0-71153c3a7300`,
@@ -55,7 +58,13 @@ const ArticleEdit = () => {
 				alignItems='center'
 				minHeight='80vh'
 			>
-				<ArticleForm article={article} handleSubmit={editArticle} />
+				<Container fixed align='center'>
+					<Typography variant='body1' gutterBottom>
+						Edit an Article
+					</Typography>
+
+					<ArticleForm article={article} handleSubmit={editArticle} />
+				</Container>
 			</Box>
 		</React.Fragment>
 	);
