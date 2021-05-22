@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import CloudinaryWidget from './CloudinaryWidget';
 
 // form styles
 const useStyles = makeStyles((theme) => ({
@@ -67,6 +68,11 @@ const ProfileEditForm = (props) => {
 							</Box>
 						</div>
 
+						<div>
+							<Box pt={2}>
+								<CloudinaryWidget />
+							</Box>
+						</div>
 						<Box pt={2} align='center'>
 							<Button
 								variant='contained'
