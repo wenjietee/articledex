@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
@@ -26,7 +26,7 @@ const articleSchema = Yup.object({
 // form component
 const ArticleForm = (props) => {
 	const classes = useStyles();
-	const [tags, setTags] = useState([]);
+
 	return (
 		<div>
 			<Formik
@@ -123,23 +123,14 @@ const ArticleForm = (props) => {
 						</div>
 						<div>
 							<Box pt={2}>
-								<ul>
-									{tags.map((tag, index) => (
-										<li key={index}>
-											<span>{tag}</span>
-											<i className='material-icons'>
-												close
-											</i>
-										</li>
-									))}
-								</ul>
-								<TextField
+								<Field
 									name='tags'
+									placeholder='Seperate tags with spacing. Eg. Tag1 Tag2'
 									label='Tags'
 									type='text'
 									variant='outlined'
 									className={classes.textField}
-									placeholder='Press enter to add tags'
+									as={TextField}
 								/>
 							</Box>
 						</div>
