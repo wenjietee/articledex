@@ -115,6 +115,8 @@ const HeaderProtected = (props) => {
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
+						component={Link}
+						to='/profile'
 						startIcon={<AccountCircleIcon />}
 					>
 						PROFILE
