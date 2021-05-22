@@ -29,8 +29,8 @@ const ProfileEditForm = (props) => {
 		<div>
 			<Formik
 				initialValues={{
-					description: '',
-					image: '',
+					description: props.profile.description,
+					image: props.profile.image,
 				}}
 				validationSchema={ProfileSchema}
 				validateOnChange={false}
@@ -40,13 +40,13 @@ const ProfileEditForm = (props) => {
 					setSubmitting(true);
 
 					// register user
-					//props.editProfile(data);
+					props.editProfile(data);
 
 					// enable button
 					setSubmitting(false);
 				}}
 			>
-				{({ isSubmitting }) => (
+				{({ values, isSubmitting }) => (
 					<Form>
 						<Typography variant='body1' gutterBottom>
 							Edit Profile
@@ -64,6 +64,7 @@ const ProfileEditForm = (props) => {
 									rowsMax={8}
 									className={classes.textField}
 									as={TextField}
+									value={values.description}
 								/>
 								<Typography color='error'>
 									<ErrorMessage name='description' />
