@@ -39,7 +39,8 @@ const HeaderPublic = (props) => {
 						<Button
 							color='primary'
 							variant='outlined'
-							href='/register'
+							component={Link}
+							to='/register'
 						>
 							SIGN UP
 						</Button>
@@ -47,7 +48,8 @@ const HeaderPublic = (props) => {
 						<Button
 							color='primary'
 							variant='outlined'
-							href='/login'
+							component={Link}
+							to='/login'
 						>
 							SIGN IN
 						</Button>

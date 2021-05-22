@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
+import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -39,7 +40,8 @@ const Landing = (props) => {
 							color='primary'
 							variant='contained'
 							size='large'
-							href='/login'
+							component={Link}
+							to='/login'
 							className={classes.button}
 						>
 							SIGN IN
@@ -50,7 +52,8 @@ const Landing = (props) => {
 							color='primary'
 							variant='contained'
 							size='large'
-							href='/register'
+							component={Link}
+							to='/register'
 							className={classes.button}
 						>
 							SIGN UP
