@@ -26,7 +26,7 @@ const articleSchema = Yup.object({
 // form component
 const ArticleForm = (props) => {
 	const classes = useStyles();
-
+	console.log('props', props);
 	return (
 		<div>
 			<Formik

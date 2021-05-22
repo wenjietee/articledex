@@ -8,10 +8,9 @@ const ArticleCreate = () => {
 	const createArticle = async (inputs) => {
 		//let scrapedContent = undefined;
 		// webscraper activates here
-		console.log(inputs);
 
 		try {
-			let { data } = await Axios.post(
+			await Axios.post(
 				`${process.env.REACT_APP_URL}api/articles/create/`,
 				{
 					url: inputs.url,
