@@ -15,7 +15,11 @@ const Article = (props) => {
 
 	return (
 		<div>
-			<pre>{JSON.stringify(article.data, null, 2)}</pre>
+			<pre>
+				{article
+					? JSON.stringify(article.data, null, 2)
+					: 'loading article'}
+			</pre>
 		</div>
 	);
 };
