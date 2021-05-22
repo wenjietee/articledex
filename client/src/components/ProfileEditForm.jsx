@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
@@ -30,13 +30,21 @@ const ProfileSchema = Yup.object({
 const ProfileEditForm = (props) => {
 	const classes = useStyles();
 
+	const [image, setImage] = useState(props.profile.image);
+
+	// set image from cloudinary
+	const getImageUrl = (image) => {
+		setImage(image);
+	};
+
 	return (
 		<div>
 			<Formik
 				initialValues={{
 					description: props.profile.description,
-					image: props.profile.image,
+					image: image,
 				}}
+				enableReinitialize
 				validationSchema={ProfileSchema}
 				validateOnChange={false}
 				validateOnBlur={false}
@@ -84,9 +92,10 @@ const ProfileEditForm = (props) => {
 									className={classes.image}
 									alt='profile'
 								/>
-								<CloudinaryWidget />
+								<CloudinaryWidget getImageUrl={getImageUrl} />
 							</Box>
 						</div>
+
 						<Box pt={2} align='center'>
 							<Button
 								variant='contained'

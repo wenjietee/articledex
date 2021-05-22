@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 const CloudinaryWidget = (props) => {
 	const [isUploaded, setUploaded] = useState(props.image);
 
+	// cloudinary widget
 	const openWidget = () => {
 		const widget = window.cloudinary.createUploadWidget(
 			{
@@ -24,8 +25,11 @@ const CloudinaryWidget = (props) => {
 				],
 			},
 			(error, response) => {
+				// check if upload successful
 				if (response.event === 'success') {
-					//props.getImageUrl(response.info.secure_url);
+					// store image url
+					props.getImageUrl(response.info.secure_url);
+					// change upload status to render button appearance
 					setUploaded({ isUploaded: true });
 				} else {
 					console.log(error);
