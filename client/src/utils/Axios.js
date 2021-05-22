@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-let base = 'http://localhost:8000';
+let base = process.env.REACT_APP_URL;
 
 Axios.interceptors.request.use(
 	(config) => {

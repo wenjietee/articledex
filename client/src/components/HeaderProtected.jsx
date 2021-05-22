@@ -107,6 +107,8 @@ const HeaderProtected = (props) => {
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
+						component={Link}
+						to='/article/create'
 						startIcon={<AddIcon />}
 					>
 						ADD
@@ -115,6 +117,9 @@ const HeaderProtected = (props) => {
 						variant='contained'
 						disableElevation={true}
 						className={classes.headerButton}
+						component={Link}
+						//to='/profile'
+						to='/article/123/edit'
 						startIcon={<AccountCircleIcon />}
 					>
 						PROFILE
