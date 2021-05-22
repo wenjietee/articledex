@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 // form schema
 const articleSchema = Yup.object({
 	url: Yup.string().required(),
+	article_type: Yup.string(),
 	title: Yup.string().required(),
 	description: Yup.string(),
 	tags: Yup.string(),
@@ -30,6 +31,7 @@ const ArticleForm = (props) => {
 			<Formik
 				initialValues={{
 					url: '',
+					article_type: '',
 					title: '',
 					description: '',
 					tags: '',
