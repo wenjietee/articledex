@@ -25,7 +25,7 @@ const CloudinaryWidget = (props) => {
 			},
 			(error, response) => {
 				if (response.event === 'success') {
-					//props.getImageUrl(response.info.secure_url);
+					props.getImageUrl(response.info.secure_url);
 					setUploaded({ isUploaded: true });
 				} else {
 					console.log(error);

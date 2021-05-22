@@ -18,16 +18,19 @@ const useStyles = makeStyles((theme) => ({
 // form schema
 const ProfileSchema = Yup.object({
 	description: Yup.string(),
+	image: Yup.string(),
 });
 
 // form component
 const ProfileEditForm = (props) => {
 	const classes = useStyles();
+
 	return (
 		<div>
 			<Formik
 				initialValues={{
 					description: '',
+					image: '',
 				}}
 				validationSchema={ProfileSchema}
 				validateOnChange={false}
