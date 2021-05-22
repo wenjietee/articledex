@@ -30,13 +30,23 @@ const ArticleForm = (props) => {
 	return (
 		<div>
 			<Formik
-				initialValues={{
-					url: props.article.url,
-					article_type: props.article.article_type,
-					title: props.article.title,
-					description: props.article.description,
-					tags: props.article.tags,
-				}}
+				initialValues={
+					props.article
+						? {
+								url: props.article.url,
+								article_type: props.article.article_type,
+								title: props.article.title,
+								description: props.article.description,
+								tags: props.article.tags,
+						  }
+						: {
+								url: '',
+								article_type: '',
+								title: '',
+								description: '',
+								tags: '',
+						  }
+				}
 				validationSchema={articleSchema}
 				validateOnChange={false}
 				validateOnBlur={false}
