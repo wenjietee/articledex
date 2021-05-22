@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 
 const CloudinaryWidget = (props) => {
-	const [isUploaded, setUploaded] = useState();
+	const [isUploaded, setUploaded] = useState(props.image);
 
 	const openWidget = () => {
 		const widget = window.cloudinary.createUploadWidget(
@@ -25,7 +25,7 @@ const CloudinaryWidget = (props) => {
 			},
 			(error, response) => {
 				if (response.event === 'success') {
-					props.getImageUrl(response.info.secure_url);
+					//props.getImageUrl(response.info.secure_url);
 					setUploaded({ isUploaded: true });
 				} else {
 					console.log(error);

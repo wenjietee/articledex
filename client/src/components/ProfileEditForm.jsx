@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
 	textField: {
 		width: '30em',
 	},
+	image: {
+		height: '150px',
+		width: '150px',
+		objectFit: 'cover',
+	},
 }));
 
 // form schema
@@ -74,6 +79,11 @@ const ProfileEditForm = (props) => {
 
 						<div>
 							<Box pt={2}>
+								<img
+									src={values.image}
+									className={classes.image}
+									alt='profile'
+								/>
 								<CloudinaryWidget />
 							</Box>
 						</div>
