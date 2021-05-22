@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 // form schema
 const articleSchema = Yup.object({
 	url: Yup.string().required(),
+	article_type: Yup.string(),
 	title: Yup.string().required(),
 	description: Yup.string(),
 	tags: Yup.string(),
@@ -25,15 +26,27 @@ const articleSchema = Yup.object({
 // form component
 const ArticleForm = (props) => {
 	const classes = useStyles();
+
 	return (
 		<div>
 			<Formik
-				initialValues={{
-					url: '',
-					title: '',
-					description: '',
-					tags: '',
-				}}
+				initialValues={
+					props.article
+						? {
+								url: props.article.url,
+								article_type: props.article.article_type,
+								title: props.article.title,
+								description: props.article.description,
+								tags: props.article.tags,
+						  }
+						: {
+								url: '',
+								article_type: '',
+								title: '',
+								description: '',
+								tags: '',
+						  }
+				}
 				validationSchema={articleSchema}
 				validateOnChange={false}
 				validateOnBlur={false}
@@ -48,11 +61,8 @@ const ArticleForm = (props) => {
 					setSubmitting(false);
 				}}
 			>
-				{({ isSubmitting }) => (
+				{({ values, isSubmitting }) => (
 					<Form>
-						<Typography variant='body1' gutterBottom>
-							Save an Article
-						</Typography>
 						<div>
 							<Box pt={2}>
 								<Field
@@ -63,6 +73,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.url}
 								/>
 
 								<Typography color='error'>
@@ -79,6 +90,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.article_type}
 								/>
 
 								<Typography color='error'>
@@ -96,6 +108,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.title}
 								/>
 								<Typography color='error'>
 									<ErrorMessage name='title' />
@@ -115,6 +128,7 @@ const ArticleForm = (props) => {
 									rowsMax={10}
 									className={classes.textField}
 									as={TextField}
+									value={values.description}
 								/>
 							</Box>
 						</div>
@@ -122,12 +136,13 @@ const ArticleForm = (props) => {
 							<Box pt={2}>
 								<Field
 									name='tags'
-									placeholder='tags'
+									placeholder='Seperate tags with spacing. Eg. Tag1 Tag2'
 									label='Tags'
 									type='text'
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.tags}
 								/>
 							</Box>
 						</div>

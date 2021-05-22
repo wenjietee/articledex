@@ -118,7 +118,8 @@ const HeaderProtected = (props) => {
 						disableElevation={true}
 						className={classes.headerButton}
 						component={Link}
-						to='/profile'
+						//to='/profile'
+						to='/article/123/edit'
 						startIcon={<AccountCircleIcon />}
 					>
 						PROFILE
