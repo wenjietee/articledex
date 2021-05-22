@@ -51,7 +51,7 @@ const ArticleForm = (props) => {
 					setSubmitting(false);
 				}}
 			>
-				{({ isSubmitting }) => (
+				{({ values, isSubmitting }) => (
 					<Form>
 						<div>
 							<Box pt={2}>
@@ -63,6 +63,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.url}
 								/>
 
 								<Typography color='error'>
@@ -79,6 +80,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.article_type}
 								/>
 
 								<Typography color='error'>
@@ -96,6 +98,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.title}
 								/>
 								<Typography color='error'>
 									<ErrorMessage name='title' />
@@ -115,6 +118,7 @@ const ArticleForm = (props) => {
 									rowsMax={10}
 									className={classes.textField}
 									as={TextField}
+									value={values.description}
 								/>
 							</Box>
 						</div>
@@ -128,6 +132,7 @@ const ArticleForm = (props) => {
 									variant='outlined'
 									className={classes.textField}
 									as={TextField}
+									value={values.tags}
 								/>
 							</Box>
 						</div>
