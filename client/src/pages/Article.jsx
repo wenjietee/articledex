@@ -36,6 +36,11 @@ const Article = (props) => {
 		).then((response) => {
 			// set state with fetched article
 			setArticle(response.data);
+
+			//check if article belongs to user
+			if (response.data.user === props.user.id) {
+				setUserArticle(true);
+			}
 		});
 	}, [props.match.params.id]);
 
@@ -51,7 +56,11 @@ const Article = (props) => {
 								color='primary'
 								variant='outlined'
 								component={Link}
-								className={classes.button}
+								className={
+									isUserArticle
+										? classes.button
+										: classes.hideButton
+								}
 								to={`/article/${article.id}/edit`}
 							>
 								EDIT
@@ -59,7 +68,11 @@ const Article = (props) => {
 							<Button
 								color='primary'
 								variant='outlined'
-								className={classes.button}
+								className={
+									isUserArticle
+										? classes.button
+										: classes.hideButton
+								}
 							>
 								DELETE
 							</Button>
@@ -80,9 +93,9 @@ const Article = (props) => {
 							{article.tags.map((tag) => {
 								return (
 									<Chip
+										key={tag}
 										label={tag}
 										component='a'
-										color='basic'
 										size='small'
 										href='#'
 										clickable

@@ -1,4 +1,3 @@
-from django.db.models.query import QuerySet
 from rest_framework import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.encoding import smart_text
