@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Axios from '../utils/Axios';
 import ArticleCard from '../components/ArticleCard';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 
 const Home = () => {
 	// states
@@ -43,15 +47,16 @@ const Home = () => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Switch
-				checked={onlyUser.checked}
-				onChange={handleChange}
-				color='primary'
-				name='checked'
-				inputProps={{ 'aria-label': 'primary checkbox' }}
-			/>
-			<label>JShow only my articles</label>
-			<Box ml={5}>
+
+			<Box ml={30} mt={3}>
+				<Switch
+					checked={onlyUser.checked}
+					onChange={handleChange}
+					color='primary'
+					name='checked'
+					inputProps={{ 'aria-label': 'primary checkbox' }}
+				/>
+				<label>Show only my articles</label>
 				{articles
 					? articles.map((article) => {
 							return (
@@ -62,8 +67,28 @@ const Home = () => {
 							);
 					  })
 					: undefined}
-			</Box>
 
+				<Card raised>
+					<CardHeader title='Unread Articles' />
+					<CardContent>
+						<ul>
+							{unreads
+								? unreads.user_unreads.map((unread) => {
+										return (
+											<li key={unread.id}>
+												<Link
+													to={`/article/${unread.article.id}`}
+												>
+													{unread.article.title}
+												</Link>
+											</li>
+										);
+								  })
+								: undefined}
+						</ul>
+					</CardContent>
+				</Card>
+			</Box>
 			<pre>{JSON.stringify(unreads, null, 2)}</pre>
 		</React.Fragment>
 	);
