@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
-
+import ArticleCard from '../components/ArticleCard';
 const Home = (props) => {
 	// states
 	const [articles, setArticles] = useState();
@@ -34,7 +34,13 @@ const Home = (props) => {
 
 	return (
 		<div>
-			<pre>{JSON.stringify(articles, null, 2)}</pre>
+			{articles
+				? articles.map((article) => {
+						return (
+							<ArticleCard key={article.id} article={article} />
+						);
+				  })
+				: undefined}
 			<pre>{JSON.stringify(unreads, null, 2)}</pre>
 		</div>
 	);
