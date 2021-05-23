@@ -89,7 +89,6 @@ const Home = () => {
 					</CardContent>
 				</Card>
 			</Box>
-			<pre>{JSON.stringify(unreads, null, 2)}</pre>
 		</React.Fragment>
 	);
 };
