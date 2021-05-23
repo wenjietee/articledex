@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -15,18 +16,25 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: 10,
 		minWidth: '5em',
 	},
+	hideButton: {
+		display: 'none',
+	},
+	chip: {
+		marginRight: 5,
+	},
 }));
 
 const Article = (props) => {
 	const classes = useStyles();
 	const [article, setArticle] = useState();
+	const [isUserArticle, setUserArticle] = useState();
+
 	useEffect(() => {
 		// fetched article
 		Axios.get(
 			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
 		).then((response) => {
 			// set state with fetched article
-
 			setArticle(response.data);
 		});
 	}, [props.match.params.id]);
@@ -69,7 +77,19 @@ const Article = (props) => {
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>
 							<p>Tags:</p>
-							<p>{article.tags}</p>
+							{article.tags.map((tag) => {
+								return (
+									<Chip
+										label={tag}
+										component='a'
+										color='basic'
+										size='small'
+										href='#'
+										clickable
+										className={classes.chip}
+									/>
+								);
+							})}
 						</Grid>
 						<Grid item xs={12}>
 							<p>{article.content}</p>
@@ -77,9 +97,6 @@ const Article = (props) => {
 					</Grid>
 				</Box>
 			) : undefined}
-			<pre>
-				{article ? JSON.stringify(article, null, 2) : 'loading article'}
-			</pre>
 		</React.Fragment>
 	);
 };
