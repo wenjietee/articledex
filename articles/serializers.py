@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from .models import *
 from accounts.models import *
 
-
 class CreatableSlugRelatedField(serializers.SlugRelatedField):
     def to_internal_value(self, data):
         try:
@@ -28,21 +27,24 @@ class ArticleSimpleSerializer(serializers.ModelSerializer):
         queryset=Tag.objects.all(),
         slug_field='name'
     )
+    user= serializers.StringRelatedField(many=False)
     class Meta:
         model=Article
-        fields=('id','url','title','tags','user','description','image','article_likes',)
+        fields=('id','url','title','tags','user','description','image','article_likes')
         
 class ArticleSerializer(serializers.ModelSerializer):
 
     article_likes = serializers.PrimaryKeyRelatedField(
         many=True, read_only=True)
 
+
     tags = CreatableSlugRelatedField(
         many=True,
         queryset=Tag.objects.all(),
         slug_field='name'
     )
-
+    
+    user= serializers.StringRelatedField(many=False)
     class Meta:
         model = Article
         fields = ('id', 'url', 'article_type', 'title',
@@ -71,3 +73,4 @@ class ArticleSerializer(serializers.ModelSerializer):
         Local.objects.create(status=False, article=article, user=user)
 
         return article
+  

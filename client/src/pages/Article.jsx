@@ -40,14 +40,14 @@ const Article = (props) => {
 				setArticle(response.data);
 
 				//check if article belongs to user
-				if (response.data.user === props.user.id) {
+				if (response.data.user === props.user.username) {
 					setUserArticle(true);
 				}
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [props.match.params.id, props.user.id]);
+	}, [props.match.params.id, props.user.username]);
 
 	const handleDelete = () => {
 		// delete article
