@@ -12,8 +12,8 @@ const ProfileEdit = () => {
 			(response) => {
 				// set state with fetched article
 				setProfile({
-					description: response.data.profile.description,
-					image: response.data.profile.image,
+					description: response.data.description,
+					image: response.data.image,
 				});
 			}
 		);
