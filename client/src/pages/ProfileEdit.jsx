@@ -8,12 +8,12 @@ const ProfileEdit = () => {
 	const [profile, setProfile] = useState();
 	useEffect(() => {
 		// fetched article
-		Axios.get(`${process.env.REACT_APP_URL}api/profile/`).then(
+		Axios.get(`${process.env.REACT_APP_URL}api/profile/edit`).then(
 			(response) => {
 				// set state with fetched article
 				setProfile({
-					description: response.data.profile.description,
-					image: response.data.profile.image,
+					description: response.data.description,
+					image: response.data.image,
 				});
 			}
 		);
@@ -21,7 +21,7 @@ const ProfileEdit = () => {
 
 	const editProfile = async (inputs) => {
 		try {
-			await Axios.put(`${process.env.REACT_APP_URL}api/profile/`, {
+			await Axios.put(`${process.env.REACT_APP_URL}api/profile/edit`, {
 				description: inputs.description,
 				image: inputs.image,
 			});
