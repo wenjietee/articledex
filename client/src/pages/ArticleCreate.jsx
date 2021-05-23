@@ -1,5 +1,5 @@
 import Axios from '../utils/Axios';
-import React from 'react';
+import React, { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,9 @@ import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
 const ArticleCreate = () => {
+	// states
+
+	// create article
 	const createArticle = async (inputs) => {
 		//let scrapedContent = undefined;
 		// webscraper activates here

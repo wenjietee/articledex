@@ -6,10 +6,12 @@ import Box from '@material-ui/core/Box';
 import ProfileEditForm from '../components/ProfileEditForm';
 
 const ProfileEdit = () => {
+	// states
 	const [profile, setProfile] = useState();
 	const [isSubmitted, setSubmitted] = useState(false);
+
+	// get article
 	useEffect(() => {
-		// fetched article
 		try {
 			Axios.get(`${process.env.REACT_APP_URL}api/profile/edit`).then(
 				(response) => {

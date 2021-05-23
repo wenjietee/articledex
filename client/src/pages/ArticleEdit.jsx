@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
 const ArticleEdit = (props) => {
+	// states
 	const [article, setArticle] = useState();
 	const [isSubmitted, setSubmitted] = useState(false);
 

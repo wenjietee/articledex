@@ -25,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Article = (props) => {
+	// states
 	const classes = useStyles();
 	const [article, setArticle] = useState();
 	const [isUserArticle, setUserArticle] = useState();
 
+	// get article
 	useEffect(() => {
-		// fetch article
 		try {
 			Axios.get(
 				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
