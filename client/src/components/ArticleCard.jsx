@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 		marginTop: 30,
 	},
 	title: {
-		fontSize: 14,
+		marginTop: '-3.5em',
 	},
 	pos: {
 		marginBottom: 12,
@@ -50,7 +50,11 @@ const ArticleCard = (props) => {
 			<CardContent>
 				<Grid container spacing={3} alignItems='center'>
 					<Grid item xs={9}>
-						<Typography variant='h5' component='h2'>
+						<Typography
+							variant='h5'
+							component='h2'
+							className={classes.title}
+						>
 							{props.article.title}
 						</Typography>
 						<Typography

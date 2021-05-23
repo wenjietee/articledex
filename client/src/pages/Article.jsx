@@ -11,16 +11,21 @@ import Chip from '@material-ui/core/Chip';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		minwidth: 600,
 	},
 	button: {
-		marginRight: 10,
+		margin: theme.spacing(0.5, 0.5),
 		minWidth: '5em',
+		width: '6em',
 	},
 	hideButton: {
 		display: 'none',
 	},
 	chip: {
 		marginRight: 5,
+	},
+	title: {
+		marginTop: '-2em',
 	},
 }));
 
@@ -67,8 +72,8 @@ const Article = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 			{article ? (
-				<Box mt={1} p={10}>
-					<Grid container spacing={3} alignItems='center'>
+				<Box mt={1} p={10} width='75%' minWidth='50%'>
+					<Grid container spacing={3} className={classes.root}>
 						<Grid item xs={12}>
 							<img src={article.image} alt='article' />
 						</Grid>
@@ -101,7 +106,7 @@ const Article = (props) => {
 							</Button>
 						</Grid>
 						<Grid item xs={8}>
-							<h1>{article.title}</h1>
+							<h1 className={classes.title}>{article.title}</h1>
 							<h3>
 								<a href={article.url}>Source</a>
 							</h3>
