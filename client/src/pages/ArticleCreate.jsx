@@ -1,5 +1,6 @@
 import Axios from '../utils/Axios';
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -7,12 +8,17 @@ import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
 const ArticleCreate = () => {
+	// states
+	const [articleId, setArticleId] = useState();
+	const [isSubmitted, setSubmitted] = useState(false);
+
+	// create article
 	const createArticle = async (inputs) => {
 		//let scrapedContent = undefined;
 		// webscraper activates here
 
 		try {
-			await Axios.post(
+			const { data } = await Axios.post(
 				`${process.env.REACT_APP_URL}api/articles/create/`,
 				{
 					url: inputs.url,
@@ -23,14 +29,17 @@ const ArticleCreate = () => {
 					tags: inputs.tags.split(' '),
 				}
 			);
-			alert(`Article created `);
+			// set submit to true and set article id
+			setSubmitted(true);
+			setArticleId(data.id);
 		} catch (error) {
-			alert(
-				`Error ${error.response.status}: ${error.response.data.detail}`
-			);
+			alert(error);
 		}
 	};
 
+	if (isSubmitted && articleId) {
+		return <Redirect to={`/article/${articleId}`} />;
+	}
 	return (
 		<React.Fragment>
 			<CssBaseline />

@@ -1,5 +1,6 @@
 import Axios from '../utils/Axios';
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -7,7 +8,9 @@ import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
 const ArticleEdit = (props) => {
+	// states
 	const [article, setArticle] = useState();
+	const [isSubmitted, setSubmitted] = useState(false);
 
 	// get article data
 	useEffect(() => {
@@ -41,14 +44,16 @@ const ArticleEdit = (props) => {
 					tags: inputs.tags.split(' '),
 				}
 			);
-			alert(`Article edited`);
+			setSubmitted(true);
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
 			);
 		}
 	};
-
+	if (isSubmitted) {
+		return <Redirect to={`/article/${props.match.params.id}`} />;
+	}
 	return (
 		<React.Fragment>
 			<CssBaseline />

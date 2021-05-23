@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -25,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Article = (props) => {
+	// states
 	const classes = useStyles();
 	const [article, setArticle] = useState();
 	const [isUserArticle, setUserArticle] = useState();
-
+	const [isDeleted, setDeleted] = useState(false);
+	// get article
 	useEffect(() => {
-		// fetch article
 		try {
 			Axios.get(
 				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
@@ -54,11 +55,14 @@ const Article = (props) => {
 			Axios.delete(
 				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
 			);
-			alert('article deleted');
+			setDeleted(true);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+	if (isDeleted) {
+		return <Redirect to='/home' />;
+	}
 	return (
 		<React.Fragment>
 			<CssBaseline />

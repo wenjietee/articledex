@@ -154,7 +154,7 @@ const ArticleForm = (props) => {
 								size='large'
 								disabled={isSubmitting}
 							>
-								ADD ARTICLE
+								SUBMIT
 							</Button>
 						</Box>
 					</Form>
