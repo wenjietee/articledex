@@ -22,15 +22,15 @@ const ArticleCreate = () => {
 					description: inputs.description,
 					tags: inputs.tags.split(' '),
 				}
-			);
-			alert(`Article created `);
+			).then((response) => {
+				alert('article created');
+			});
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
 			);
 		}
 	};
-
 	return (
 		<React.Fragment>
 			<CssBaseline />
