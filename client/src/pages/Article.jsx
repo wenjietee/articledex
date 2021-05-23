@@ -70,7 +70,7 @@ const Article = (props) => {
 				<Box mt={1} p={10}>
 					<Grid container spacing={3} alignItems='center'>
 						<Grid item xs={12}>
-							<img src={article.image} />
+							<img src={article.image} alt='article' />
 						</Grid>
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>

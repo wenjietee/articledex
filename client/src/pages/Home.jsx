@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
 import ArticleCard from '../components/ArticleCard';
-const Home = (props) => {
+import Box from '@material-ui/core/Box';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Switch from '@material-ui/core/Switch';
+
+const Home = () => {
 	// states
 	const [articles, setArticles] = useState();
 	const [unreads, setUnreads] = useState();
+	const [onlyUser, setOnlyUser] = useState({ checked: false });
 
 	// on load get data
 	useEffect(() => {
@@ -32,18 +37,35 @@ const Home = (props) => {
 		}
 	}, []);
 
+	const handleChange = (e) => {
+		setOnlyUser({ [e.target.name]: e.target.checked });
+	};
 	return (
-		<div>
-			{articles
-				? articles.map((article) => {
-						return (
-							<ArticleCard key={article.id} article={article} />
-						);
-				  })
-				: undefined}
-			<pre>{JSON.stringify(articles, null, 2)}</pre>
+		<React.Fragment>
+			<CssBaseline />
+			<Switch
+				checked={onlyUser.checked}
+				onChange={handleChange}
+				color='primary'
+				name='checked'
+				inputProps={{ 'aria-label': 'primary checkbox' }}
+			/>
+			<label>JShow only my articles</label>
+			<Box ml={5}>
+				{articles
+					? articles.map((article) => {
+							return (
+								<ArticleCard
+									key={article.id}
+									article={article}
+								/>
+							);
+					  })
+					: undefined}
+			</Box>
+
 			<pre>{JSON.stringify(unreads, null, 2)}</pre>
-		</div>
+		</React.Fragment>
 	);
 };
 
