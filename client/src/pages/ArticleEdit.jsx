@@ -9,8 +9,8 @@ import ArticleForm from '../components/ArticleForm';
 const ArticleEdit = (props) => {
 	const [article, setArticle] = useState();
 
+	// get article data
 	useEffect(() => {
-		// fetched article
 		Axios.get(
 			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
 		).then((response) => {
@@ -24,11 +24,11 @@ const ArticleEdit = (props) => {
 			});
 		});
 	}, [props.match.params.id]);
+
 	const editArticle = async (inputs) => {
 		//let scrapedContent = undefined;
 		// webscraper activates here
 
-		// placeholder article to edit
 		try {
 			await Axios.put(
 				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`,
@@ -48,6 +48,7 @@ const ArticleEdit = (props) => {
 			);
 		}
 	};
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
