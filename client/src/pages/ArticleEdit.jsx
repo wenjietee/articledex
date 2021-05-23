@@ -6,12 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
 
-const ArticleEdit = () => {
+const ArticleEdit = (props) => {
 	const [article, setArticle] = useState();
+
+	// get article data
 	useEffect(() => {
-		// fetched article
 		Axios.get(
-			`${process.env.REACT_APP_URL}api/articles/show/cc18b4fe-35b2-4586-8ad0-71153c3a7300`
+			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
 		).then((response) => {
 			// set state with fetched article
 			setArticle({
@@ -22,15 +23,15 @@ const ArticleEdit = () => {
 				tags: response.data.tags.join(' '),
 			});
 		});
-	}, []);
+	}, [props.match.params.id]);
+
 	const editArticle = async (inputs) => {
 		//let scrapedContent = undefined;
 		// webscraper activates here
 
-		// placeholder article to edit
 		try {
 			await Axios.put(
-				`${process.env.REACT_APP_URL}api/articles/show/cc18b4fe-35b2-4586-8ad0-71153c3a7300`,
+				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`,
 				{
 					url: inputs.url,
 					article_type: inputs.article_type,
@@ -47,6 +48,7 @@ const ArticleEdit = () => {
 			);
 		}
 	};
+
 	return (
 		<React.Fragment>
 			<CssBaseline />

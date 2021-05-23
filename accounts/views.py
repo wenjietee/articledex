@@ -54,10 +54,15 @@ def views_login(request):
         # generate tokens
         tokens = RefreshToken.for_user(user)
 
+        # get user data
+        user= UserSerializer(instance=user).data
+
         # return user object and tokens
         return Response({
             'refresh': str(tokens),
             'access': str(tokens.access_token),
+            'user': {'id':user['id'],'username':user['username']}
+            
         })
 
 

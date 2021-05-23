@@ -8,15 +8,19 @@ const ProfileEdit = () => {
 	const [profile, setProfile] = useState();
 	useEffect(() => {
 		// fetched article
-		Axios.get(`${process.env.REACT_APP_URL}api/profile/edit`).then(
-			(response) => {
-				// set state with fetched article
-				setProfile({
-					description: response.data.description,
-					image: response.data.image,
-				});
-			}
-		);
+		try {
+			Axios.get(`${process.env.REACT_APP_URL}api/profile/edit`).then(
+				(response) => {
+					// set state with fetched article
+					setProfile({
+						description: response.data.description,
+						image: response.data.image,
+					});
+				}
+			);
+		} catch (error) {
+			console.log(error);
+		}
 	}, []);
 
 	const editProfile = async (inputs) => {

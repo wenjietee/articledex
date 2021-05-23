@@ -25,7 +25,7 @@ import Footer from './components/Footer';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
-
+	const [user, setUser] = useState();
 	useEffect(() => {
 		const access = localStorage.getItem('access');
 
@@ -33,9 +33,9 @@ const App = () => {
 		if (access) {
 			try {
 				Axios.get('api/verify/');
-
 				// verify auth
 				setAuth(true);
+				// set user data
 				console.log('verification success');
 			} catch (error) {
 				// logout user if auth failed
@@ -60,6 +60,8 @@ const App = () => {
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
 
+			// set user data
+			setUser(data.user);
 			// login user
 			setAuth(true);
 		} catch (error) {
@@ -81,7 +83,7 @@ const App = () => {
 		<React.Fragment>
 			<Router>
 				{isAuth ? (
-					<HeaderProtected logout={logout} />
+					<HeaderProtected logout={logout} user={user} />
 				) : (
 					<HeaderPublic />
 				)}
@@ -118,6 +120,7 @@ const App = () => {
 							exact
 							path='/article/:id'
 							isAuth={isAuth}
+							user={user}
 							component={Article}
 						/>
 						<ProtectedRoute
@@ -130,12 +133,14 @@ const App = () => {
 							exact
 							path='/profile'
 							isAuth={isAuth}
+							user={user}
 							component={Profile}
 						/>
 						<ProtectedRoute
 							exact
 							path='/profile/edit'
 							isAuth={isAuth}
+							user={user}
 							component={ProfileEdit}
 						/>
 						<ProtectedRoute
@@ -143,6 +148,7 @@ const App = () => {
 							path='/home'
 							logout={logout}
 							isAuth={isAuth}
+							user={user}
 							component={Home}
 						/>
 						<Route exact path='/404' component={NotFound} />
