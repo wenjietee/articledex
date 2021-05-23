@@ -30,7 +30,7 @@ class ArticleSimpleSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model=Article
-        fields=('id','url','title','tags','user','article_likes')
+        fields=('id','url','title','tags','user','description','image','article_likes',)
         
 class ArticleSerializer(serializers.ModelSerializer):
 
@@ -46,7 +46,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ('id', 'url', 'article_type', 'title',
-                  'content', 'description', 'tags', 'user', 'article_likes')
+                  'content', 'description','image', 'tags', 'user', 'article_likes')
 
     def create(self, validated_data):
 
