@@ -14,7 +14,7 @@ class Profile(models.Model):
     )
     description = models.TextField()
     image = models.CharField(
-        max_length=2083, default='https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png')
+        max_length=2083, default='https://cdn0.iconfinder.com/data/icons/elasto-online-store/26/00-ELASTOFONT-STORE-READY_user-circle-512.png')
 
     # relationships
     user = models.OneToOneField(
