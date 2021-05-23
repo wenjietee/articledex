@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
 	root: {
@@ -105,6 +107,9 @@ const ArticleCard = (props) => {
 				</Grid>
 			</CardContent>
 			<CardActions>
+				<IconButton aria-label='add to favorites'>
+					<FavoriteIcon />
+				</IconButton>
 				<Button
 					size='small'
 					component={Link}
