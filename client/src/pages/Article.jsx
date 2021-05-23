@@ -30,20 +30,35 @@ const Article = (props) => {
 	const [isUserArticle, setUserArticle] = useState();
 
 	useEffect(() => {
-		// fetched article
-		Axios.get(
-			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
-		).then((response) => {
-			// set state with fetched article
-			setArticle(response.data);
+		// fetch article
+		try {
+			Axios.get(
+				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
+			).then((response) => {
+				// set state with fetched article
+				setArticle(response.data);
 
-			//check if article belongs to user
-			if (response.data.user === props.user.id) {
-				setUserArticle(true);
-			}
-		});
-	}, [props.match.params.id]);
+				//check if article belongs to user
+				if (response.data.user === props.user.id) {
+					setUserArticle(true);
+				}
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}, [props.match.params.id, props.user.id]);
 
+	const handleDelete = () => {
+		// delete article
+		try {
+			Axios.delete(
+				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
+			);
+			alert('article deleted');
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -68,6 +83,7 @@ const Article = (props) => {
 							<Button
 								color='primary'
 								variant='outlined'
+								onClick={handleDelete}
 								className={
 									isUserArticle
 										? classes.button

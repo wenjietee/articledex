@@ -119,7 +119,7 @@ const HeaderProtected = (props) => {
 						className={classes.headerButton}
 						component={Link}
 						//to='/profile'
-						to='/article/cc18b4fe-35b2-4586-8ad0-71153c3a7300'
+						to='/article/53f81134-2655-470b-b0b3-30c4786afabb'
 						startIcon={<AccountCircleIcon />}
 					>
 						PROFILE

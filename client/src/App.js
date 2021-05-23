@@ -35,6 +35,7 @@ const App = () => {
 				Axios.get('api/verify/');
 				// verify auth
 				setAuth(true);
+				// set user data
 				console.log('verification success');
 			} catch (error) {
 				// logout user if auth failed
