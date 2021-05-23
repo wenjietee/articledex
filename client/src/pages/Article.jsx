@@ -69,6 +69,9 @@ const Article = (props) => {
 			{article ? (
 				<Box mt={1} p={10}>
 					<Grid container spacing={3} alignItems='center'>
+						<Grid item xs={12}>
+							<img src={article.image} />
+						</Grid>
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>
 							<Button

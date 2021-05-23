@@ -34,6 +34,8 @@ const ArticleCard = (props) => {
 					className={classes.media}
 					image={props.article.image}
 					title='article'
+					component={Link}
+					to={`/article/${props.article.id}`}
 				/>
 			</CardActionArea>
 			<CardContent>
