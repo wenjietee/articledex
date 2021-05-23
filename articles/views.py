@@ -15,7 +15,7 @@ from django.shortcuts import render
 @permission_classes([IsAuthenticated])
 def views_index(request):
     articles = Article.objects.all()
-    serializer = ArticleSerializer(articles, many=True)
+    serializer = ArticleSimpleSerializer(articles, many=True)
     return Response(serializer.data)
 
 

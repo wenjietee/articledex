@@ -147,6 +147,18 @@ def views_user_actions(request):
 
         return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def views_unreads(request):
+
+    # serialize user unread data
+    user = get_user_model().objects.get(pk=request.user.id)
+    serialized_unreads = UserUnreadSerializer(instance=user).data
+
+    return Response(serialized_unreads)
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_verify(request):

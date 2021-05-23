@@ -22,7 +22,16 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = '__all__'
 
-
+class ArticleSimpleSerializer(serializers.ModelSerializer):
+    tags = CreatableSlugRelatedField(
+        many=True,
+        queryset=Tag.objects.all(),
+        slug_field='name'
+    )
+    class Meta:
+        model=Article
+        fields=('id','url','title','tags','user','article_likes')
+        
 class ArticleSerializer(serializers.ModelSerializer):
 
     article_likes = serializers.PrimaryKeyRelatedField(
