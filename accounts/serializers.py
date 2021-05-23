@@ -79,4 +79,4 @@ class UserUnreadSerializer(serializers.ModelSerializer):
     user_unreads = UnreadSerializer(many=True, read_only=True)
     class Meta:
         model=User
-        fields='user_unreads'
+        fields=('user_unreads',)
