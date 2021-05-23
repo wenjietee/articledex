@@ -61,19 +61,9 @@ def views_login(request):
         })
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_profile(request):
-
-    # edit profile
-    if request.method == 'PUT':
-        # get profile by user id
-        profile = Profile.objects.get(user=request.user)
-
-        serializer = ProfileSerializer(
-            instance=profile, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
 
     # serialize user data
     user = get_user_model().objects.get(pk=request.user.id)
@@ -83,6 +73,27 @@ def views_profile(request):
     del serialized_user['password']
 
     return Response(serialized_user)
+
+
+@api_view(['GET','PUT'])
+@permission_classes([IsAuthenticated])
+def views_profile_edit(request):
+
+    # get profile by user id
+    profile = Profile.objects.get(user=request.user)
+    # edit profile
+    if request.method == 'PUT':
+        
+
+        serializer = ProfileSerializer(
+            instance=profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+    # serialize profile data
+    serialized_profile = ProfileSerializer(instance=profile).data
+    
+    return Response(serialized_profile)
 
 
 @api_view(['PUT'])
