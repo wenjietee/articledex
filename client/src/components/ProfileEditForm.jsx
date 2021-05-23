@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import CloudinaryWidget from './CloudinaryWidget';
+import Avatar from '@material-ui/core/Avatar';
 
 // form styles
 const useStyles = makeStyles((theme) => ({
@@ -86,13 +87,25 @@ const ProfileEditForm = (props) => {
 						</div>
 
 						<div>
-							<Box pt={2}>
-								<img
-									src={values.image}
-									className={classes.image}
-									alt='profile'
-								/>
-								<CloudinaryWidget getImageUrl={getImageUrl} />
+							<Box
+								component='div'
+								display='flex'
+								alignItems='flex-start'
+								p={5}
+							>
+								<Box mr={2}>
+									<Avatar
+										alt='Profile'
+										src={values.image}
+										className={classes.image}
+									/>
+								</Box>
+								<Box mt={6}>
+									<CloudinaryWidget
+										getImageUrl={getImageUrl}
+										className={classes.button}
+									/>
+								</Box>
 							</Box>
 						</div>
 

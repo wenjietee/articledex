@@ -40,7 +40,7 @@ const ProfileEdit = () => {
 				display='flex'
 				justifyContent='center'
 				alignItems='center'
-				minHeight='50vh'
+				minHeight='80vh'
 			>
 				{profile ? (
 					<ProfileEditForm
