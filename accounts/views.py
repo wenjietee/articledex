@@ -162,4 +162,7 @@ def views_unreads(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_verify(request):
-    return Response({'detail':'verification successful.'})
+      # serialize user data
+    user = get_user_model().objects.get(pk=request.user.id)
+    serialized_user = UserSerializer(instance=user).data
+    return Response({'id':serialized_user['id'],'username':serialized_user['username']})

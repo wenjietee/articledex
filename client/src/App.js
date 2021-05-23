@@ -25,17 +25,19 @@ import Footer from './components/Footer';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
-	const [user, setUser] = useState();
+	const [user, setUser] = useState({});
 	useEffect(() => {
 		const access = localStorage.getItem('access');
 
 		// Verify token
 		if (access) {
 			try {
-				Axios.get('api/verify/');
+				let { data } = Axios.get('api/verify/');
+				console.log(data);
 				// verify auth
 				setAuth(true);
 				// set user data
+				setUser(data);
 				console.log('verification success');
 			} catch (error) {
 				// logout user if auth failed
@@ -46,8 +48,8 @@ const App = () => {
 		} else {
 			setAuth(false);
 		}
-	}, []);
-
+	}, [user]);
+	console.log(user);
 	// handle login
 	const login = async (username, password) => {
 		try {
