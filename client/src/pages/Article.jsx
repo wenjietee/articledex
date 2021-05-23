@@ -1,7 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
+import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	button: {
+		marginRight: 10,
+		minWidth: '5em',
+	},
+}));
 
 const Article = (props) => {
+	const classes = useStyles();
 	const [article, setArticle] = useState();
 	useEffect(() => {
 		// fetched article
@@ -9,18 +26,61 @@ const Article = (props) => {
 			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
 		).then((response) => {
 			// set state with fetched article
-			setArticle(response);
+
+			setArticle(response.data);
 		});
 	}, [props.match.params.id]);
 
 	return (
-		<div>
+		<React.Fragment>
+			<CssBaseline />
+			{article ? (
+				<Box mt={1} p={10}>
+					<Grid container spacing={3} alignItems='center'>
+						<Grid item xs={8}></Grid>
+						<Grid item xs={4}>
+							<Button
+								color='primary'
+								variant='outlined'
+								component={Link}
+								className={classes.button}
+								to={`/article/${article.id}/edit`}
+							>
+								EDIT
+							</Button>
+							<Button
+								color='primary'
+								variant='outlined'
+								className={classes.button}
+							>
+								DELETE
+							</Button>
+						</Grid>
+						<Grid item xs={8}>
+							<h1>{article.title}</h1>
+							<h3>
+								<a href={article.url}>Source</a>
+							</h3>
+						</Grid>
+						<Grid item xs={4}>
+							<p>Saved by:</p>
+							<p>{article.user}</p>
+						</Grid>
+						<Grid item xs={8}></Grid>
+						<Grid item xs={4}>
+							<p>Tags:</p>
+							<p>{article.tags}</p>
+						</Grid>
+						<Grid item xs={12}>
+							<p>{article.content}</p>
+						</Grid>
+					</Grid>
+				</Box>
+			) : undefined}
 			<pre>
-				{article
-					? JSON.stringify(article.data, null, 2)
-					: 'loading article'}
+				{article ? JSON.stringify(article, null, 2) : 'loading article'}
 			</pre>
-		</div>
+		</React.Fragment>
 	);
 };
 
