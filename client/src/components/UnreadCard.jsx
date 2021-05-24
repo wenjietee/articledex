@@ -31,7 +31,9 @@ const UnreadCard = (props) => {
 				aria-label='mailbox folders'
 			>
 				<ListItem>
-					<ListItemText primary='Unread Articles' />
+					<ListItemText
+						primary={`Unread Articles (${props.unreads.user_unreads.length})`}
+					/>
 				</ListItem>
 
 				<Divider />
