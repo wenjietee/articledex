@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Axios from '../utils/Axios';
 import ArticleCard from '../components/ArticleCard';
+import UnreadCard from '../components/UnreadCard';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 
 const Home = () => {
 	// states
@@ -49,45 +46,31 @@ const Home = () => {
 			<CssBaseline />
 
 			<Box ml={30} mt={3}>
-				<Switch
-					checked={onlyUser.checked}
-					onChange={handleChange}
-					color='primary'
-					name='checked'
-					inputProps={{ 'aria-label': 'primary checkbox' }}
-				/>
-				<label>Show only my articles</label>
-				{articles
-					? articles.map((article) => {
-							return (
-								<ArticleCard
-									key={article.id}
-									article={article}
-								/>
-							);
-					  })
-					: undefined}
-
-				<Card raised>
-					<CardHeader title='Unread Articles' />
-					<CardContent>
-						<ul>
-							{unreads
-								? unreads.user_unreads.map((unread) => {
-										return (
-											<li key={unread.id}>
-												<Link
-													to={`/article/${unread.article.id}`}
-												>
-													{unread.article.title}
-												</Link>
-											</li>
-										);
-								  })
-								: undefined}
-						</ul>
-					</CardContent>
-				</Card>
+				<div>
+					<Switch
+						checked={onlyUser.checked}
+						onChange={handleChange}
+						color='primary'
+						name='checked'
+						inputProps={{ 'aria-label': 'primary checkbox' }}
+					/>
+					<label>Show only my articles</label>
+				</div>
+				<div>
+					{articles
+						? articles.map((article) => {
+								return (
+									<ArticleCard
+										key={article.id}
+										article={article}
+									/>
+								);
+						  })
+						: undefined}
+				</div>
+				<div>
+					{unreads ? <UnreadCard unreads={unreads} /> : undefined}
+				</div>
 			</Box>
 		</React.Fragment>
 	);
