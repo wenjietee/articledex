@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import ArticleForm from '../components/ArticleForm';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ArticleEdit = (props) => {
 	// states
@@ -74,7 +75,9 @@ const ArticleEdit = (props) => {
 							article={article}
 							handleSubmit={editArticle}
 						/>
-					) : undefined}
+					) : (
+						<CircularProgress />
+					)}
 				</Container>
 			</Box>
 		</React.Fragment>

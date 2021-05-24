@@ -32,11 +32,13 @@ const App = () => {
 		// Verify token
 		if (access) {
 			try {
-				Axios.get('api/verify/');
-				// verify auth
-				setAuth(true);
-				// set user data
-				console.log('verification success');
+				Axios.get('api/verify/').then((response) => {
+					// verify auth
+					setAuth(true);
+					// set user data
+					setUser(response.data);
+					console.log('verification success');
+				});
 			} catch (error) {
 				// logout user if auth failed
 				console.log('verification', error);
@@ -59,11 +61,10 @@ const App = () => {
 			// set tokens
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
-
-			// set user data
-			setUser(data.user);
 			// login user
 			setAuth(true);
+			// set user data
+			setUser(data.user);
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
@@ -79,6 +80,7 @@ const App = () => {
 		// logout user
 		setAuth(false);
 	};
+
 	return (
 		<React.Fragment>
 			<Router>

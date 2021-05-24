@@ -29,7 +29,8 @@ class Article(models.Model):
     title = models.CharField(max_length=200, null=False)
     content = models.TextField()
     description = models.TextField()
-
+    image=models.CharField(
+        max_length=2083, default='https://image.freepik.com/free-vector/content-author-writer-job-concept_74855-7064.jpg')
     # relationships
     tags = models.ManyToManyField(Tag, related_name='tags', blank=True)
     user = models.ForeignKey(

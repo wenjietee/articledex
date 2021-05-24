@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from .models import *
-from articles.serializers import ArticleSerializer
+from articles.serializers import *
 from rest_framework import serializers
 
 
@@ -12,7 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class UnreadSerializer(serializers.ModelSerializer):
 
-    article = ArticleSerializer(read_only=True)
+    article = ArticleSimpleSerializer(read_only=True)
 
     class Meta:
         model = Unread
@@ -21,7 +21,7 @@ class UnreadSerializer(serializers.ModelSerializer):
 
 class PrivateSerializer(serializers.ModelSerializer):
 
-    article = ArticleSerializer(read_only=True)
+    article = ArticleSimpleSerializer(read_only=True)
 
     class Meta:
         model = Private
@@ -30,7 +30,7 @@ class PrivateSerializer(serializers.ModelSerializer):
 
 class LocalSerializer(serializers.ModelSerializer):
 
-    article = ArticleSerializer(read_only=True)
+    article = ArticleSimpleSerializer(read_only=True)
 
     class Meta:
         model = Local
@@ -39,7 +39,7 @@ class LocalSerializer(serializers.ModelSerializer):
 
 class LikeSerializer(serializers.ModelSerializer):
 
-    article = ArticleSerializer(read_only=True)
+    article = ArticleSimpleSerializer(read_only=True)
 
     class Meta:
         model = Like
@@ -75,3 +75,8 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
         return user
+class UserUnreadSerializer(serializers.ModelSerializer):
+    user_unreads = UnreadSerializer(many=True, read_only=True)
+    class Meta:
+        model=User
+        fields=('user_unreads',)

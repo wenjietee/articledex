@@ -7,20 +7,26 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		minwidth: 600,
 	},
 	button: {
-		marginRight: 10,
+		margin: theme.spacing(0.5, 0.5),
 		minWidth: '5em',
+		width: '6em',
 	},
 	hideButton: {
 		display: 'none',
 	},
 	chip: {
 		marginRight: 5,
+	},
+	title: {
+		marginTop: '-2em',
 	},
 }));
 
@@ -40,14 +46,14 @@ const Article = (props) => {
 				setArticle(response.data);
 
 				//check if article belongs to user
-				if (response.data.user === props.user.id) {
+				if (response.data.user === props.user.username) {
 					setUserArticle(true);
 				}
 			});
 		} catch (error) {
-			console.log(error);
+			window.location.href = `/404`;
 		}
-	}, [props.match.params.id, props.user.id]);
+	}, [props.match.params.id, props.user.username]);
 
 	const handleDelete = () => {
 		// delete article
@@ -67,8 +73,11 @@ const Article = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 			{article ? (
-				<Box mt={1} p={10}>
-					<Grid container spacing={3} alignItems='center'>
+				<Box mt={1} p={10} width='75%' minWidth='50%'>
+					<Grid container spacing={3} className={classes.root}>
+						<Grid item xs={12}>
+							<img src={article.image} alt='article' />
+						</Grid>
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>
 							<Button
@@ -98,7 +107,7 @@ const Article = (props) => {
 							</Button>
 						</Grid>
 						<Grid item xs={8}>
-							<h1>{article.title}</h1>
+							<h1 className={classes.title}>{article.title}</h1>
 							<h3>
 								<a href={article.url}>Source</a>
 							</h3>
@@ -129,7 +138,9 @@ const Article = (props) => {
 						</Grid>
 					</Grid>
 				</Box>
-			) : undefined}
+			) : (
+				<CircularProgress />
+			)}
 		</React.Fragment>
 	);
 };
