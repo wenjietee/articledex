@@ -73,11 +73,16 @@ def views_profile(request):
     # serialize user data
     user = get_user_model().objects.get(pk=request.user.id)
     serialized_user = UserSerializer(instance=user).data
-    
+
     # delete password from user object
     del serialized_user['password']
 
-    return Response(serialized_user)
+    # serialize user articles
+    articles=Article.objects.filter(user=request.user.id)
+
+    serialized_articles=ArticleSerializer(articles,many=True).data
+
+    return Response({'profile':serialized_user,'user_articles':serialized_articles})
 
 
 @api_view(['GET','PUT'])
