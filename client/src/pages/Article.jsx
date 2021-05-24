@@ -43,21 +43,16 @@ const Article = (props) => {
 			).then((response) => {
 				// set state with fetched article
 				setArticle(response.data);
-				console.log(
-					'response',
-					response.data.user,
-					'props',
-					props.username
-				);
+
 				//check if article belongs to user
-				if (response.data.user === props.username) {
+				if (response.data.user === props.user.username) {
 					setUserArticle(true);
 				}
 			});
 		} catch (error) {
 			window.location.href = `/404`;
 		}
-	}, [props.match.params.id, props.username]);
+	}, [props.match.params.id, props.user.username]);
 
 	const handleDelete = () => {
 		// delete article
