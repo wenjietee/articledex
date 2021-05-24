@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
+import ProfileCard from '../components/ProfileCard';
 
 const Profile = (props) => {
 	// states
@@ -28,16 +28,14 @@ const Profile = (props) => {
 			<CssBaseline />
 
 			<h1>Profile page</h1>
+			{profile ? (
+				<ProfileCard
+					profile={profile.profile}
+					unreads={profile.user_unreads}
+					likes={profile.user_likes}
+				/>
+			) : undefined}
 
-			<Button
-				variant='contained'
-				color='primary'
-				disableElevation={true}
-				component={Link}
-				to='/profile/edit'
-			>
-				EDIT PROFILE
-			</Button>
 			<pre>{JSON.stringify(profile, null, 2)}</pre>
 		</React.Fragment>
 	);
