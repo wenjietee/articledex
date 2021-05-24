@@ -13,14 +13,15 @@ const useStyles = makeStyles({
 		maxWidth: 300,
 		width: '100%',
 		marginTop: 30,
+		textAlign: 'center',
 	},
 	listItem: {
 		textDecoration: 'none',
 		color: '#268ede',
 	},
 	image: {
-		height: '120px',
-		width: '120px',
+		height: '100px',
+		width: '100px',
 		objectFit: 'cover',
 	},
 });
@@ -38,7 +39,7 @@ const ProfileCard = (props) => {
 					/>
 				</ListItem>
 				<ListItem>
-					<ListItemText primary={props.profile.user} />
+					<ListItemText primary={props.username} />
 				</ListItem>
 				<ListItem>
 					<ListItemText
