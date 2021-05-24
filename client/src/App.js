@@ -25,7 +25,7 @@ import Footer from './components/Footer';
 
 const App = () => {
 	const [isAuth, setAuth] = useState(false);
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState();
 	useEffect(() => {
 		const access = localStorage.getItem('access');
 
@@ -49,7 +49,7 @@ const App = () => {
 			setAuth(false);
 		}
 	}, [user]);
-	console.log(user);
+
 	// handle login
 	const login = async (username, password) => {
 		try {
