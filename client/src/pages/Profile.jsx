@@ -48,8 +48,6 @@ const Profile = (props) => {
 							);
 					  })
 					: undefined}
-				<pre>{JSON.stringify(profile, null, 2)}</pre>
-				<pre>{JSON.stringify(userArticles, null, 2)}</pre>
 			</Box>
 		</React.Fragment>
 	);

@@ -43,7 +43,12 @@ const Article = (props) => {
 			).then((response) => {
 				// set state with fetched article
 				setArticle(response.data);
-
+				console.log(
+					'response',
+					response.data.user,
+					'props',
+					props.username
+				);
 				//check if article belongs to user
 				if (response.data.user === props.username) {
 					setUserArticle(true);

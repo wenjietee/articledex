@@ -57,6 +57,9 @@ const Home = () => {
 					<label>Show only my articles</label>
 				</div>
 				<div>
+					{unreads ? <UnreadCard unreads={unreads} /> : undefined}
+				</div>
+				<div>
 					{articles
 						? articles.map((article) => {
 								return (
@@ -67,9 +70,6 @@ const Home = () => {
 								);
 						  })
 						: undefined}
-				</div>
-				<div>
-					{unreads ? <UnreadCard unreads={unreads} /> : undefined}
 				</div>
 			</Box>
 		</React.Fragment>

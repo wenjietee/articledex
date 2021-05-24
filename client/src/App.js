@@ -62,10 +62,10 @@ const App = () => {
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
 
-			// set user data
-			setUser(data.user);
 			// login user
 			setAuth(true);
+			// set user data
+			setUser(data);
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
