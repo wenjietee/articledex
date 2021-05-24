@@ -3,11 +3,12 @@ import Axios from '../utils/Axios';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProfileCard from '../components/ProfileCard';
+import ArticleCard from '../components/ArticleCard';
 
 const Profile = (props) => {
 	// states
 	const [profile, setProfile] = useState();
-
+	const [userArticles, setUserArticles] = useState();
 	// get profile
 	useEffect(() => {
 		// get articles
@@ -15,7 +16,8 @@ const Profile = (props) => {
 			Axios.get(`${process.env.REACT_APP_URL}api/profile/`).then(
 				(response) => {
 					// set state with article
-					setProfile(response.data);
+					setProfile(response.data.profile);
+					setUserArticles(response.data.user_articles);
 				}
 			);
 		} catch (error) {
@@ -36,8 +38,18 @@ const Profile = (props) => {
 						likes={profile.user_likes}
 					/>
 				) : undefined}
-
+				{userArticles
+					? userArticles.map((article) => {
+							return (
+								<ArticleCard
+									key={article.id}
+									article={article}
+								/>
+							);
+					  })
+					: undefined}
 				<pre>{JSON.stringify(profile, null, 2)}</pre>
+				<pre>{JSON.stringify(userArticles, null, 2)}</pre>
 			</Box>
 		</React.Fragment>
 	);
