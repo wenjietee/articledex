@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -137,7 +138,9 @@ const Article = (props) => {
 						</Grid>
 					</Grid>
 				</Box>
-			) : undefined}
+			) : (
+				<CircularProgress />
+			)}
 		</React.Fragment>
 	);
 };

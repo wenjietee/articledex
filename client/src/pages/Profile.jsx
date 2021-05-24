@@ -4,8 +4,9 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProfileCard from '../components/ProfileCard';
 import ArticleCard from '../components/ArticleCard';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const Profile = (props) => {
+const Profile = () => {
 	// states
 	const [profile, setProfile] = useState();
 	const [userArticles, setUserArticles] = useState();
@@ -38,16 +39,20 @@ const Profile = (props) => {
 						likes={profile.user_likes}
 					/>
 				) : undefined}
-				{userArticles
-					? userArticles.map((article) => {
-							return (
+				{userArticles ? (
+					userArticles.map((article) => {
+						return (
+							<div>
 								<ArticleCard
 									key={article.id}
 									article={article}
 								/>
-							);
-					  })
-					: undefined}
+							</div>
+						);
+					})
+				) : (
+					<CircularProgress />
+				)}
 			</Box>
 		</React.Fragment>
 	);
