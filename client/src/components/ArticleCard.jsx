@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -35,6 +35,15 @@ const useStyles = makeStyles({
 
 const ArticleCard = (props) => {
 	const classes = useStyles();
+	const [isLiked, setLike] = useState();
+
+	useEffect(() => {
+		console.log(props.article.article_likes);
+	}, [props.article]);
+	const handleClick = (e) => {
+		e.preventDefault();
+		setLike(!isLiked);
+	};
 
 	return (
 		<Card raised className={classes.root}>
@@ -112,7 +121,10 @@ const ArticleCard = (props) => {
 			</CardContent>
 			<CardActions>
 				<IconButton aria-label='add to favorites'>
-					<FavoriteIcon />
+					<FavoriteIcon
+						onClick={handleClick}
+						color={isLiked ? 'secondary' : 'default'}
+					/>
 				</IconButton>
 				<Button
 					size='small'
