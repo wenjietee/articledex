@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Axios from '../utils/Axios';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -34,17 +35,40 @@ const useStyles = makeStyles({
 });
 
 const ArticleCard = (props) => {
+	// states
 	const classes = useStyles();
 	const [isLiked, setLike] = useState();
 
+	// check if user liked article
 	useEffect(() => {
 		if (props.article.article_likes.includes(props.username)) {
 			setLike(true);
 		}
 	}, [props.article.article_likes, props.username]);
-	const handleClick = (e) => {
-		e.preventDefault();
-		setLike(!isLiked);
+
+	// toggle like
+	const likeArticle = () => {
+		try {
+			Axios.post(
+				`${process.env.REACT_APP_URL}api/articles/like/${props.article.id}`
+			).then(() => {
+				setLike(!isLiked);
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const unlikeArticle = () => {
+		try {
+			Axios.delete(
+				`${process.env.REACTREACT_APP_URL}api/articles/like/${props.article.id}`
+			).then(() => {
+				setLike(!isLiked);
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -122,12 +146,22 @@ const ArticleCard = (props) => {
 				</Grid>
 			</CardContent>
 			<CardActions>
-				<IconButton aria-label='add to favorites'>
-					<FavoriteIcon
-						onClick={handleClick}
-						color={isLiked ? 'secondary' : 'action'}
-					/>
-				</IconButton>
+				{isLiked ? (
+					<IconButton
+						aria-label='add to favorites'
+						onClick={unlikeArticle}
+					>
+						<FavoriteIcon color='secondary' />
+					</IconButton>
+				) : (
+					<IconButton
+						aria-label='add to favorites'
+						onClick={likeArticle}
+					>
+						<FavoriteIcon color='action' />
+					</IconButton>
+				)}
+
 				<Button
 					size='small'
 					component={Link}

@@ -44,7 +44,7 @@ const Home = (props) => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<pre>{JSON.stringify(articles, null, 2)}</pre>
+			{/* <pre>{JSON.stringify(articles, null, 2)}</pre> */}
 			<Box ml={30} mt={3}>
 				<div>
 					<Switch
