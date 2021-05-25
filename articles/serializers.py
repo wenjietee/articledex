@@ -44,7 +44,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         slug_field='name'
     )
     
-    user= serializers.StringRelatedField(many=False)
+    #user= serializers.StringRelatedField(many=False)
     class Meta:
         model = Article
         fields = ('id', 'url', 'article_type', 'title',
