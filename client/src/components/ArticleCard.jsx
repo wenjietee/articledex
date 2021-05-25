@@ -38,8 +38,10 @@ const ArticleCard = (props) => {
 	const [isLiked, setLike] = useState();
 
 	useEffect(() => {
-		console.log(props.article.article_likes);
-	}, [props.article]);
+		if (props.article.article_likes.includes(props.username)) {
+			setLike(true);
+		}
+	}, [props.article.article_likes, props.username]);
 	const handleClick = (e) => {
 		e.preventDefault();
 		setLike(!isLiked);
@@ -123,7 +125,7 @@ const ArticleCard = (props) => {
 				<IconButton aria-label='add to favorites'>
 					<FavoriteIcon
 						onClick={handleClick}
-						color={isLiked ? 'secondary' : 'default'}
+						color={isLiked ? 'secondary' : 'action'}
 					/>
 				</IconButton>
 				<Button
