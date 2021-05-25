@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
 import CircularProgress from '@material-ui/core/CircularProgress';
-const Home = () => {
+const Home = (props) => {
 	// states
 	const [articles, setArticles] = useState();
 	const [unreads, setUnreads] = useState();
@@ -44,7 +44,6 @@ const Home = () => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-
 			<Box ml={30} mt={3}>
 				<div>
 					<Switch
@@ -66,6 +65,7 @@ const Home = () => {
 								<ArticleCard
 									key={article.id}
 									article={article}
+									username={props.user.username}
 								/>
 							);
 						})

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // profile page component
-const Profile = () => {
+const Profile = (props) => {
 	// states
 	const classes = useStyles();
 	const [profile, setProfile] = useState();
@@ -59,7 +59,10 @@ const Profile = () => {
 								<UserActionPopover
 									className={classes.actionMenu}
 								/>
-								<ArticleCard article={article} />
+								<ArticleCard
+									article={article}
+									username={props.user.username}
+								/>
 							</div>
 						);
 					})

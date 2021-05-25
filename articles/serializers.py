@@ -28,23 +28,26 @@ class ArticleSimpleSerializer(serializers.ModelSerializer):
         slug_field='name'
     )
     user= serializers.StringRelatedField(many=False)
+    
+    article_likes = serializers.StringRelatedField(
+        many=True)
     class Meta:
         model=Article
         fields=('id','url','title','tags','user','description','image','article_likes')
         
 class ArticleSerializer(serializers.ModelSerializer):
 
-    article_likes = serializers.PrimaryKeyRelatedField(
-        many=True, read_only=True)
-
-
     tags = CreatableSlugRelatedField(
         many=True,
         queryset=Tag.objects.all(),
         slug_field='name'
     )
-    
+   
     #user= serializers.StringRelatedField(many=False)
+
+    article_likes = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=True)
+
     class Meta:
         model = Article
         fields = ('id', 'url', 'article_type', 'title',
