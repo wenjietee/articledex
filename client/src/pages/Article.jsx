@@ -46,14 +46,14 @@ const Article = (props) => {
 				setArticle(response.data);
 
 				//check if article belongs to user
-				if (response.data.user === props.user.username) {
+				if (response.data.user === props.user.id) {
 					setUserArticle(true);
 				}
 			});
 		} catch (error) {
 			window.location.href = `/404`;
 		}
-	}, [props.match.params.id, props.user.username]);
+	}, [props.match.params.id, props.user.id]);
 
 	const handleDelete = () => {
 		// delete article
