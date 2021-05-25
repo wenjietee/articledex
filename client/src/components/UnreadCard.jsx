@@ -38,14 +38,15 @@ const UnreadCard = (props) => {
 				<Divider />
 				{props.unreads.user_unreads.map((unread) => {
 					return (
-						<ListItem button divider key={unread.id}>
-							<Link
-								to={`/article/${unread.article.id}`}
-								className={classes.listItem}
-							>
+						<Link
+							to={`/article/${unread.article.id}`}
+							className={classes.listItem}
+							key={unread.id}
+						>
+							<ListItem button divider>
 								<ListItemText primary={unread.article.title} />
-							</Link>
-						</ListItem>
+							</ListItem>
+						</Link>
 					);
 				})}
 			</List>

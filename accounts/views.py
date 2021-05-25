@@ -80,7 +80,7 @@ def views_profile(request):
     # serialize user articles
     articles=Article.objects.filter(user=request.user.id)
 
-    serialized_articles=ArticleSerializer(articles,many=True).data
+    serialized_articles=ArticleSimpleSerializer(articles,many=True).data
 
     return Response({'profile':serialized_user,'user_articles':serialized_articles})
 
