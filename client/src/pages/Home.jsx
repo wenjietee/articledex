@@ -4,13 +4,12 @@ import ArticleCard from '../components/ArticleCard';
 import UnreadCard from '../components/UnreadCard';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Switch from '@material-ui/core/Switch';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 const Home = (props) => {
 	// states
 	const [articles, setArticles] = useState();
 	const [unreads, setUnreads] = useState();
-	const [onlyUser, setOnlyUser] = useState({ checked: false });
 
 	// on load get data
 	useEffect(() => {
@@ -38,23 +37,10 @@ const Home = (props) => {
 		}
 	}, []);
 
-	const handleChange = (e) => {
-		setOnlyUser({ [e.target.name]: e.target.checked });
-	};
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			<Box ml={30} mt={3}>
-				<div>
-					<Switch
-						checked={onlyUser.checked}
-						onChange={handleChange}
-						color='primary'
-						name='checked'
-						inputProps={{ 'aria-label': 'primary checkbox' }}
-					/>
-					<label>Show only my articles</label>
-				</div>
 				<div>
 					{unreads ? <UnreadCard unreads={unreads} /> : undefined}
 				</div>
