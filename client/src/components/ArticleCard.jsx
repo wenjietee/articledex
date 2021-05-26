@@ -74,7 +74,9 @@ const ArticleCard = (props) => {
 
 	return (
 		<Card raised className={classes.root}>
-			{props.isProfilePage ? <UserActionPopover /> : undefined}
+			{props.isProfilePage ? (
+				<UserActionPopover id={props.article.id} />
+			) : undefined}
 			<CardActionArea>
 				<CardMedia
 					className={classes.media}

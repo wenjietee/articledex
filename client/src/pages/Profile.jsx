@@ -4,7 +4,6 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProfileCard from '../components/ProfileCard';
 import ArticleCard from '../components/ArticleCard';
-
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // profile page component

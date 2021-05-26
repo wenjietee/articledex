@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Axios from '../utils/Axios';
 import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -30,17 +31,44 @@ const UserActionPopover = (props) => {
 
 	// toggle unread
 	const toggleUnread = () => {
-		setUnread(!isUnread);
+		try {
+			Axios.put(
+				`${process.env.REACT_APP_URL}api/actions/?action=unread&article=${props.id}`
+			);
+			setUnread(!isUnread);
+		} catch (error) {
+			alert(
+				`Error ${error.response.status}: ${error.response.data.detail}`
+			);
+		}
 	};
 
 	// toggle private
 	const togglePrivate = () => {
-		setPrivate(!isPrivate);
+		try {
+			Axios.put(
+				`${process.env.REACT_APP_URL}api/actions/?action=private&article=${props.id}`
+			);
+			setPrivate(!isPrivate);
+		} catch (error) {
+			alert(
+				`Error ${error.response.status}: ${error.response.data.detail}`
+			);
+		}
 	};
 	// toggle local
 
 	const toggleLocal = () => {
-		setLocal(!isLocal);
+		try {
+			Axios.put(
+				`${process.env.REACT_APP_URL}api/actions/?action=local&article=${props.id}`
+			);
+			setLocal(!isLocal);
+		} catch (error) {
+			alert(
+				`Error ${error.response.status}: ${error.response.data.detail}`
+			);
+		}
 	};
 	return (
 		<React.Fragment>
