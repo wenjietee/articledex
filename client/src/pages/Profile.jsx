@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProfileCard from '../components/ProfileCard';
 import ArticleCard from '../components/ArticleCard';
-import UserActionPopover from '../components/UserActionPopover';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-// profile page styles
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	actionMenu: {},
-}));
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // profile page component
 const Profile = (props) => {
 	// states
-	const classes = useStyles();
+
 	const [profile, setProfile] = useState();
 	const [userArticles, setUserArticles] = useState();
 
@@ -56,12 +47,10 @@ const Profile = (props) => {
 					userArticles.map((article) => {
 						return (
 							<div key={article.id}>
-								<UserActionPopover
-									className={classes.actionMenu}
-								/>
 								<ArticleCard
 									article={article}
 									username={props.user.username}
+									isProfilePage={true}
 								/>
 							</div>
 						);
