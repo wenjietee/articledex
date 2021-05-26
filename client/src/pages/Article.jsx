@@ -67,7 +67,7 @@ const Article = (props) => {
 		}
 	};
 	if (isDeleted) {
-		return <Redirect to='/home' />;
+		return <Redirect to='/profile' />;
 	}
 	return (
 		<React.Fragment>
