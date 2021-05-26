@@ -75,7 +75,12 @@ const ArticleCard = (props) => {
 	return (
 		<Card raised className={classes.root}>
 			{props.isProfilePage ? (
-				<UserActionPopover id={props.article.id} />
+				<UserActionPopover
+					id={props.article.id}
+					isUnread={props.isUnread}
+					isPrivate={props.isPrivate}
+					isLocal={props.isLocal}
+				/>
 			) : undefined}
 			<CardActionArea>
 				<CardMedia

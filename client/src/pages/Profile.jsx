@@ -29,9 +29,21 @@ const Profile = (props) => {
 		}
 	}, []);
 
+	// check user article status for unread local private
+	const findArticleStatus = (id, array) => {
+		let result = undefined;
+		array.forEach((item) => {
+			if (item.article.id === id) {
+				result = item.status;
+			}
+		});
+		return result;
+	};
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
+
 			<Box ml={30} mt={3}>
 				<h1>My Profile</h1>
 				{profile ? (
@@ -49,6 +61,18 @@ const Profile = (props) => {
 								<ArticleCard
 									article={article}
 									username={props.user.username}
+									isUnread={findArticleStatus(
+										article.id,
+										profile.user_unreads
+									)}
+									isPrivate={findArticleStatus(
+										article.id,
+										profile.user_privates
+									)}
+									isLocal={findArticleStatus(
+										article.id,
+										profile.user_locals
+									)}
 									isProfilePage={true}
 								/>
 							</div>

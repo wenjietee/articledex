@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
 import Popover from '@material-ui/core/Popover';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,9 +13,9 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 const UserActionPopover = (props) => {
 	// states
 	const [anchorEl, setAnchorEl] = useState(null);
-	const [isLocal, setLocal] = useState();
 	const [isUnread, setUnread] = useState();
 	const [isPrivate, setPrivate] = useState();
+	const [isLocal, setLocal] = useState();
 
 	// toggle popover
 	const handleClick = (event) => {
@@ -29,6 +29,12 @@ const UserActionPopover = (props) => {
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 
+	// set states for article unread, private, local statuses
+	useEffect(() => {
+		setUnread(props.isUnread);
+		setPrivate(props.isPrivate);
+		setLocal(props.isLocal);
+	}, [props.isUnread, props.isPrivate, props.isLocal]);
 	// toggle unread
 	const toggleUnread = () => {
 		try {
