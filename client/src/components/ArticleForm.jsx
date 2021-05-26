@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // form styles
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +44,7 @@ const ArticleForm = (props) => {
 						  }
 						: {
 								url: '',
-								article_type: '',
+								article_type: 'webpage',
 								title: '',
 								description: '',
 								tags: '',
@@ -63,15 +66,19 @@ const ArticleForm = (props) => {
 			>
 				{({ values, isSubmitting }) => (
 					<Form>
-						<div>
-							<Box pt={2}>
+						<Grid
+							container
+							spacing={3}
+							className={classes.textField}
+						>
+							<Grid item xs={8}>
 								<Field
 									name='url'
 									placeholder='www.myarticle.com/'
 									label='URL*'
 									type='input'
+									fullWidth
 									variant='outlined'
-									className={classes.textField}
 									as={TextField}
 									value={values.url}
 								/>
@@ -79,44 +86,36 @@ const ArticleForm = (props) => {
 								<Typography color='error'>
 									<ErrorMessage name='url' />
 								</Typography>
-							</Box>
-						</div>
-						<div>
-							<Box pt={2}>
+							</Grid>
+							<Grid item xs={4}>
 								<Field
 									name='article_type'
+									type='select'
 									label='Article Type'
-									type='input'
 									variant='outlined'
-									className={classes.textField}
-									as={TextField}
+									fullWidth
+									as={Select}
 									value={values.article_type}
-								/>
-
-								<Typography color='error'>
-									<ErrorMessage name='url' />
-								</Typography>
-							</Box>
-						</div>
-						<div>
-							<Box pt={2}>
+								>
+									<MenuItem value='webpage'>webpage</MenuItem>
+								</Field>
+							</Grid>
+							<Grid item xs={12}>
 								<Field
 									name='title'
 									placeholder='article title'
 									label='Title*'
 									type='text'
 									variant='outlined'
-									className={classes.textField}
+									fullWidth
 									as={TextField}
 									value={values.title}
 								/>
 								<Typography color='error'>
 									<ErrorMessage name='title' />
 								</Typography>
-							</Box>
-						</div>
-						<div>
-							<Box pt={2}>
+							</Grid>
+							<Grid item xs={12}>
 								<Field
 									name='description'
 									placeholder='Description'
@@ -126,26 +125,25 @@ const ArticleForm = (props) => {
 									multiline
 									rows={10}
 									rowsMax={10}
-									className={classes.textField}
+									fullWidth
 									as={TextField}
 									value={values.description}
 								/>
-							</Box>
-						</div>
-						<div>
-							<Box pt={2}>
+							</Grid>
+							<Grid item xs={12}>
 								<Field
 									name='tags'
 									placeholder='Seperate tags with spacing. Eg. Tag1 Tag2'
 									label='Tags'
 									type='text'
 									variant='outlined'
-									className={classes.textField}
+									fullWidth
 									as={TextField}
 									value={values.tags}
 								/>
-							</Box>
-						</div>
+							</Grid>
+						</Grid>
+
 						<Box pt={2} align='center'>
 							<Button
 								variant='contained'
