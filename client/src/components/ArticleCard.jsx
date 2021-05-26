@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import UserActionPopover from './UserActionPopover';
 
 const useStyles = makeStyles({
 	root: {
@@ -73,6 +74,14 @@ const ArticleCard = (props) => {
 
 	return (
 		<Card raised className={classes.root}>
+			{props.isProfilePage ? (
+				<UserActionPopover
+					id={props.article.id}
+					isUnread={props.isUnread}
+					isPrivate={props.isPrivate}
+					isLocal={props.isLocal}
+				/>
+			) : undefined}
 			<CardActionArea>
 				<CardMedia
 					className={classes.media}

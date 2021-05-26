@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ProfileCard from '../components/ProfileCard';
 import ArticleCard from '../components/ArticleCard';
-import UserActionPopover from '../components/UserActionPopover';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// profile page styles
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	actionMenu: {},
-}));
 
 // profile page component
 const Profile = (props) => {
 	// states
-	const classes = useStyles();
+
 	const [profile, setProfile] = useState();
 	const [userArticles, setUserArticles] = useState();
 
@@ -39,9 +29,21 @@ const Profile = (props) => {
 		}
 	}, []);
 
+	// check user article status for unread local private
+	const findArticleStatus = (id, array) => {
+		let result = undefined;
+		array.forEach((item) => {
+			if (item.article.id === id) {
+				result = item.status;
+			}
+		});
+		return result;
+	};
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
+
 			<Box ml={30} mt={3}>
 				<h1>My Profile</h1>
 				{profile ? (
@@ -56,12 +58,22 @@ const Profile = (props) => {
 					userArticles.map((article) => {
 						return (
 							<div key={article.id}>
-								<UserActionPopover
-									className={classes.actionMenu}
-								/>
 								<ArticleCard
 									article={article}
 									username={props.user.username}
+									isUnread={findArticleStatus(
+										article.id,
+										profile.user_unreads
+									)}
+									isPrivate={findArticleStatus(
+										article.id,
+										profile.user_privates
+									)}
+									isLocal={findArticleStatus(
+										article.id,
+										profile.user_locals
+									)}
+									isProfilePage={true}
 								/>
 							</div>
 						);

@@ -31,12 +31,12 @@ const UnreadCard = (props) => {
 			>
 				<ListItem>
 					<ListItemText
-						primary={`Unread Articles (${props.unreads.user_unreads.length})`}
+						primary={`Unread Articles (${props.unreads.length})`}
 					/>
 				</ListItem>
 
 				<Divider />
-				{props.unreads.user_unreads.map((unread) => {
+				{props.unreads.map((unread) => {
 					return (
 						<Link
 							to={`/article/${unread.article.id}`}
