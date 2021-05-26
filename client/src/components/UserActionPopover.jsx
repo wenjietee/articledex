@@ -105,9 +105,9 @@ const UserActionPopover = (props) => {
 					onClick={toggleUnread}
 				>
 					{isUnread ? (
-						<PlaylistAddCheckIcon fontSize='default' />
-					) : (
 						<SubjectIcon fontSize='default' />
+					) : (
+						<PlaylistAddCheckIcon fontSize='default' />
 					)}
 				</IconButton>
 				<IconButton

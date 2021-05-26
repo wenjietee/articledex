@@ -31,7 +31,7 @@ const Home = (props) => {
 					const filteredData = [];
 					console.log(response.data);
 					response.data.user_unreads.forEach((unread) => {
-						if (!unread.status) {
+						if (unread.status) {
 							filteredData.push(unread);
 						}
 					});
