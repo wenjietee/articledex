@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // form styles
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ const ArticleForm = (props) => {
 						  }
 						: {
 								url: '',
-								article_type: '',
+								article_type: 'webpage',
 								title: '',
 								description: '',
 								tags: '',
@@ -89,17 +90,15 @@ const ArticleForm = (props) => {
 							<Grid item xs={4}>
 								<Field
 									name='article_type'
+									type='select'
 									label='Article Type'
-									type='input'
 									variant='outlined'
 									fullWidth
-									as={TextField}
+									as={Select}
 									value={values.article_type}
-								/>
-
-								<Typography color='error'>
-									<ErrorMessage name='url' />
-								</Typography>
+								>
+									<MenuItem value='webpage'>webpage</MenuItem>
+								</Field>
 							</Grid>
 							<Grid item xs={12}>
 								<Field
