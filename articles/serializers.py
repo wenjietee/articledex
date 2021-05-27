@@ -40,7 +40,7 @@ class ArticleCreatorSerializer(serializers.ModelSerializer):
 
      class Meta:
          model=Article
-         fields=('user') 
+         fields=('id','user') 
 class ArticleSerializer(serializers.ModelSerializer):
 
     tags = CreatableSlugRelatedField(

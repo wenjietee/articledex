@@ -45,9 +45,9 @@ def views_create(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def views_show(request, id):
-    # get article by uuid
+    # get article & article creator by uuid
     article = Article.objects.get(pk=id)
-
+    
     # delete article
     if request.method == 'DELETE':
         article.delete()
@@ -68,9 +68,13 @@ def views_show(request, id):
         if serializer.is_valid():
             serializer.save()
 
-    serializer = ArticleSerializer(article, many=False)
+    # serialize article 
+    serialized_article = ArticleSerializer(article, many=False)
 
-    return Response(serializer.data)
+    # serialize article createTypography
+    serialized_article_creator =  ArticleCreatorSerializer(article,many=False)
+    
+    return Response({'article':serialized_article.data,'creator':serialized_article_creator.data})
 
 
 @api_view(['POST', 'DELETE'])

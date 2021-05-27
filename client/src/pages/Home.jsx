@@ -30,7 +30,7 @@ const Home = (props) => {
 			Axios.get(`${process.env.REACT_APP_URL}api/unreads/`).then(
 				(response) => {
 					const filteredData = [];
-					console.log(response.data);
+
 					response.data.user_unreads.forEach((unread) => {
 						if (unread.status) {
 							filteredData.push(unread);
