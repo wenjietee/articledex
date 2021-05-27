@@ -6,7 +6,7 @@ from .models import *
 from articles.serializers import *
 from accounts.serializers import *
 from django.shortcuts import render
-
+from .scrapers import *
 
 # Create your views here.
 
@@ -22,16 +22,19 @@ def views_index(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
-    
+
     if request.method == 'POST':
         # set current user in data
         request.data['user'] = request.user.pk
+
+        # scrape content from website
+        request.data['content'] = scrape(request.data['url'])
 
         # save article
         article = ArticleSerializer(data=request.data)
         if article.is_valid():
             article.save()
-            
+
             return Response(article.data)
 
         else:
