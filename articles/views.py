@@ -14,6 +14,7 @@ from .scrapers import *
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_index(request):
+
     articles = Article.objects.all()
     serializer = ArticleSimpleSerializer(articles, many=True)
     return Response(serializer.data)
