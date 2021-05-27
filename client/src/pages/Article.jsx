@@ -134,7 +134,11 @@ const Article = (props) => {
 							})}
 						</Grid>
 						<Grid item xs={12}>
-							<p>{article.content}</p>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: article.content,
+								}}
+							></div>
 						</Grid>
 					</Grid>
 				</Box>
