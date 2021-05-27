@@ -55,6 +55,14 @@ def views_show(request, id):
 
     # edit article
     if request.method == 'PUT':
+        # store url from db
+        prev_url = article.url
+
+        # if url dont match rescrape content
+        if prev_url != request.data['url']:
+            request.data['content'] = scrape(request.data['url'])
+
+        # save edited data
         serializer = ArticleSerializer(
             instance=article, data=request.data, partial=True)
         if serializer.is_valid():
