@@ -40,7 +40,6 @@ const ArticleEdit = (props) => {
 					url: inputs.url,
 					article_type: inputs.article_type,
 					title: inputs.title,
-					content: 'scraped content edited',
 					description: inputs.description,
 					tags: inputs.tags.split(' '),
 				}
