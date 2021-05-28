@@ -60,8 +60,9 @@ const Article = (props) => {
 		try {
 			Axios.delete(
 				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
-			);
-			setDeleted(true);
+			).then(() => {
+				setDeleted(true);
+			});
 		} catch (error) {
 			console.log(error);
 		}
