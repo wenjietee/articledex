@@ -19,12 +19,13 @@ const ArticleEdit = (props) => {
 			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
 		).then((response) => {
 			// set state with fetched article
+		
 			setArticle({
-				url: response.data.url,
-				article_type: response.data.article_type,
-				title: response.data.title,
-				description: response.data.description,
-				tags: response.data.tags.join(' '),
+				url: response.data.article.url,
+				article_type: response.data.article.article_type,
+				title: response.data.article.title,
+				description: response.data.article.description,
+				tags: response.data.article.tags.join(' '),
 			});
 		});
 	}, [props.match.params.id]);
