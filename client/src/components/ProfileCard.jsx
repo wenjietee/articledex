@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 
 const ProfileCard = (props) => {
 	const classes = useStyles();
+	console.log(props);
 	return (
 		<Card raised className={classes.root}>
 			<List className={classes.root}>
@@ -54,6 +55,11 @@ const ProfileCard = (props) => {
 				<ListItem>
 					<ListItemText
 						primary={`Liked Articles: ${props.likes.length}`}
+					/>
+				</ListItem>
+				<ListItem>
+					<ListItemText
+						primary={`Bio: ${props.profile.description}`}
 					/>
 				</ListItem>
 				<ListItem>
