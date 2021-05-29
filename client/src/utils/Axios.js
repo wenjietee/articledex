@@ -35,7 +35,7 @@ Axios.interceptors.response.use(
 			!originalRequest._retry
 		) {
 			originalRequest._retry = true;
-			return Axios.post(`${base}/api/token/`, {
+			return Axios.post(`/api/token/`, {
 				refresh: refreshToken,
 			}).then((res) => {
 				if (res.status === 200) {

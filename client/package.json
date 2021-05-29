@@ -29,7 +29,7 @@
 		"workbox-streams": "^5.1.4",
 		"yup": "^0.32.9"
 	},
-	"proxy": "http://localhost:8000",
+	"proxy": "http://localhost:8000/",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",

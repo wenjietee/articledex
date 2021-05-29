@@ -38,9 +38,7 @@ const UserActionPopover = (props) => {
 	// toggle unread
 	const toggleUnread = () => {
 		try {
-			Axios.put(
-				`${process.env.REACT_APP_URL}api/actions/?action=unread&article=${props.id}`
-			);
+			Axios.put(`/api/actions/?action=unread&article=${props.id}`);
 			setUnread(!isUnread);
 		} catch (error) {
 			alert(
@@ -52,9 +50,7 @@ const UserActionPopover = (props) => {
 	// toggle private
 	const togglePrivate = () => {
 		try {
-			Axios.put(
-				`${process.env.REACT_APP_URL}api/actions/?action=private&article=${props.id}`
-			);
+			Axios.put(`/api/actions/?action=private&article=${props.id}`);
 			setPrivate(!isPrivate);
 		} catch (error) {
 			alert(
@@ -66,9 +62,7 @@ const UserActionPopover = (props) => {
 
 	const toggleLocal = () => {
 		try {
-			Axios.put(
-				`${process.env.REACT_APP_URL}api/actions/?action=local&article=${props.id}`
-			);
+			Axios.put(`/api/actions/?action=local&article=${props.id}`);
 			setLocal(!isLocal);
 		} catch (error) {
 			alert(

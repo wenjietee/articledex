@@ -50,9 +50,7 @@ const ArticleCard = (props) => {
 	// toggle like
 	const likeArticle = () => {
 		try {
-			Axios.post(
-				`${process.env.REACT_APP_URL}api/articles/like/${props.article.id}`
-			).then(() => {
+			Axios.post(`/api/articles/like/${props.article.id}`).then(() => {
 				setLike(!isLiked);
 			});
 		} catch (error) {
@@ -63,9 +61,7 @@ const ArticleCard = (props) => {
 	// toggle unlike
 	const unlikeArticle = () => {
 		try {
-			Axios.delete(
-				`${process.env.REACT_APP_URL}api/articles/like/${props.article.id}`
-			);
+			Axios.delete(`/api/articles/like/${props.article.id}`);
 			setLike(!isLiked);
 		} catch (error) {
 			console.log(error);
