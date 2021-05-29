@@ -33,7 +33,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
-    os.getenv('URL'),
+    os.getenv('DEV_URL'),
+    os.getenv('BUILD_URL')
 ]
 
 # Application definition

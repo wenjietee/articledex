@@ -13,7 +13,7 @@ def scrape(url):
 
     content = ''
     for section in sections:
-        paragraphs = section.find_all('p')
+        paragraphs = section.find_all(['p', 'img'])
         for paragraph in paragraphs:
             content += str(paragraph)
 
