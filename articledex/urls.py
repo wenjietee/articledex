@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/', include('accounts.urls')),
     path('api/articles/', include('articles.urls')),
     path('api/token/', TokenRefreshView.as_view(), name='token_refresh_view'),
+    path('service-worker.js', TemplateView.as_view(template_name="service-worker.js", 
+    content_type='application/javascript'), name='service-worker.js'),
     re_path('(^(?!(api|admin)).*$)',
             TemplateView.as_view(template_name='index.html'))
 ]
