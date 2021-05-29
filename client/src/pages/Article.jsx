@@ -39,17 +39,17 @@ const Article = (props) => {
 	// get article
 	useEffect(() => {
 		try {
-			Axios.get(
-				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
-			).then((response) => {
-				// set state with fetched article
-				setArticleData(response.data);
+			Axios.get(`/api/articles/show/${props.match.params.id}`).then(
+				(response) => {
+					// set state with fetched article
+					setArticleData(response.data);
 
-				//check if article belongs to user
-				if (response.data.article.user === props.user.id) {
-					setUserArticle(true);
+					//check if article belongs to user
+					if (response.data.article.user === props.user.id) {
+						setUserArticle(true);
+					}
 				}
-			});
+			);
 		} catch (error) {
 			window.location.href = `/404`;
 		}
@@ -58,11 +58,11 @@ const Article = (props) => {
 	const handleDelete = () => {
 		// delete article
 		try {
-			Axios.delete(
-				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
-			).then(() => {
-				setDeleted(true);
-			});
+			Axios.delete(`/api/articles/show/${props.match.params.id}`).then(
+				() => {
+					setDeleted(true);
+				}
+			);
 		} catch (error) {
 			console.log(error);
 		}

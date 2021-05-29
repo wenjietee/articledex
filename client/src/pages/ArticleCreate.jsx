@@ -18,17 +18,14 @@ const ArticleCreate = () => {
 		// webscraper activates here
 
 		try {
-			const { data } = await Axios.post(
-				`${process.env.REACT_APP_URL}api/articles/create/`,
-				{
-					url: inputs.url,
-					article_type: inputs.article_type,
-					title: inputs.title,
-					content: 'scraped content',
-					description: inputs.description,
-					tags: inputs.tags.split(' '),
-				}
-			);
+			const { data } = await Axios.post(`/api/articles/create/`, {
+				url: inputs.url,
+				article_type: inputs.article_type,
+				title: inputs.title,
+				content: 'scraped content',
+				description: inputs.description,
+				tags: inputs.tags.split(' '),
+			});
 			// set submit to true and set article id
 			setSubmitted(true);
 			setArticleId(data.id);

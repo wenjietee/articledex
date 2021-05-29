@@ -16,30 +16,26 @@ const Home = (props) => {
 	useEffect(() => {
 		// get articles
 		try {
-			Axios.get(`${process.env.REACT_APP_URL}api/articles/`).then(
-				(response) => {
-					// set state with article
-					setArticles(response.data);
-				}
-			);
+			Axios.get(`/api/articles/`).then((response) => {
+				// set state with article
+				setArticles(response.data);
+			});
 		} catch (error) {
 			console.log(error);
 		}
 		// get user unreads
 		try {
-			Axios.get(`${process.env.REACT_APP_URL}api/unreads/`).then(
-				(response) => {
-					const filteredData = [];
+			Axios.get(`/api/unreads/`).then((response) => {
+				const filteredData = [];
 
-					response.data.user_unreads.forEach((unread) => {
-						if (unread.status) {
-							filteredData.push(unread);
-						}
-					});
-					// set state with article
-					setUnreads(filteredData);
-				}
-			);
+				response.data.user_unreads.forEach((unread) => {
+					if (unread.status) {
+						filteredData.push(unread);
+					}
+				});
+				// set state with article
+				setUnreads(filteredData);
+			});
 		} catch (error) {
 			console.log(error);
 		}

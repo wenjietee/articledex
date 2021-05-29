@@ -13,15 +13,13 @@ const ProfileEdit = () => {
 	// get article
 	useEffect(() => {
 		try {
-			Axios.get(`${process.env.REACT_APP_URL}api/profile/edit`).then(
-				(response) => {
-					// set state with fetched article
-					setProfile({
-						description: response.data.description,
-						image: response.data.image,
-					});
-				}
-			);
+			Axios.get(`/api/profile/edit`).then((response) => {
+				// set state with fetched article
+				setProfile({
+					description: response.data.description,
+					image: response.data.image,
+				});
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -29,7 +27,7 @@ const ProfileEdit = () => {
 
 	const editProfile = async (inputs) => {
 		try {
-			await Axios.put(`${process.env.REACT_APP_URL}api/profile/edit`, {
+			await Axios.put(`/api/profile/edit`, {
 				description: inputs.description,
 				image: inputs.image,
 			});
