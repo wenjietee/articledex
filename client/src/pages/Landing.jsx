@@ -64,7 +64,20 @@ const Landing = (props) => {
 					</Container>
 				</Box>
 			) : (
-				<div>Offline Placeholder</div>
+				<Box
+					display='flex'
+					justifyContent='center'
+					alignItems='center'
+					minHeight='50vh'
+				>
+					<Container fixed align='center'>
+						<h1>Looks like you are offline.</h1>
+						<h1>
+							We've loaded the articles you've save locally in the
+							mean time.
+						</h1>
+					</Container>
+				</Box>
 			)}
 		</React.Fragment>
 	);
