@@ -24,43 +24,48 @@ const useStyles = makeStyles((theme) => ({
 // landing page component
 const Landing = (props) => {
 	const classes = useStyles();
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Box
-				display='flex'
-				justifyContent='center'
-				alignItems='center'
-				minHeight='50vh'
-			>
-				<Container fixed align='center'>
-					<h1>No time to read? Save 'em Read later!</h1>
-					<div>
-						<Button
-							color='primary'
-							variant='contained'
-							size='large'
-							component={Link}
-							to='/login'
-							className={classes.button}
-						>
-							SIGN IN
-						</Button>
-					</div>
-					<div>
-						<Button
-							color='primary'
-							variant='contained'
-							size='large'
-							component={Link}
-							to='/register'
-							className={classes.button}
-						>
-							SIGN UP
-						</Button>
-					</div>
-				</Container>
-			</Box>
+			{window.navigator.onLine ? (
+				<Box
+					display='flex'
+					justifyContent='center'
+					alignItems='center'
+					minHeight='50vh'
+				>
+					<Container fixed align='center'>
+						<h1>No time to read? Save 'em Read later!</h1>
+						<div>
+							<Button
+								color='primary'
+								variant='contained'
+								size='large'
+								component={Link}
+								to='/login'
+								className={classes.button}
+							>
+								SIGN IN
+							</Button>
+						</div>
+						<div>
+							<Button
+								color='primary'
+								variant='contained'
+								size='large'
+								component={Link}
+								to='/register'
+								className={classes.button}
+							>
+								SIGN UP
+							</Button>
+						</div>
+					</Container>
+				</Box>
+			) : (
+				<div>Offline Placeholder</div>
+			)}
 		</React.Fragment>
 	);
 };
