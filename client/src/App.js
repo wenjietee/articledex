@@ -17,6 +17,8 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
+import OfflineHome from './pages/OfflineHome';
+import LocalArticle from './pages/LocalArticle';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 import HeaderPublic from './components/HeaderPublic';
@@ -90,72 +92,83 @@ const App = () => {
 					<HeaderPublic />
 				)}
 				<main>
-					<Switch>
-						<PublicRoute
-							exact
-							path='/'
-							login={login}
-							isAuth={isAuth}
-							component={Landing}
-						/>
-						<PublicRoute
-							exact
-							path='/login'
-							login={login}
-							isAuth={isAuth}
-							component={Login}
-						/>
-						<PublicRoute
-							exact
-							path='/register'
-							isAuth={isAuth}
-							component={Register}
-						/>
+					{window.navigator.onLine ? (
+						<Switch>
+							<PublicRoute
+								exact
+								path='/'
+								login={login}
+								isAuth={isAuth}
+								component={Landing}
+							/>
+							<PublicRoute
+								exact
+								path='/login'
+								login={login}
+								isAuth={isAuth}
+								component={Login}
+							/>
+							<PublicRoute
+								exact
+								path='/register'
+								isAuth={isAuth}
+								component={Register}
+							/>
 
-						<ProtectedRoute
-							exact
-							path='/article/create'
-							isAuth={isAuth}
-							component={ArticleCreate}
-						/>
-						<ProtectedRoute
-							exact
-							path='/article/:id'
-							isAuth={isAuth}
-							user={user}
-							component={Article}
-						/>
-						<ProtectedRoute
-							exact
-							path='/article/:id/edit'
-							isAuth={isAuth}
-							component={ArticleEdit}
-						/>
-						<ProtectedRoute
-							exact
-							path='/profile'
-							isAuth={isAuth}
-							user={user}
-							component={Profile}
-						/>
-						<ProtectedRoute
-							exact
-							path='/profile/edit'
-							isAuth={isAuth}
-							user={user}
-							component={ProfileEdit}
-						/>
-						<ProtectedRoute
-							exact
-							path='/home'
-							logout={logout}
-							isAuth={isAuth}
-							user={user}
-							component={Home}
-						/>
-						<Route exact path='/404' component={NotFound} />
-						<Redirect to='/404' />
-					</Switch>
+							<ProtectedRoute
+								exact
+								path='/article/create'
+								isAuth={isAuth}
+								component={ArticleCreate}
+							/>
+							<ProtectedRoute
+								exact
+								path='/article/:id'
+								isAuth={isAuth}
+								user={user}
+								component={Article}
+							/>
+							<ProtectedRoute
+								exact
+								path='/article/:id/edit'
+								isAuth={isAuth}
+								component={ArticleEdit}
+							/>
+							<ProtectedRoute
+								exact
+								path='/profile'
+								isAuth={isAuth}
+								user={user}
+								component={Profile}
+							/>
+							<ProtectedRoute
+								exact
+								path='/profile/edit'
+								isAuth={isAuth}
+								user={user}
+								component={ProfileEdit}
+							/>
+							<ProtectedRoute
+								exact
+								path='/home'
+								logout={logout}
+								isAuth={isAuth}
+								user={user}
+								component={Home}
+							/>
+							<Route exact path='/404' component={NotFound} />
+							<Redirect to='/404' />
+						</Switch>
+					) : (
+						<Switch>
+							<Route exact path='/' component={OfflineHome} />
+							<Route
+								exact
+								path='/article/local/:id'
+								component={LocalArticle}
+							/>
+						</Switch>
+					)}
 				</main>
 				<Footer />
 			</Router>
