@@ -53,7 +53,7 @@ const ProfileEditForm = (props) => {
 					// disable button when submitting form
 					setSubmitting(true);
 
-					// register user
+					// edit user
 					props.editProfile(data);
 
 					// enable button
@@ -65,26 +65,6 @@ const ProfileEditForm = (props) => {
 						<Typography variant='body1' gutterBottom>
 							Edit Profile
 						</Typography>
-						<div>
-							<Box pt={2}>
-								<Field
-									name='description'
-									placeholder='Bio'
-									label='Bio'
-									type='text'
-									variant='outlined'
-									multiline
-									rows={8}
-									rowsMax={8}
-									className={classes.textField}
-									as={TextField}
-									value={values.description}
-								/>
-								<Typography color='error'>
-									<ErrorMessage name='description' />
-								</Typography>
-							</Box>
-						</div>
 
 						<div>
 							<Box
@@ -106,6 +86,26 @@ const ProfileEditForm = (props) => {
 										className={classes.button}
 									/>
 								</Box>
+							</Box>
+						</div>
+						<div>
+							<Box pt={2}>
+								<Field
+									name='description'
+									placeholder='Bio'
+									label='Bio'
+									type='text'
+									variant='outlined'
+									multiline
+									rows={8}
+									rowsMax={8}
+									className={classes.textField}
+									as={TextField}
+									value={values.description}
+								/>
+								<Typography color='error'>
+									<ErrorMessage name='description' />
+								</Typography>
 							</Box>
 						</div>
 
