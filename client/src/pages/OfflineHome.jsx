@@ -22,7 +22,6 @@ const OfflineHome = (props) => {
 					</h1>
 				</Container>
 			</Box>
-			;
 		</React.Fragment>
 	);
 };

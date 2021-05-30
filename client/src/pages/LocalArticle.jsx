@@ -35,13 +35,15 @@ const LocalArticle = (props) => {
 	useEffect(() => {
 		try {
 			setArticleData(
-				localStorage.getItem(`article-${props.match.params.id}`)
+				JSON.parse(
+					localStorage.getItem(`article-${props.match.params.id}`)
+				)
 			);
 		} catch (error) {
 			window.location.href = `/404`;
 		}
 	}, [props.match.params.id]);
-
+	console.log(articleData);
 	return (
 		<React.Fragment>
 			<CssBaseline />
