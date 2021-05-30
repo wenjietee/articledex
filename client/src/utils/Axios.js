@@ -1,7 +1,5 @@
 import Axios from 'axios';
 
-let base = process.env.REACT_APP_URL;
-
 Axios.interceptors.request.use(
 	(config) => {
 		// delete auth header if url matches regex

@@ -58,12 +58,34 @@ const UserActionPopover = (props) => {
 			);
 		}
 	};
-	// toggle local
 
+	// toggle local
 	const toggleLocal = () => {
 		try {
-			Axios.put(`/api/actions/?action=local&article=${props.id}`);
+			// set local
+			Axios.put(`/api/actions/?action=local&article=${props.id}`).then();
 			setLocal(!isLocal);
+
+			// cache data if set to true else remove data from cache
+			if (isLocal) {
+				// create cache
+				caches.open(`local-article-${props.id}`).then((cache) => {
+					try {
+						// fetched article data
+						Axios.get(`/api/articles/show/${props.id}`).then(
+							(response) => {
+								// cache the data
+								cache.add(response.data);
+							}
+						);
+					} catch (error) {
+						console.log(error);
+					}
+				});
+			} else {
+				// delete cache
+				caches.delete(`local-article-${props.id}`);
+			}
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
