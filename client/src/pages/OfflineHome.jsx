@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
 // offline home page component
 const OfflineHome = () => {
-	const [localArticles, setLocalArticles] = useState([]);
-	useEffect(() => {}, []);
+	const [localItems, setLocalItems] = useState();
+	// let localItems;
+	// localItems = JSON.parse(localStorage.getItem('localArticles'));
+	useEffect(() => {
+		setLocalItems(JSON.parse(localStorage.getItem('localArticles')));
+	}, []);
+
+	console.log(localItems);
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -22,6 +29,20 @@ const OfflineHome = () => {
 						We've loaded the articles you've save locally in the
 						mean time.
 					</h1>
+					<div>
+						{localItems
+							? localItems.map((item) => {
+									return (
+										<a
+											href={`/article/local/${item.article.id}`}
+											key={item.id}
+										>
+											{item.article.title}
+										</a>
+									);
+							  })
+							: undefined}
+					</div>
 				</Container>
 			</Box>
 		</React.Fragment>
