@@ -48,12 +48,6 @@ const LocalArticle = (props) => {
 			{articleData ? (
 				<Box mt={1} p={10} width='75%' minWidth='50%'>
 					<Grid container spacing={3} className={classes.root}>
-						<Grid item xs={12}>
-							<img
-								src={articleData.article.image}
-								alt='article'
-							/>
-						</Grid>
 						<Grid item xs={8}>
 							<h1 className={classes.title}>
 								{articleData.article.title}

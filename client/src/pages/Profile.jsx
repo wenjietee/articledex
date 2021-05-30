@@ -13,9 +13,6 @@ const Profile = (props) => {
 	const [profile, setProfile] = useState();
 	const [userArticles, setUserArticles] = useState();
 
-	// remove localArticles
-	localStorage.removeItem('localArticles');
-
 	// get profile
 	useEffect(() => {
 		// get articles
@@ -24,6 +21,11 @@ const Profile = (props) => {
 				// set state with article
 				setProfile(response.data.profile);
 				setUserArticles(response.data.user_articles);
+
+				// check if localArticle exist else create
+				if (!localStorage.key('localArticles')) {
+					localStorage.setItem('localArticles', undefined);
+				}
 
 				// store local article data
 				localStorage.setItem(
