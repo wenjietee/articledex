@@ -68,7 +68,7 @@ const UserActionPopover = (props) => {
 			setLocal(!isLocal);
 
 			// cache data if set to true else remove data from cache
-			if (isLocal) {
+			if (!isLocal) {
 				// store article
 
 				// local storage
@@ -168,9 +168,9 @@ const UserActionPopover = (props) => {
 					onClick={toggleLocal}
 				>
 					{isLocal ? (
-						<GetAppIcon fontSize='default' />
-					) : (
 						<PublishIcon fontSize='default' />
+					) : (
+						<GetAppIcon fontSize='default' />
 					)}
 				</IconButton>
 			</Popover>
