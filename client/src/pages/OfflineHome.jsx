@@ -30,12 +30,14 @@ const OfflineHome = () => {
 						{localItems
 							? localItems.map((item) => {
 									return (
-										<a
-											href={`/article/local/${item.article.id}`}
-											key={item.id}
-										>
-											{item.article.title}
-										</a>
+										<div>
+											<a
+												href={`/article/local/${item.article.id}`}
+												key={item.id}
+											>
+												{item.article.title}
+											</a>
+										</div>
 									);
 							  })
 							: undefined}
