@@ -44,7 +44,7 @@ const ProfileCard = (props) => {
 				</ListItem>
 				<ListItem>
 					<ListItemText
-						primary={`Save Articles: ${props.unreads.length}`}
+						primary={`Local Articles: ${props.locals.length}`}
 					/>
 				</ListItem>
 				<ListItem>

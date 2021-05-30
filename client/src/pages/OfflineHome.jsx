@@ -7,13 +7,11 @@ import Container from '@material-ui/core/Container';
 // offline home page component
 const OfflineHome = () => {
 	const [localItems, setLocalItems] = useState();
-	// let localItems;
-	// localItems = JSON.parse(localStorage.getItem('localArticles'));
+
 	useEffect(() => {
 		setLocalItems(JSON.parse(localStorage.getItem('localArticles')));
 	}, []);
 
-	console.log(localItems);
 	return (
 		<React.Fragment>
 			<CssBaseline />
