@@ -7,10 +7,6 @@ import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		minwidth: 600,
-	},
 	button: {
 		margin: theme.spacing(0.5, 0.5),
 		minWidth: '5em',
@@ -46,8 +42,8 @@ const LocalArticle = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 			{articleData ? (
-				<Box mt={1} p={10} width='75%' minWidth='50%'>
-					<Grid container spacing={3} className={classes.root}>
+				<Box m='auto' p={5} width='70%' minWidth='40%'>
+					<Grid container spacing={0}>
 						<Grid item xs={8}>
 							<h1 className={classes.title}>
 								{articleData.article.title}
