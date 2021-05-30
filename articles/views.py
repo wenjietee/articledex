@@ -6,7 +6,7 @@ from .models import *
 from articles.serializers import *
 from accounts.serializers import *
 from django.shortcuts import render
-
+from .scrapers import *
 
 # Create your views here.
 
@@ -14,6 +14,7 @@ from django.shortcuts import render
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_index(request):
+
     articles = Article.objects.all()
     serializer = ArticleSimpleSerializer(articles, many=True)
     return Response(serializer.data)
@@ -22,16 +23,19 @@ def views_index(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
-    
+
     if request.method == 'POST':
         # set current user in data
         request.data['user'] = request.user.pk
+
+        # scrape content from website
+        request.data['content'] = scrape(request.data['url'])
 
         # save article
         article = ArticleSerializer(data=request.data)
         if article.is_valid():
             article.save()
-            
+
             return Response(article.data)
 
         else:
@@ -41,9 +45,9 @@ def views_create(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def views_show(request, id):
-    # get article by uuid
+    # get article & article creator by uuid
     article = Article.objects.get(pk=id)
-
+    
     # delete article
     if request.method == 'DELETE':
         article.delete()
@@ -51,14 +55,26 @@ def views_show(request, id):
 
     # edit article
     if request.method == 'PUT':
+        # store url from db
+        prev_url = article.url
+
+        # if url dont match rescrape content
+        if prev_url != request.data['url']:
+            request.data['content'] = scrape(request.data['url'])
+
+        # save edited data
         serializer = ArticleSerializer(
             instance=article, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
 
-    serializer = ArticleSerializer(article, many=False)
+    # serialize article 
+    serialized_article = ArticleSerializer(article, many=False)
 
-    return Response(serializer.data)
+    # serialize article createTypography
+    serialized_article_creator =  ArticleCreatorSerializer(article,many=False)
+    
+    return Response({'article':serialized_article.data,'creator':serialized_article_creator.data})
 
 
 @api_view(['POST', 'DELETE'])

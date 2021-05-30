@@ -35,12 +35,11 @@ const UserActionPopover = (props) => {
 		setPrivate(props.isPrivate);
 		setLocal(props.isLocal);
 	}, [props.isUnread, props.isPrivate, props.isLocal]);
+
 	// toggle unread
 	const toggleUnread = () => {
 		try {
-			Axios.put(
-				`${process.env.REACT_APP_URL}api/actions/?action=unread&article=${props.id}`
-			);
+			Axios.put(`/api/actions/?action=unread&article=${props.id}`);
 			setUnread(!isUnread);
 		} catch (error) {
 			alert(
@@ -52,9 +51,7 @@ const UserActionPopover = (props) => {
 	// toggle private
 	const togglePrivate = () => {
 		try {
-			Axios.put(
-				`${process.env.REACT_APP_URL}api/actions/?action=private&article=${props.id}`
-			);
+			Axios.put(`/api/actions/?action=private&article=${props.id}`);
 			setPrivate(!isPrivate);
 		} catch (error) {
 			alert(
@@ -62,20 +59,64 @@ const UserActionPopover = (props) => {
 			);
 		}
 	};
-	// toggle local
 
+	// toggle local
 	const toggleLocal = () => {
 		try {
-			Axios.put(
-				`${process.env.REACT_APP_URL}api/actions/?action=local&article=${props.id}`
-			);
+			// set local
+			Axios.put(`/api/actions/?action=local&article=${props.id}`).then();
 			setLocal(!isLocal);
+
+			// cache data if set to true else remove data from cache
+			if (isLocal) {
+				// store article
+
+				// local storage
+				try {
+					// fetched article data
+					Axios.get(`/api/articles/show/${props.id}`).then(
+						(response) => {
+							localStorage.setItem(
+								`article-${props.id}`,
+								JSON.stringify(response.data)
+							);
+						}
+					);
+				} catch (error) {
+					console.log(error);
+				}
+
+				// create cache
+				// caches.open(`local-article-${props.id}`).then((cache) => {
+				// 	try {
+				// 		// // fetched article data
+				// 		// Axios.get(`/api/articles/show/${props.id}`).then(
+				// 		// 	(response) => {
+				// 		// 		// cache the data
+				// 		// 		cache.put(
+				// 		// 			`article/${props.id}`,
+				// 		// 			new Response(JSON.stringify(response.data))
+				// 		// 		);
+				// 		// 	}
+				// 		// );
+				// 	} catch (error) {
+				// 		console.log(error);
+				// 	}
+				// });
+			} else {
+				// delete cache
+				// caches.delete(`local-article-${props.id}`);
+
+				// delete localSotrage item
+				localStorage.removeItem(`article-${props.id}`);
+			}
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
 			);
 		}
 	};
+
 	return (
 		<React.Fragment>
 			<IconButton
@@ -127,9 +168,9 @@ const UserActionPopover = (props) => {
 					onClick={toggleLocal}
 				>
 					{isLocal ? (
-						<PublishIcon fontSize='default' />
-					) : (
 						<GetAppIcon fontSize='default' />
+					) : (
+						<PublishIcon fontSize='default' />
 					)}
 				</IconButton>
 			</Popover>

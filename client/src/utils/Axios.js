@@ -1,7 +1,5 @@
 import Axios from 'axios';
 
-let base = process.env.REACT_APP_URL;
-
 Axios.interceptors.request.use(
 	(config) => {
 		// delete auth header if url matches regex
@@ -35,7 +33,7 @@ Axios.interceptors.response.use(
 			!originalRequest._retry
 		) {
 			originalRequest._retry = true;
-			return Axios.post(`${base}/api/token/`, {
+			return Axios.post(`/api/token/`, {
 				refresh: refreshToken,
 			}).then((res) => {
 				if (res.status === 200) {

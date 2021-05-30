@@ -15,18 +15,19 @@ const ArticleEdit = (props) => {
 
 	// get article data
 	useEffect(() => {
-		Axios.get(
-			`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
-		).then((response) => {
-			// set state with fetched article
-			setArticle({
-				url: response.data.url,
-				article_type: response.data.article_type,
-				title: response.data.title,
-				description: response.data.description,
-				tags: response.data.tags.join(' '),
-			});
-		});
+		Axios.get(`/api/articles/show/${props.match.params.id}`).then(
+			(response) => {
+				// set state with fetched article
+
+				setArticle({
+					url: response.data.article.url,
+					article_type: response.data.article.article_type,
+					title: response.data.article.title,
+					description: response.data.article.description,
+					tags: response.data.article.tags.join(' '),
+				});
+			}
+		);
 	}, [props.match.params.id]);
 
 	const editArticle = async (inputs) => {
@@ -34,17 +35,13 @@ const ArticleEdit = (props) => {
 		// webscraper activates here
 
 		try {
-			await Axios.put(
-				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`,
-				{
-					url: inputs.url,
-					article_type: inputs.article_type,
-					title: inputs.title,
-					content: 'scraped content edited',
-					description: inputs.description,
-					tags: inputs.tags.split(' '),
-				}
-			);
+			await Axios.put(`/api/articles/show/${props.match.params.id}`, {
+				url: inputs.url,
+				article_type: inputs.article_type,
+				title: inputs.title,
+				description: inputs.description,
+				tags: inputs.tags.split(' '),
+			});
 			setSubmitted(true);
 		} catch (error) {
 			alert(

@@ -33,23 +33,23 @@ const useStyles = makeStyles((theme) => ({
 const Article = (props) => {
 	// states
 	const classes = useStyles();
-	const [article, setArticle] = useState();
+	const [articleData, setArticleData] = useState();
 	const [isUserArticle, setUserArticle] = useState();
 	const [isDeleted, setDeleted] = useState(false);
 	// get article
 	useEffect(() => {
 		try {
-			Axios.get(
-				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
-			).then((response) => {
-				// set state with fetched article
-				setArticle(response.data);
+			Axios.get(`/api/articles/show/${props.match.params.id}`).then(
+				(response) => {
+					// set state with fetched article
+					setArticleData(response.data);
 
-				//check if article belongs to user
-				if (response.data.user === props.user.id) {
-					setUserArticle(true);
+					//check if article belongs to user
+					if (response.data.article.user === props.user.id) {
+						setUserArticle(true);
+					}
 				}
-			});
+			);
 		} catch (error) {
 			window.location.href = `/404`;
 		}
@@ -58,10 +58,11 @@ const Article = (props) => {
 	const handleDelete = () => {
 		// delete article
 		try {
-			Axios.delete(
-				`${process.env.REACT_APP_URL}api/articles/show/${props.match.params.id}`
+			Axios.delete(`/api/articles/show/${props.match.params.id}`).then(
+				() => {
+					setDeleted(true);
+				}
 			);
-			setDeleted(true);
 		} catch (error) {
 			console.log(error);
 		}
@@ -72,11 +73,14 @@ const Article = (props) => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			{article ? (
+			{articleData ? (
 				<Box mt={1} p={10} width='75%' minWidth='50%'>
 					<Grid container spacing={3} className={classes.root}>
 						<Grid item xs={12}>
-							<img src={article.image} alt='article' />
+							<img
+								src={articleData.article.image}
+								alt='article'
+							/>
 						</Grid>
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>
@@ -89,7 +93,7 @@ const Article = (props) => {
 										? classes.button
 										: classes.hideButton
 								}
-								to={`/article/${article.id}/edit`}
+								to={`/article/${articleData.article.id}/edit`}
 							>
 								EDIT
 							</Button>
@@ -107,19 +111,21 @@ const Article = (props) => {
 							</Button>
 						</Grid>
 						<Grid item xs={8}>
-							<h1 className={classes.title}>{article.title}</h1>
+							<h1 className={classes.title}>
+								{articleData.article.title}
+							</h1>
 							<h3>
-								<a href={article.url}>Source</a>
+								<a href={articleData.article.url}>Source</a>
 							</h3>
 						</Grid>
 						<Grid item xs={4}>
 							<p>Saved by:</p>
-							<p>{article.user}</p>
+							<p>{articleData.creator.user}</p>
 						</Grid>
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>
 							<p>Tags:</p>
-							{article.tags.map((tag) => {
+							{articleData.article.tags.map((tag) => {
 								return (
 									<Chip
 										key={tag}
@@ -134,7 +140,11 @@ const Article = (props) => {
 							})}
 						</Grid>
 						<Grid item xs={12}>
-							<p>{article.content}</p>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: articleData.article.content,
+								}}
+							></div>
 						</Grid>
 					</Grid>
 				</Box>

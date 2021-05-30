@@ -34,7 +34,13 @@ class ArticleSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model=Article
         fields=('id','url','title','tags','user','description','image','article_likes')
-        
+
+class ArticleCreatorSerializer(serializers.ModelSerializer):
+     user= serializers.StringRelatedField(many=False) 
+
+     class Meta:
+         model=Article
+         fields=('id','user') 
 class ArticleSerializer(serializers.ModelSerializer):
 
     tags = CreatableSlugRelatedField(

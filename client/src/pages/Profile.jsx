@@ -17,13 +17,11 @@ const Profile = (props) => {
 	useEffect(() => {
 		// get articles
 		try {
-			Axios.get(`${process.env.REACT_APP_URL}api/profile/`).then(
-				(response) => {
-					// set state with article
-					setProfile(response.data.profile);
-					setUserArticles(response.data.user_articles);
-				}
-			);
+			Axios.get(`/api/profile/`).then((response) => {
+				// set state with article
+				setProfile(response.data.profile);
+				setUserArticles(response.data.user_articles);
+			});
 		} catch (error) {
 			console.log(error);
 		}
