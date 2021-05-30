@@ -69,6 +69,8 @@ const UserActionPopover = (props) => {
 
 			// cache data if set to true else remove data from cache
 			if (isLocal) {
+				// store article
+
 				// create cache
 				caches.open(`local-article-${props.id}`).then((cache) => {
 					try {
@@ -76,7 +78,10 @@ const UserActionPopover = (props) => {
 						Axios.get(`/api/articles/show/${props.id}`).then(
 							(response) => {
 								// cache the data
-								cache.add(response);
+								cache.put(
+									`article/${props.id}`,
+									new Response(JSON.stringify(response.data))
+								);
 							}
 						);
 					} catch (error) {
@@ -84,8 +89,8 @@ const UserActionPopover = (props) => {
 					}
 				});
 			} else {
-				// delete cache
-				caches.delete(`local-article-${props.id}`);
+				// delete article
+				caches.delete(`local-article-${props.id}`); // using cache
 			}
 		} catch (error) {
 			alert(
@@ -93,7 +98,9 @@ const UserActionPopover = (props) => {
 			);
 		}
 	};
-
+	caches.match(`article/${props.id}`).then((item) => {
+		console.log(item);
+	});
 	return (
 		<React.Fragment>
 			<IconButton
