@@ -71,26 +71,44 @@ const UserActionPopover = (props) => {
 			if (isLocal) {
 				// store article
 
+				// local storage
+				try {
+					// fetched article data
+					Axios.get(`/api/articles/show/${props.id}`).then(
+						(response) => {
+							localStorage.setItem(
+								`article-${props.id}`,
+								JSON.stringify(response.data)
+							);
+						}
+					);
+				} catch (error) {
+					console.log(error);
+				}
+
 				// create cache
-				caches.open(`local-article-${props.id}`).then((cache) => {
-					try {
-						// fetched article data
-						Axios.get(`/api/articles/show/${props.id}`).then(
-							(response) => {
-								// cache the data
-								cache.put(
-									`article/${props.id}`,
-									new Response(JSON.stringify(response.data))
-								);
-							}
-						);
-					} catch (error) {
-						console.log(error);
-					}
-				});
+				// caches.open(`local-article-${props.id}`).then((cache) => {
+				// 	try {
+				// 		// // fetched article data
+				// 		// Axios.get(`/api/articles/show/${props.id}`).then(
+				// 		// 	(response) => {
+				// 		// 		// cache the data
+				// 		// 		cache.put(
+				// 		// 			`article/${props.id}`,
+				// 		// 			new Response(JSON.stringify(response.data))
+				// 		// 		);
+				// 		// 	}
+				// 		// );
+				// 	} catch (error) {
+				// 		console.log(error);
+				// 	}
+				// });
 			} else {
-				// delete article
-				caches.delete(`local-article-${props.id}`); // using cache
+				// delete cache
+				// caches.delete(`local-article-${props.id}`);
+
+				// delete localSotrage item
+				localStorage.removeItem(`article-${props.id}`);
 			}
 		} catch (error) {
 			alert(
@@ -98,9 +116,7 @@ const UserActionPopover = (props) => {
 			);
 		}
 	};
-	caches.match(`article/${props.id}`).then((item) => {
-		console.log(item);
-	});
+
 	return (
 		<React.Fragment>
 			<IconButton
