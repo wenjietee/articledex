@@ -18,6 +18,16 @@ const Profile = (props) => {
 		// get articles
 		try {
 			Axios.get(`/api/profile/`).then((response) => {
+				// filter unread data
+				const filteredData = [];
+
+				response.data.profile.user_unreads.forEach((unread) => {
+					if (unread.status) {
+						filteredData.push(unread);
+					}
+				});
+				response.data.profile.user_unreads = filteredData;
+
 				// set state with article
 				setProfile(response.data.profile);
 				setUserArticles(response.data.user_articles);
