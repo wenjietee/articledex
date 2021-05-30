@@ -19,14 +19,22 @@ const Profile = (props) => {
 		try {
 			Axios.get(`/api/profile/`).then((response) => {
 				// filter unread data
-				const filteredData = [];
-
+				const filteredUnreads = [];
+				const filteredLocals = [];
 				response.data.profile.user_unreads.forEach((unread) => {
 					if (unread.status) {
-						filteredData.push(unread);
+						filteredUnreads.push(unread);
 					}
 				});
-				response.data.profile.user_unreads = filteredData;
+				response.data.profile.user_unreads = filteredLocals;
+
+				// filter local data
+				response.data.profile.user_locals.forEach((unread) => {
+					if (unread.status) {
+						filteredLocals.push(unread);
+					}
+				});
+				response.data.profile.user_locals = filteredLocals;
 
 				// set state with article
 				setProfile(response.data.profile);
@@ -70,6 +78,7 @@ const Profile = (props) => {
 						profile={profile.profile}
 						userArticles={userArticles.length}
 						unreads={profile.user_unreads.length}
+						locals={profile.user_locals.length}
 						likes={profile.user_likes.length}
 						username={profile.username}
 					/>

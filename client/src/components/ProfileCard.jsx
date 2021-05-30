@@ -53,6 +53,9 @@ const ProfileCard = (props) => {
 					/>
 				</ListItem>
 				<ListItem>
+					<ListItemText primary={`Local Articles: ${props.locals}`} />
+				</ListItem>
+				<ListItem>
 					<ListItemText primary={`Liked Articles: ${props.likes}`} />
 				</ListItem>
 				<ListItem>
