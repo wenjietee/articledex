@@ -57,7 +57,6 @@ const Profile = (props) => {
 					<ProfileCard
 						profile={profile.profile}
 						unreads={profile.user_unreads}
-						locals={profile.user_locals}
 						username={profile.username}
 						likes={profile.user_likes}
 					/>
