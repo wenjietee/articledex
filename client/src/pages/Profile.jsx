@@ -20,15 +20,15 @@ const Profile = (props) => {
 			Axios.get(`/api/profile/`).then((response) => {
 				// filter unread data
 				const filteredUnreads = [];
-				const filteredLocals = [];
 				response.data.profile.user_unreads.forEach((unread) => {
 					if (unread.status) {
 						filteredUnreads.push(unread);
 					}
 				});
-				response.data.profile.user_unreads = filteredLocals;
+				response.data.profile.user_unreads = filteredUnreads;
 
 				// filter local data
+				const filteredLocals = [];
 				response.data.profile.user_locals.forEach((unread) => {
 					if (unread.status) {
 						filteredLocals.push(unread);
