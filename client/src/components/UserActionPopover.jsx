@@ -35,6 +35,7 @@ const UserActionPopover = (props) => {
 		setPrivate(props.isPrivate);
 		setLocal(props.isLocal);
 	}, [props.isUnread, props.isPrivate, props.isLocal]);
+
 	// toggle unread
 	const toggleUnread = () => {
 		try {
@@ -75,7 +76,7 @@ const UserActionPopover = (props) => {
 						Axios.get(`/api/articles/show/${props.id}`).then(
 							(response) => {
 								// cache the data
-								cache.add(response.data);
+								cache.add(response);
 							}
 						);
 					} catch (error) {
@@ -92,6 +93,7 @@ const UserActionPopover = (props) => {
 			);
 		}
 	};
+
 	return (
 		<React.Fragment>
 			<IconButton
@@ -143,9 +145,9 @@ const UserActionPopover = (props) => {
 					onClick={toggleLocal}
 				>
 					{isLocal ? (
-						<PublishIcon fontSize='default' />
-					) : (
 						<GetAppIcon fontSize='default' />
+					) : (
+						<PublishIcon fontSize='default' />
 					)}
 				</IconButton>
 			</Popover>
