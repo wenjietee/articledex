@@ -167,6 +167,8 @@ const App = () => {
 								path='/article/local/:id'
 								component={LocalArticle}
 							/>
+							<Route exact path='/404' component={NotFound} />
+							<Redirect to='/404' />
 						</Switch>
 					)}
 				</main>

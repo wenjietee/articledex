@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
 // offline home page component
-const OfflineHome = (props) => {
+const OfflineHome = () => {
+	const [localArticles, setLocalArticles] = useState([]);
+	useEffect(() => {}, []);
 	return (
 		<React.Fragment>
 			<CssBaseline />
