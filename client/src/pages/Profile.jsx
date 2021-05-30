@@ -11,7 +11,7 @@ const Profile = (props) => {
 	// states
 
 	const [profile, setProfile] = useState();
-	const [userArticles, setUserArticles] = useState();
+	const [userArticles, setUserArticles] = useState([]);
 
 	// get profile
 	useEffect(() => {
@@ -58,7 +58,7 @@ const Profile = (props) => {
 		});
 		return result;
 	};
-
+	console.log(userArticles);
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -68,9 +68,10 @@ const Profile = (props) => {
 				{profile ? (
 					<ProfileCard
 						profile={profile.profile}
-						unreads={profile.user_unreads}
+						userArticles={userArticles.length}
+						unreads={profile.user_unreads.length}
+						likes={profile.user_likes.length}
 						username={profile.username}
-						likes={profile.user_likes}
 					/>
 				) : undefined}
 				{userArticles ? (
