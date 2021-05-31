@@ -30,5 +30,13 @@ def scrape(url,article_type):
         content = str(article)
  
         return content or error
+    
+    # get dev.to article or attempt to...
+    if article_type == 'dev.to':
+        article = parsed_html.find('div','crayons-article__main')
+        content = str(article)
+ 
+        return content or error
+
 
            

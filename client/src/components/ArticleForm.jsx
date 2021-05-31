@@ -98,10 +98,10 @@ const ArticleForm = (props) => {
 									value={values.article_type}
 								>
 									<MenuItem value='medium'>medium</MenuItem>
+									<MenuItem value='dev.to'>dev.to</MenuItem>
 									<MenuItem value='webpage'>
 										webpage (will try my best!)
 									</MenuItem>
-									<MenuItem value='reddit'>reddit</MenuItem>
 								</Field>
 							</Grid>
 							<Grid item xs={12}>
