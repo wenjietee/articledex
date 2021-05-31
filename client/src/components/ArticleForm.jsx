@@ -44,7 +44,7 @@ const ArticleForm = (props) => {
 						  }
 						: {
 								url: '',
-								article_type: 'webpage',
+								article_type: 'medium',
 								title: '',
 								description: '',
 								tags: '',
@@ -97,7 +97,11 @@ const ArticleForm = (props) => {
 									as={Select}
 									value={values.article_type}
 								>
-									<MenuItem value='webpage'>webpage</MenuItem>
+									<MenuItem value='medium'>medium</MenuItem>
+									<MenuItem value='webpage'>
+										webpage (will try my best!)
+									</MenuItem>
+									<MenuItem value='reddit'>reddit</MenuItem>
 								</Field>
 							</Grid>
 							<Grid item xs={12}>
