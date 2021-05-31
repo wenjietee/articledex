@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 // form schema
 const articleSchema = Yup.object({
-	url: Yup.string().required(),
+	url: Yup.string().url().required(),
 	article_type: Yup.string(),
 	title: Yup.string().required(),
-	description: Yup.string(),
+	description: Yup.string().required(),
 	tags: Yup.string(),
 });
 
@@ -133,6 +133,9 @@ const ArticleForm = (props) => {
 									as={TextField}
 									value={values.description}
 								/>
+								<Typography color='error'>
+									<ErrorMessage name='description' />
+								</Typography>
 							</Grid>
 							<Grid item xs={12}>
 								<Field
