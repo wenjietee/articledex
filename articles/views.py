@@ -29,7 +29,7 @@ def views_create(request):
         request.data['user'] = request.user.pk
 
         # scrape content from website
-        request.data['content'] = scrape(request.data['url'])
+        request.data['content'] = scrape(request.data['url'],request.data['article_type'])
 
         # save article
         article = ArticleSerializer(data=request.data)
@@ -60,7 +60,7 @@ def views_show(request, id):
 
         # if url dont match rescrape content
         if prev_url != request.data['url']:
-            request.data['content'] = scrape(request.data['url'])
+            request.data['content'] = scrape(request.data['url'],request.data['article_type'])
 
         # save edited data
         serializer = ArticleSerializer(

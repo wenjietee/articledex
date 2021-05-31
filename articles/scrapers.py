@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def scrape(url):
+def scrape(url,article_type):
     # get DOM object
     page = requests.get(url)
 
