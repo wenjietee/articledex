@@ -23,7 +23,7 @@ def views_index(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
-
+  
     if request.method == 'POST':
         # set current user in data
         request.data['user'] = request.user.pk

@@ -3,19 +3,20 @@ from bs4 import BeautifulSoup
 
 
 def scrape(url,article_type):
+
     # get DOM object
     page = requests.get(url)
+     # html string
+    parsed_html = BeautifulSoup(page.content, 'html.parser')
+    # init error message
+    error = '<h2>attempt to parse but no data was retrieved 😔 </h2>'
 
-    error = '<h3>attempt to parse but no data was retrieved 😔 </h3>'
-    # parse medium article
+    # get medium article
     if article_type == 'medium':
-    
-        # html string
-        parsed_html = BeautifulSoup(page.content, 'html.parser')
 
         sections = parsed_html.find_all('section')
-
         content = ''
+
         for section in sections:
             paragraphs = section.find_all(['p', 'img'])
             for paragraph in paragraphs:
@@ -23,4 +24,11 @@ def scrape(url,article_type):
 
         return content or error
 
+    # get web article or attempt to...
+    if article_type == 'webpage':
+        article = parsed_html.find('article')
+        content = str(article)
+ 
+        return content or error
 
+           
