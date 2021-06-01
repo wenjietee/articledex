@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import Axios from '../utils/Axios';
+import Axios from '../utils/Axios';
 import ArticleCard from '../components/ArticleCard';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,17 +12,19 @@ const SearchResults = (props) => {
 
 	// on load get data
 	useEffect(() => {
+		// format string
+		let queries = props.location.search.substring(3).split(' ').join('+');
+
 		// find articles
-		// try {
-		// 	Axios.get(`/api/articles/search/?q=`).then((response) => {
-		// 		// set state with found articles
-		// 		setFoundArticles(response.data);
-		// 	});
-		// } catch (error) {
-		// 	console.log(error);
-		// }
-	}, []);
-	console.log(props.location.search);
+		try {
+			Axios.get(`/api/articles/search/?q=${queries}`).then((response) => {
+				// set state with found articles
+				setFoundArticles(response.data);
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}, [props.location.search]);
 	return (
 		<React.Fragment>
 			<CssBaseline />
