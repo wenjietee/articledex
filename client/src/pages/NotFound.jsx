@@ -24,7 +24,7 @@ const NotFound = () => {
 						<span>
 							<strong>404:</strong>
 							<small className='text-muted '>
-								Page not found.
+								Page not found. Or are you offline?
 							</small>
 						</span>
 					</Typography>
@@ -33,11 +33,7 @@ const NotFound = () => {
 						Let's get you back.
 					</Typography>
 					<Box pt={3}>
-						<Button
-							variant='contained'
-							color='primary'
-							href='/home'
-						>
+						<Button variant='contained' color='primary' href='/'>
 							Back to Home
 						</Button>
 					</Box>

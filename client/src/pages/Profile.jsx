@@ -11,16 +11,45 @@ const Profile = (props) => {
 	// states
 
 	const [profile, setProfile] = useState();
-	const [userArticles, setUserArticles] = useState();
+	const [userArticles, setUserArticles] = useState([]);
 
 	// get profile
 	useEffect(() => {
 		// get articles
 		try {
 			Axios.get(`/api/profile/`).then((response) => {
+				// filter unread data
+				const filteredUnreads = [];
+				response.data.profile.user_unreads.forEach((unread) => {
+					if (unread.status) {
+						filteredUnreads.push(unread);
+					}
+				});
+				response.data.profile.user_unreads = filteredUnreads;
+
+				// filter local data
+				const filteredLocals = [];
+				response.data.profile.user_locals.forEach((unread) => {
+					if (unread.status) {
+						filteredLocals.push(unread);
+					}
+				});
+				response.data.profile.user_locals = filteredLocals;
+
 				// set state with article
 				setProfile(response.data.profile);
 				setUserArticles(response.data.user_articles);
+
+				// check if localArticle exist else create
+				if (!localStorage.key('localArticles')) {
+					localStorage.setItem('localArticles', undefined);
+				}
+
+				// store local article data
+				localStorage.setItem(
+					'localArticles',
+					JSON.stringify(response.data.profile.user_locals)
+				);
 			});
 		} catch (error) {
 			console.log(error);
@@ -37,7 +66,7 @@ const Profile = (props) => {
 		});
 		return result;
 	};
-
+	console.log(userArticles);
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -47,9 +76,11 @@ const Profile = (props) => {
 				{profile ? (
 					<ProfileCard
 						profile={profile.profile}
-						unreads={profile.user_unreads}
+						userArticles={userArticles.length}
+						unreads={profile.user_unreads.length}
+						locals={profile.user_locals.length}
+						likes={profile.user_likes.length}
 						username={profile.username}
-						likes={profile.user_likes}
 					/>
 				) : undefined}
 				{userArticles ? (

@@ -28,57 +28,40 @@ const Landing = (props) => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			{window.navigator.onLine ? (
-				<Box
-					display='flex'
-					justifyContent='center'
-					alignItems='center'
-					minHeight='50vh'
-				>
-					<Container fixed align='center'>
-						<h1>No time to read? Save 'em Read later!</h1>
-						<div>
-							<Button
-								color='primary'
-								variant='contained'
-								size='large'
-								component={Link}
-								to='/login'
-								className={classes.button}
-							>
-								SIGN IN
-							</Button>
-						</div>
-						<div>
-							<Button
-								color='primary'
-								variant='contained'
-								size='large'
-								component={Link}
-								to='/register'
-								className={classes.button}
-							>
-								SIGN UP
-							</Button>
-						</div>
-					</Container>
-				</Box>
-			) : (
-				<Box
-					display='flex'
-					justifyContent='center'
-					alignItems='center'
-					minHeight='50vh'
-				>
-					<Container fixed align='center'>
-						<h1>Looks like you are offline.</h1>
-						<h1>
-							We've loaded the articles you've save locally in the
-							mean time.
-						</h1>
-					</Container>
-				</Box>
-			)}
+			<Box
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				minHeight='50vh'
+			>
+				<Container fixed align='center'>
+					<h1>No time to read? Save 'em Read later!</h1>
+					<div>
+						<Button
+							color='primary'
+							variant='contained'
+							size='large'
+							component={Link}
+							to='/login'
+							className={classes.button}
+						>
+							SIGN IN
+						</Button>
+					</div>
+					<div>
+						<Button
+							color='primary'
+							variant='contained'
+							size='large'
+							component={Link}
+							to='/register'
+							className={classes.button}
+						>
+							SIGN UP
+						</Button>
+					</div>
+				</Container>
+			</Box>
 		</React.Fragment>
 	);
 };

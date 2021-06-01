@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 // form schema
 const articleSchema = Yup.object({
-	url: Yup.string().required(),
+	url: Yup.string().url().required(),
 	article_type: Yup.string(),
 	title: Yup.string().required(),
-	description: Yup.string(),
+	description: Yup.string().required(),
 	tags: Yup.string(),
 });
 
@@ -44,7 +44,7 @@ const ArticleForm = (props) => {
 						  }
 						: {
 								url: '',
-								article_type: 'webpage',
+								article_type: 'medium',
 								title: '',
 								description: '',
 								tags: '',
@@ -97,7 +97,11 @@ const ArticleForm = (props) => {
 									as={Select}
 									value={values.article_type}
 								>
-									<MenuItem value='webpage'>webpage</MenuItem>
+									<MenuItem value='medium'>medium</MenuItem>
+									<MenuItem value='dev.to'>dev.to</MenuItem>
+									<MenuItem value='webpage'>
+										webpage (will try my best!)
+									</MenuItem>
 								</Field>
 							</Grid>
 							<Grid item xs={12}>
@@ -129,6 +133,9 @@ const ArticleForm = (props) => {
 									as={TextField}
 									value={values.description}
 								/>
+								<Typography color='error'>
+									<ErrorMessage name='description' />
+								</Typography>
 							</Grid>
 							<Grid item xs={12}>
 								<Field

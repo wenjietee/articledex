@@ -10,11 +10,11 @@ const ProfileEdit = () => {
 	const [profile, setProfile] = useState();
 	const [isSubmitted, setSubmitted] = useState(false);
 
-	// get article
+	// get profile data
 	useEffect(() => {
 		try {
 			Axios.get(`/api/profile/edit`).then((response) => {
-				// set state with fetched article
+				// set state with fetched profile data
 				setProfile({
 					description: response.data.description,
 					image: response.data.image,

@@ -68,7 +68,7 @@ const UserActionPopover = (props) => {
 			setLocal(!isLocal);
 
 			// cache data if set to true else remove data from cache
-			if (isLocal) {
+			if (!isLocal) {
 				// store article
 
 				// local storage
@@ -77,7 +77,7 @@ const UserActionPopover = (props) => {
 					Axios.get(`/api/articles/show/${props.id}`).then(
 						(response) => {
 							localStorage.setItem(
-								`article-${props.id}`,
+								props.id,
 								JSON.stringify(response.data)
 							);
 						}
@@ -108,7 +108,7 @@ const UserActionPopover = (props) => {
 				// caches.delete(`local-article-${props.id}`);
 
 				// delete localSotrage item
-				localStorage.removeItem(`article-${props.id}`);
+				localStorage.removeItem(props.id);
 			}
 		} catch (error) {
 			alert(
@@ -168,9 +168,9 @@ const UserActionPopover = (props) => {
 					onClick={toggleLocal}
 				>
 					{isLocal ? (
-						<GetAppIcon fontSize='default' />
-					) : (
 						<PublishIcon fontSize='default' />
+					) : (
+						<GetAppIcon fontSize='default' />
 					)}
 				</IconButton>
 			</Popover>
