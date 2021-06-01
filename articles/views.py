@@ -7,6 +7,7 @@ from articles.serializers import *
 from accounts.serializers import *
 from django.shortcuts import render
 from .scrapers import *
+import operator
 
 # Create your views here.
 
@@ -94,3 +95,21 @@ def views_like(request, id):
         # delete like object
         Like.objects.get(article=article).delete()
         return Response({'message': 'article unliked.'})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def views_search(request):
+
+    # get array of queries from url
+    queries = request.GET['q'].split(' ')
+    
+    # get tags
+    tags = Tag.objects.filter(name__in=queries)
+
+    # find articles using tags
+    found_articles = Article.objects.filter(tags__in=tags)
+
+    # serialized article
+    serialized_articles =ArticleSimpleSerializer(found_articles,many=True).data
+
+    return Response(serialized_articles)
