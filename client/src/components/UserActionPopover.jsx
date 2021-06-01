@@ -89,16 +89,16 @@ const UserActionPopover = (props) => {
 				// create cache
 				// caches.open(`local-article-${props.id}`).then((cache) => {
 				// 	try {
-				// 		// // fetched article data
-				// 		// Axios.get(`/api/articles/show/${props.id}`).then(
-				// 		// 	(response) => {
-				// 		// 		// cache the data
-				// 		// 		cache.put(
-				// 		// 			`article/${props.id}`,
-				// 		// 			new Response(JSON.stringify(response.data))
-				// 		// 		);
-				// 		// 	}
-				// 		// );
+				// 		// fetched article data
+				// 		Axios.get(`/api/articles/show/${props.id}`).then(
+				// 			(response) => {
+				// 				// cache the data
+				// 				cache.put(
+				// 					`article/${props.id}`,
+				// 					new Response(JSON.stringify(response.data))
+				// 				);
+				// 			}
+				// 		);
 				// 	} catch (error) {
 				// 		console.log(error);
 				// 	}
@@ -116,6 +116,9 @@ const UserActionPopover = (props) => {
 			);
 		}
 	};
+	// caches.match(`local-article-${props.id}`).then((item) => {
+	// 	console.log('item', item);
+	// });
 
 	return (
 		<React.Fragment>

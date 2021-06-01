@@ -46,8 +46,8 @@ const ArticleForm = (props) => {
 								url: '',
 								article_type: 'medium',
 								title: '',
-								description: '',
-								tags: '',
+								description: 'my article',
+								tags: 'article',
 						  }
 				}
 				validationSchema={articleSchema}

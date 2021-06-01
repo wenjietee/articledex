@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
@@ -70,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 
+	searchButton: {
+		margin: theme.spacing(0, 1),
+		width: '1em',
+	},
+
 	home: {
 		textDecoration: 'none',
 		color: '#ffffff',
@@ -78,7 +83,15 @@ const useStyles = makeStyles((theme) => ({
 
 // header component
 const HeaderProtected = (props) => {
+	// states
 	const classes = useStyles();
+	const [searchVals, setSearchVals] = useState();
+
+	// update search input values
+	const updateInput = (e) => {
+		e.preventDefault();
+		setSearchVals(e.target.value);
+	};
 
 	return (
 		<React.Fragment>
@@ -90,9 +103,7 @@ const HeaderProtected = (props) => {
 						</Link>
 					</Typography>
 					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
-						</div>
+						<div className={classes.searchIcon}></div>
 						<InputBase
 							placeholder='Search…'
 							classes={{
@@ -100,9 +111,18 @@ const HeaderProtected = (props) => {
 								input: classes.inputInput,
 							}}
 							inputProps={{ 'aria-label': 'search' }}
+							onChange={updateInput}
 						/>
 					</div>
-
+					<Button
+						variant='contained'
+						disableElevation={true}
+						className={classes.searchButton}
+						component={Link}
+						to={`/search/?q=${searchVals}`}
+					>
+						<SearchIcon />
+					</Button>
 					<Button
 						variant='contained'
 						disableElevation={true}

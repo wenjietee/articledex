@@ -66,7 +66,7 @@ const Profile = (props) => {
 		});
 		return result;
 	};
-	console.log(userArticles);
+
 	return (
 		<React.Fragment>
 			<CssBaseline />

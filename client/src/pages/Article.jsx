@@ -70,7 +70,7 @@ const Article = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 			{articleData ? (
-				<Box m='auto' p={5} width='70%' minWidth='40%'>
+				<Box m='auto' mt={5} p={5} width='70%' minWidth='40%'>
 					<Grid container spacing={0}>
 						<Grid item xs={8}></Grid>
 						<Grid item xs={4}>
@@ -120,9 +120,9 @@ const Article = (props) => {
 									<Chip
 										key={tag}
 										label={tag}
-										component='a'
+										component={Link}
+										to={`/search/?q=${tag}`}
 										size='small'
-										href='#'
 										clickable
 										className={classes.chip}
 									/>
