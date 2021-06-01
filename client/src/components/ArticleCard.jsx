@@ -138,10 +138,10 @@ const ArticleCard = (props) => {
 								<Chip
 									key={tag}
 									label={tag}
-									component='a'
+									component={Link}
+									to={`/search/?q=${tag}`}
 									color='primary'
 									size='small'
-									href='#'
 									clickable
 									className={classes.chip}
 								/>

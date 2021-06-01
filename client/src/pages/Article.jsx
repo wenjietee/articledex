@@ -120,9 +120,9 @@ const Article = (props) => {
 									<Chip
 										key={tag}
 										label={tag}
-										component='a'
+										component={Link}
+										to={`/search/?q=${tag}`}
 										size='small'
-										href='#'
 										clickable
 										className={classes.chip}
 									/>

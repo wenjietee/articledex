@@ -19,6 +19,7 @@ import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 import OfflineHome from './pages/OfflineHome';
 import LocalArticle from './pages/LocalArticle';
+import SearchResults from './pages/SearchResults';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 import HeaderPublic from './components/HeaderPublic';
@@ -155,6 +156,14 @@ const App = () => {
 								isAuth={isAuth}
 								user={user}
 								component={Home}
+							/>
+							<ProtectedRoute
+								exact
+								path='/search/'
+								logout={logout}
+								isAuth={isAuth}
+								user={user}
+								component={SearchResults}
 							/>
 							<Route exact path='/404' component={NotFound} />
 							<Redirect to='/404' />
