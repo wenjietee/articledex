@@ -64,10 +64,7 @@ const LocalArticle = (props) => {
 									<Chip
 										key={tag}
 										label={tag}
-										component='a'
 										size='small'
-										href='#'
-										clickable
 										className={classes.chip}
 									/>
 								);
