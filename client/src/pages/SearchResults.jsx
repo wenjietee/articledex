@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Axios from '../utils/Axios';
+// import Axios from '../utils/Axios';
 import ArticleCard from '../components/ArticleCard';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +12,6 @@ const SearchResults = (props) => {
 
 	// on load get data
 	useEffect(() => {
-		console.log(props);
 		// find articles
 		// try {
 		// 	Axios.get(`/api/articles/search/?q=`).then((response) => {
@@ -23,7 +22,7 @@ const SearchResults = (props) => {
 		// 	console.log(error);
 		// }
 	}, []);
-
+	console.log(props.location.search);
 	return (
 		<React.Fragment>
 			<CssBaseline />
