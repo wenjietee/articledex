@@ -7,7 +7,6 @@ from articles.serializers import *
 from accounts.serializers import *
 from django.shortcuts import render
 from .scrapers import *
-import operator
 
 # Create your views here.
 
