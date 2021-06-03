@@ -64,10 +64,11 @@ const App = () => {
 			// set tokens
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
-			// login user
-			setAuth(true);
 			// set user data
+			localStorage.setItem('user', JSON.stringify(data.user));
 			setUser(data.user);
+			// set auth status
+			setAuth(true);
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
@@ -76,10 +77,10 @@ const App = () => {
 	};
 
 	const logout = () => {
-		// remove tokens
+		// clear items
 		localStorage.removeItem('access');
 		localStorage.removeItem('refresh');
-
+		localStorage.removeItem('user');
 		// logout user
 		setAuth(false);
 	};
