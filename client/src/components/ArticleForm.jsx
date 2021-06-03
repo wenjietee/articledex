@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 const articleSchema = Yup.object({
 	url: Yup.string().url().required(),
 	article_type: Yup.string(),
-	title: Yup.string().required(),
 	description: Yup.string().required(),
 	tags: Yup.string(),
 });
@@ -38,14 +37,12 @@ const ArticleForm = (props) => {
 						? {
 								url: props.article.url,
 								article_type: props.article.article_type,
-								title: props.article.title,
 								description: props.article.description,
 								tags: props.article.tags,
 						  }
 						: {
 								url: '',
 								article_type: 'medium',
-								title: '',
 								description: 'my article',
 								tags: 'article',
 						  }
@@ -103,21 +100,6 @@ const ArticleForm = (props) => {
 										webpage (will try my best!)
 									</MenuItem>
 								</Field>
-							</Grid>
-							<Grid item xs={12}>
-								<Field
-									name='title'
-									placeholder='article title'
-									label='Title*'
-									type='text'
-									variant='outlined'
-									fullWidth
-									as={TextField}
-									value={values.title}
-								/>
-								<Typography color='error'>
-									<ErrorMessage name='title' />
-								</Typography>
 							</Grid>
 							<Grid item xs={12}>
 								<Field

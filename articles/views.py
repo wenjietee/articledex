@@ -23,13 +23,18 @@ def views_index(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def views_create(request):
-  
+
     if request.method == 'POST':
         # set current user in data
         request.data['user'] = request.user.pk
 
-        # scrape content from website
-        request.data['content'] = scrape(request.data['url'],request.data['article_type'])
+        # scrape page data from website
+        scraped_data = scrape(
+            request.data['url'], request.data['article_type'])
+
+        # set content and title from scraped data
+        request.data['title'] = scraped_data['title']
+        request.data['content'] = scraped_data['content']
 
         # save article
         article = ArticleSerializer(data=request.data)
@@ -47,7 +52,7 @@ def views_create(request):
 def views_show(request, id):
     # get article & article creator by uuid
     article = Article.objects.get(pk=id)
-    
+
     # delete article
     if request.method == 'DELETE':
         article.delete()
@@ -60,7 +65,14 @@ def views_show(request, id):
 
         # if url dont match rescrape content
         if prev_url != request.data['url']:
-            request.data['content'] = scrape(request.data['url'],request.data['article_type'])
+
+            # scrape page data from website
+            scraped_data = scrape(
+                request.data['url'], request.data['article_type'])
+
+            # set content and title from scraped data
+            request.data['title'] = scraped_data['title']
+            request.data['content'] = scraped_data['content']
 
         # save edited data
         serializer = ArticleSerializer(
@@ -68,13 +80,13 @@ def views_show(request, id):
         if serializer.is_valid():
             serializer.save()
 
-    # serialize article 
+    # serialize article
     serialized_article = ArticleSerializer(article, many=False)
 
     # serialize article createTypography
-    serialized_article_creator =  ArticleCreatorSerializer(article,many=False)
-    
-    return Response({'article':serialized_article.data,'creator':serialized_article_creator.data})
+    serialized_article_creator = ArticleCreatorSerializer(article, many=False)
+
+    return Response({'article': serialized_article.data, 'creator': serialized_article_creator.data})
 
 
 @api_view(['POST', 'DELETE'])
@@ -95,13 +107,14 @@ def views_like(request, id):
         Like.objects.get(article=article).delete()
         return Response({'message': 'article unliked.'})
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def views_search(request):
 
     # get array of queries from url
     queries = request.GET['q'].split(' ')
-    
+
     # get tags
     tags = Tag.objects.filter(name__in=queries)
 
@@ -109,6 +122,7 @@ def views_search(request):
     found_articles = Article.objects.filter(tags__in=tags)
 
     # serialized article
-    serialized_articles =ArticleSimpleSerializer(found_articles,many=True).data
+    serialized_articles = ArticleSimpleSerializer(
+        found_articles, many=True).data
 
     return Response(serialized_articles)
