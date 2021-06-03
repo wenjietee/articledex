@@ -64,9 +64,6 @@ const App = () => {
 			// set tokens
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
-			// set user data
-			localStorage.setItem('user', JSON.stringify(data.user));
-			setUser(data.user);
 			// set auth status
 			setAuth(true);
 		} catch (error) {
@@ -80,7 +77,6 @@ const App = () => {
 		// clear items
 		localStorage.removeItem('access');
 		localStorage.removeItem('refresh');
-		localStorage.removeItem('user');
 		// logout user
 		setAuth(false);
 	};
