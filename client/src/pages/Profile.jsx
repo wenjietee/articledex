@@ -9,7 +9,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // profile page component
 const Profile = (props) => {
 	// states
-
 	const [profile, setProfile] = useState();
 	const [userArticles, setUserArticles] = useState([]);
 
