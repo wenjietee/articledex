@@ -5,6 +5,7 @@ from rest_framework import exceptions
 from .models import *
 from articles.serializers import *
 from accounts.serializers import *
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from .scrapers import *
 
@@ -128,11 +129,13 @@ def views_search(request):
     return Response(serialized_articles)
 
 
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
+@csrf_exempt
 def views_ext_create(request):
     if request.method == 'POST':
-
+        
         # find username match in DB
         username = request.data['user']
         user = User.objects.filter(username=username).first()
