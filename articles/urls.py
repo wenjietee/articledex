@@ -7,4 +7,5 @@ urlpatterns = [
     path('show/<uuid:id>', views_show, name='article_show'),
     path('like/<uuid:id>', views_like, name='article_like'),
     path('search/', views_search, name='article_search'),
+    path('ext/create/', views_ext_create, name='article_ext_create')
 ]

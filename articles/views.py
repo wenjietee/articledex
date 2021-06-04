@@ -1,4 +1,4 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import exceptions
@@ -126,3 +126,34 @@ def views_search(request):
         found_articles, many=True).data
 
     return Response(serialized_articles)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def views_ext_create(request):
+    if request.method == 'POST':
+
+        # find username match in DB
+        username = request.data['user']
+        user = User.objects.filter(username=username).first()
+
+        # set current user in data
+        request.data['user'] = user.pk
+
+        # scrape page data from website
+        scraped_data = scrape(
+            request.data['url'], request.data['article_type'])
+
+        # set content and title from scraped data
+        request.data['title'] = scraped_data['title']
+        request.data['content'] = scraped_data['content']
+
+        # save article
+        article = ArticleSerializer(data=request.data)
+        if article.is_valid():
+            article.save()
+
+            return Response(article.data)
+
+        else:
+            raise exceptions.ValidationError()
