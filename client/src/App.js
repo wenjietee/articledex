@@ -66,6 +66,8 @@ const App = () => {
 			localStorage.setItem('refresh', data.refresh);
 			// set auth status
 			setAuth(true);
+			// set user data
+			setUser(data.user);
 		} catch (error) {
 			alert(
 				`Error ${error.response.status}: ${error.response.data.detail}`
