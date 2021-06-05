@@ -42,15 +42,11 @@ const ArticleCard = (props) => {
 
 	// check if user liked article
 	useEffect(() => {
-		checkLikes();
-	}, []);
-
-	// check likes
-	const checkLikes = async () => {
-		if (props.article.article_likes.includes(await props.username)) {
+		if (props.article.article_likes.includes(props.username)) {
 			setLike(true);
 		}
-	};
+	}, [props.article.article_likes, props.username]);
+
 	// toggle like
 	const likeArticle = () => {
 		try {
