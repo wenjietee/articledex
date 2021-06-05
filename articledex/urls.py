@@ -26,6 +26,8 @@ urlpatterns = [
     path('api/token/', TokenRefreshView.as_view(), name='token_refresh_view'),
     path('service-worker.js', TemplateView.as_view(template_name='service-worker.js', 
     content_type='application/javascript'), name='service-worker.js'),
+    path('service-worker.js.map', TemplateView.as_view(template_name='service-worker.js.map', 
+    content_type='application/javascript'), name='service-worker.js.map'),
     path('manifest.json', TemplateView.as_view(template_name='manifest.json', 
     content_type='application/json'), name='manifest.json'),
     re_path('(^(?!(api|admin)).*$)',
