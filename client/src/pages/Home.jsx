@@ -1,0 +1,74 @@
+import React, { useState, useEffect } from 'react';
+import Axios from '../utils/Axios';
+import ArticleCard from '../components/ArticleCard';
+import UnreadCard from '../components/UnreadCard';
+import Box from '@material-ui/core/Box';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from '@material-ui/core/Container';
+
+const Home = (props) => {
+	// states
+	const [articles, setArticles] = useState();
+	const [unreads, setUnreads] = useState();
+
+	// on load get data
+	useEffect(() => {
+		// get articles
+		try {
+			Axios.get(`/api/articles/`).then((response) => {
+				// set state with article
+				setArticles(response.data);
+			});
+		} catch (error) {
+			console.log(error);
+		}
+		// get user unreads
+		try {
+			Axios.get(`/api/unreads/`).then((response) => {
+				const filteredData = [];
+
+				response.data.user_unreads.forEach((unread) => {
+					if (unread.status) {
+						filteredData.push(unread);
+					}
+				});
+				// set state with article
+				setUnreads(filteredData);
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
+
+	return (
+		<React.Fragment>
+			<CssBaseline />
+
+			<Box ml={30} mt={3}>
+				<Container>
+					<div>
+						{unreads ? <UnreadCard unreads={unreads} /> : undefined}
+					</div>
+					<div>
+						{articles ? (
+							articles.map((article) => {
+								return (
+									<ArticleCard
+										key={article.id}
+										article={article}
+										username={props.user.username}
+									/>
+								);
+							})
+						) : (
+							<CircularProgress />
+						)}
+					</div>
+				</Container>
+			</Box>
+		</React.Fragment>
+	);
+};
+
+export default Home;

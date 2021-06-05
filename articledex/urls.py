@@ -14,15 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf.urls.static import static
 from django.conf import settings
-from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView
-
+from django.urls import path, include, re_path
+from django.views.generic import TemplateView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('accounts.urls')),
-    path('api/articles', include('articles.urls')),
-    path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('api/articles/', include('articles.urls')),
+    path('api/token/', TokenRefreshView.as_view(), name='token_refresh_view'),
+    path('service-worker.js', TemplateView.as_view(template_name='service-worker.js', 
+    content_type='application/javascript'), name='service-worker.js'),
+    path('service-worker.js.map', TemplateView.as_view(template_name='service-worker.js.map', 
+    content_type='application/javascript'), name='service-worker.js.map'),
+    path('manifest.json', TemplateView.as_view(template_name='manifest.json', 
+    content_type='application/json'), name='manifest.json'),
+    re_path('(^(?!(api|admin)).*$)',
+            TemplateView.as_view(template_name='index.html'))
+] 
