@@ -64,7 +64,7 @@ const App = () => {
 			// set tokens
 			localStorage.setItem('access', data.access);
 			localStorage.setItem('refresh', data.refresh);
-			// login user
+			// set auth status
 			setAuth(true);
 			// set user data
 			setUser(data.user);
@@ -76,10 +76,9 @@ const App = () => {
 	};
 
 	const logout = () => {
-		// remove tokens
+		// clear items
 		localStorage.removeItem('access');
 		localStorage.removeItem('refresh');
-
 		// logout user
 		setAuth(false);
 	};

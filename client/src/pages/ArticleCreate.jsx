@@ -14,8 +14,6 @@ const ArticleCreate = () => {
 
 	// create article
 	const createArticle = async (inputs) => {
-		//let scrapedContent = undefined;
-		// webscraper activates here
 
 		try {
 			const { data } = await Axios.post(`/api/articles/create/`, {

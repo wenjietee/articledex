@@ -31,9 +31,6 @@ const ArticleEdit = (props) => {
 	}, [props.match.params.id]);
 
 	const editArticle = async (inputs) => {
-		//let scrapedContent = undefined;
-		// webscraper activates here
-
 		try {
 			await Axios.put(`/api/articles/show/${props.match.params.id}`, {
 				url: inputs.url,

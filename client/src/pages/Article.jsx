@@ -56,7 +56,15 @@ const Article = (props) => {
 		try {
 			Axios.delete(`/api/articles/show/${props.match.params.id}`).then(
 				() => {
+
+					// remove from local storage if article exist
+					if(localStorage.getItem(props.match.params.id) !== null){
+						localStorage.removeItem(props.match.params.id);
+					}
+					
+					// set delete state
 					setDeleted(true);
+
 				}
 			);
 		} catch (error) {
