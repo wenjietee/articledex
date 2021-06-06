@@ -88,10 +88,10 @@ const Profile = (props) => {
 										article.id,
 										profile.user_unreads
 									)}
-									isPrivate={findArticleStatus(
-										article.id,
-										profile.user_privates
-									)}
+									// isPrivate={findArticleStatus(
+									// 	article.id,
+									// 	profile.user_privates
+									// )}
 									isLocal={findArticleStatus(
 										article.id,
 										profile.user_locals
