@@ -39,12 +39,7 @@ const Profile = (props) => {
 				setProfile(response.data.profile);
 				setUserArticles(response.data.user_articles);
 
-				// check if localArticle exist else create
-				if (!localStorage.key('localArticles')) {
-					localStorage.setItem('localArticles', undefined);
-				}
-
-				// store local article data
+				//store local article data
 				localStorage.setItem(
 					'localArticles',
 					JSON.stringify(response.data.profile.user_locals)
