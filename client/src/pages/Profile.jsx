@@ -39,12 +39,7 @@ const Profile = (props) => {
 				setProfile(response.data.profile);
 				setUserArticles(response.data.user_articles);
 
-				// check if localArticle exist else create
-				if (!localStorage.key('localArticles')) {
-					localStorage.setItem('localArticles', undefined);
-				}
-
-				// store local article data
+				//store local article data
 				localStorage.setItem(
 					'localArticles',
 					JSON.stringify(response.data.profile.user_locals)
@@ -93,10 +88,10 @@ const Profile = (props) => {
 										article.id,
 										profile.user_unreads
 									)}
-									isPrivate={findArticleStatus(
-										article.id,
-										profile.user_privates
-									)}
+									// isPrivate={findArticleStatus(
+									// 	article.id,
+									// 	profile.user_privates
+									// )}
 									isLocal={findArticleStatus(
 										article.id,
 										profile.user_locals

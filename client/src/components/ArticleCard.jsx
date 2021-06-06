@@ -74,7 +74,7 @@ const ArticleCard = (props) => {
 				<UserActionPopover
 					id={props.article.id}
 					isUnread={props.isUnread}
-					isPrivate={props.isPrivate}
+					// isPrivate={props.isPrivate}
 					isLocal={props.isLocal}
 				/>
 			) : undefined}

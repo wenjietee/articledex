@@ -169,12 +169,36 @@ const App = () => {
 						</Switch>
 					) : (
 						<Switch>
-							<Route exact path='/' component={OfflineHome} />
-							<Route
+							<PublicRoute
+								exact
+								path='/'
+								login={login}
+								isAuth={isAuth}
+								component={OfflineHome}
+							/>
+
+							<PublicRoute
 								exact
 								path='/article/local/:id'
+								login={login}
+								isAuth={isAuth}
 								component={LocalArticle}
 							/>
+							<ProtectedRoute
+								exact
+								path='/home'
+								logout={logout}
+								isAuth={isAuth}
+								component={OfflineHome}
+							/>
+							<ProtectedRoute
+								exact
+								path='/article/local/:id'
+								logout={logout}
+								isAuth={isAuth}
+								component={LocalArticle}
+							/>
+
 							<Route exact path='/404' component={NotFound} />
 							<Redirect to='/404' />
 						</Switch>
