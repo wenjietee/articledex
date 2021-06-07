@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	content: {
 		minWidth: 275,
+		'& img': {
+			[theme.breakpoints.up('xs')]: {
+				width: '100%',
+				objectFit: 'contain',
+			},
+		},
 	},
 }));
 
