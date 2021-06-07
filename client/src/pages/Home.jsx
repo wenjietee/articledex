@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 const Home = (props) => {
 	// states
@@ -45,26 +46,36 @@ const Home = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 
-			<Box ml={30} mt={3}>
-				<Container>
-					<div>
-						{unreads ? <UnreadCard unreads={unreads} /> : undefined}
-					</div>
-					<div>
-						{articles ? (
-							articles.map((article) => {
-								return (
-									<ArticleCard
-										key={article.id}
-										article={article}
-										username={props.user.username}
-									/>
-								);
-							})
-						) : (
-							<CircularProgress />
-						)}
-					</div>
+			<Box mt={3}>
+				<Container fixed>
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={9} md={8} lg={7}>
+							<Grid container>
+								<Grid item xs>
+									{articles ? (
+										articles.map((article) => {
+											return (
+												<ArticleCard
+													key={article.id}
+													article={article}
+													username={
+														props.user.username
+													}
+												/>
+											);
+										})
+									) : (
+										<CircularProgress />
+									)}
+								</Grid>
+							</Grid>
+						</Grid>
+						<Grid item xs={12} sm={3} md={4} lg={5}>
+							{unreads ? (
+								<UnreadCard unreads={unreads} />
+							) : undefined}
+						</Grid>
+					</Grid>
 				</Container>
 			</Box>
 		</React.Fragment>

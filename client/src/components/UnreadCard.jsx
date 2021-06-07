@@ -9,9 +9,10 @@ import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles({
 	root: {
-		minWidth: 200,
-		maxWidth: 300,
-		width: '100%',
+		minWidth: 275,
+
+		position: 'sticky',
+		top: '1rem',
 		marginTop: 30,
 	},
 	listItem: {
@@ -23,12 +24,8 @@ const useStyles = makeStyles({
 const UnreadCard = (props) => {
 	const classes = useStyles();
 	return (
-		<Card raised className={classes.root}>
-			<List
-				component='nav'
-				className={classes.root}
-				aria-label='mailbox folders'
-			>
+		<Card raised className={classes.root} elevation={15}>
+			<List component='nav' aria-label='mailbox folders'>
 				<ListItem>
 					<ListItemText
 						primary={`Unread Articles (${props.unreads.length})`}
