@@ -49,7 +49,7 @@ const Home = (props) => {
 			<Box mt={3}>
 				<Container fixed>
 					<Grid container spacing={3}>
-						<Grid item xs={12} sm={9} md={8} lg={7}>
+						<Grid item xs={12} sm={8} md={8} lg={7}>
 							<Grid container>
 								<Grid item xs>
 									{articles ? (
@@ -70,7 +70,7 @@ const Home = (props) => {
 								</Grid>
 							</Grid>
 						</Grid>
-						<Grid item xs={12} sm={3} md={4} lg={5}>
+						<Grid item xs={12} sm={4} md={4} lg={5}>
 							{unreads ? (
 								<UnreadCard unreads={unreads} />
 							) : undefined}
