@@ -14,15 +14,24 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		display: 'flex',
+
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+			justifyContent: 'space-evenly',
+			padding: '0.5em',
+		},
 	},
 	title: {
+		marginTop: '0.5em',
 		flexGrow: 1,
-		display: 'none',
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('xs')]: {
 			display: 'block',
 		},
 	},
 	search: {
+		marginBottom: '0.5em',
+		marginTop: '0.5em',
 		position: 'relative',
 		borderRadius: theme.shape.borderRadius,
 		margin: theme.spacing(0, 2),
@@ -32,7 +41,10 @@ const useStyles = makeStyles((theme) => ({
 		},
 
 		width: '100%',
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('lg')]: {
+			width: '20em',
+		},
+		[theme.breakpoints.down('xs')]: {
 			marginLeft: theme.spacing(1),
 			width: 'auto',
 		},
@@ -55,24 +67,29 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
 		transition: theme.transitions.create('width'),
 		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-			width: '12ch',
+		[theme.breakpoints.up('xs')]: {
+			width: '100%',
 			'&:focus': {
 				width: '20ch',
 			},
 		},
 	},
 	headerButton: {
+		marginTop: '0.5em',
 		margin: theme.spacing(0, 1),
 		width: '100%',
 		[theme.breakpoints.up('lg')]: {
 			width: '8em',
 		},
 	},
-
-	searchButton: {
+	profileButton: {
+		marginTop: '0.5em',
 		margin: theme.spacing(0, 1),
-		width: '1em',
+		width: '100%',
+		fontSize: '14px',
+		[theme.breakpoints.up('lg')]: {
+			width: '8em',
+		},
 	},
 
 	home: {
@@ -96,7 +113,7 @@ const HeaderProtected = (props) => {
 	return (
 		<React.Fragment>
 			<AppBar position='static'>
-				<Toolbar>
+				<Toolbar className={classes.root}>
 					<Typography className={classes.title} variant='h6' noWrap>
 						<Link to='/home' className={classes.home}>
 							ARTICLE DEX
@@ -117,11 +134,12 @@ const HeaderProtected = (props) => {
 					<Button
 						variant='contained'
 						disableElevation={true}
-						className={classes.searchButton}
+						className={classes.headerButton}
 						component={Link}
 						to={`/search/?q=${searchVals}`}
+						startIcon={<SearchIcon />}
 					>
-						<SearchIcon />
+						SEARCH
 					</Button>
 					<Button
 						variant='contained'
@@ -136,7 +154,7 @@ const HeaderProtected = (props) => {
 					<Button
 						variant='contained'
 						disableElevation={true}
-						className={classes.headerButton}
+						className={classes.profileButton}
 						component={Link}
 						to='/profile'
 						startIcon={<AccountCircleIcon />}
