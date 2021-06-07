@@ -10,7 +10,6 @@ import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
-
 		position: 'sticky',
 		top: '1rem',
 		marginTop: 30,
