@@ -8,7 +8,7 @@ Article Dex is a progressive web application that allows busy users to save web 
 
 ## Chrome Extension
 
-A Chrome extension for Article Dex is avaliable allow users to save web articles even while away from the main application.
+A Chrome extension for Article Dex is avaliable to allow users to save web articles even while away from the main application.
 
 [Chrome Extension Github](https://github.com/wenjietee/articledex-chrome-extension)
 
