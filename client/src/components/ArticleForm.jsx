@@ -13,7 +13,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 // form styles
 const useStyles = makeStyles((theme) => ({
 	textField: {
-		width: '40em',
+		width: '100%',
+		[theme.breakpoints.up('lg')]: {
+			width: '70%',
+		},
 	},
 }));
 

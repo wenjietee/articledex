@@ -10,19 +10,25 @@ import Avatar from '@material-ui/core/Avatar';
 const useStyles = makeStyles({
 	root: {
 		minWidth: 200,
-		maxWidth: 300,
-		width: '100%',
+		maxWidth: '70%',
+		position: 'sticky',
+		top: '1rem',
 		marginTop: 30,
-		textAlign: 'center',
+		display: 'block',
 	},
-	listItem: {
-		textDecoration: 'none',
-		color: '#268ede',
-	},
+
 	image: {
-		height: '100px',
-		width: '100px',
+		height: '120px',
+		width: '120px',
 		objectFit: 'cover',
+		margin: 'auto',
+	},
+	user: {
+		textAlign: 'center',
+		fontSize: '5em',
+	},
+	button: {
+		margin: 'auto',
 	},
 });
 
@@ -30,8 +36,8 @@ const ProfileCard = (props) => {
 	const classes = useStyles();
 
 	return (
-		<Card raised className={classes.root}>
-			<List className={classes.root}>
+		<Card raised className={classes.root} elevation={15}>
+			<List>
 				<ListItem>
 					<Avatar
 						alt='Profile'
@@ -40,11 +46,14 @@ const ProfileCard = (props) => {
 					/>
 				</ListItem>
 				<ListItem>
-					<ListItemText primary={props.username} />
+					<ListItemText
+						primary={props.username}
+						className={classes.user}
+					/>
 				</ListItem>
 				<ListItem>
 					<ListItemText
-						primary={`Save Articles: ${props.userArticles}`}
+						primary={`Saved Articles: ${props.userArticles}`}
 					/>
 				</ListItem>
 				<ListItem>
@@ -65,6 +74,7 @@ const ProfileCard = (props) => {
 				</ListItem>
 				<ListItem>
 					<Button
+						className={classes.button}
 						variant='contained'
 						color='primary'
 						disableElevation={true}

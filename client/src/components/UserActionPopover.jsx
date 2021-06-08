@@ -5,8 +5,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import PublishIcon from '@material-ui/icons/Publish';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+// import VisibilityIcon from '@material-ui/icons/Visibility';
+// import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import SubjectIcon from '@material-ui/icons/Subject';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 
@@ -14,7 +14,7 @@ const UserActionPopover = (props) => {
 	// states
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [isUnread, setUnread] = useState();
-	const [isPrivate, setPrivate] = useState();
+	// const [isPrivate, setPrivate] = useState();
 	const [isLocal, setLocal] = useState();
 
 	// toggle popover
@@ -32,7 +32,7 @@ const UserActionPopover = (props) => {
 	// set states for article unread, private, local statuses
 	useEffect(() => {
 		setUnread(props.isUnread);
-		setPrivate(props.isPrivate);
+		// setPrivate(props.isPrivate);
 		setLocal(props.isLocal);
 	}, [props.isUnread, props.isPrivate, props.isLocal]);
 
@@ -49,16 +49,16 @@ const UserActionPopover = (props) => {
 	};
 
 	// toggle private
-	const togglePrivate = () => {
-		try {
-			Axios.put(`/api/actions/?action=private&article=${props.id}`);
-			setPrivate(!isPrivate);
-		} catch (error) {
-			alert(
-				`Error ${error.response.status}: ${error.response.data.detail}`
-			);
-		}
-	};
+	// const togglePrivate = () => {
+	// 	try {
+	// 		Axios.put(`/api/actions/?action=private&article=${props.id}`);
+	// 		setPrivate(!isPrivate);
+	// 	} catch (error) {
+	// 		alert(
+	// 			`Error ${error.response.status}: ${error.response.data.detail}`
+	// 		);
+	// 	}
+	// };
 
 	// toggle local
 	const toggleLocal = () => {
@@ -154,7 +154,7 @@ const UserActionPopover = (props) => {
 						<PlaylistAddCheckIcon fontSize='default' />
 					)}
 				</IconButton>
-				<IconButton
+				{/* <IconButton
 					aria-describedby={id}
 					color='primary'
 					onClick={togglePrivate}
@@ -164,7 +164,7 @@ const UserActionPopover = (props) => {
 					) : (
 						<VisibilityIcon fontSize='default' />
 					)}
-				</IconButton>
+				</IconButton> */}
 				<IconButton
 					aria-describedby={id}
 					color='primary'

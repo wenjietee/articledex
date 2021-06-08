@@ -18,17 +18,13 @@ import UserActionPopover from './UserActionPopover';
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
-		width: 700,
 		marginTop: 30,
-	},
-	title: {
-		marginTop: '-3.5em',
 	},
 	pos: {
 		marginBottom: 12,
 	},
 	media: {
-		height: 140,
+		height: '15em',
 	},
 	chip: {
 		margin: 2,
@@ -74,7 +70,7 @@ const ArticleCard = (props) => {
 				<UserActionPopover
 					id={props.article.id}
 					isUnread={props.isUnread}
-					isPrivate={props.isPrivate}
+					// isPrivate={props.isPrivate}
 					isLocal={props.isLocal}
 				/>
 			) : undefined}
@@ -90,11 +86,7 @@ const ArticleCard = (props) => {
 			<CardContent>
 				<Grid container spacing={3} alignItems='center'>
 					<Grid item xs={9}>
-						<Typography
-							variant='h5'
-							component='h2'
-							className={classes.title}
-						>
+						<Typography variant='h5' component='h2'>
 							{props.article.title}
 						</Typography>
 						<Typography
