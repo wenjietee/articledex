@@ -18,6 +18,7 @@ This application is built with Django, React, PostgreSQL and MaterialUI.
 
 ## Installation
 
+-   ensure pipenv and npm are installed.
 -   git clone `https://github.com/wenjietee/articledex.git`
 -   in terminal run these commands to start django server.
 -   `pipenv shell && install`
