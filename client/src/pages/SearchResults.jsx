@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 const SearchResults = (props) => {
 	// states
@@ -29,23 +30,28 @@ const SearchResults = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 
-			<Box ml={30} mt={3}>
-				<Container>
-					<div>
-						{foundArticles ? (
-							foundArticles.map((article) => {
-								return (
-									<ArticleCard
-										key={article.id}
-										article={article}
-										username={props.user.username}
-									/>
-								);
-							})
-						) : (
-							<CircularProgress />
-						)}
-					</div>
+			<Box mt={3}>
+				<Container fixed>
+					<h1>
+						Search results for: {props.location.search.substring(3)}
+					</h1>
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={9} md={8} lg={7}>
+							{foundArticles ? (
+								foundArticles.map((article) => {
+									return (
+										<ArticleCard
+											key={article.id}
+											article={article}
+											username={props.user.username}
+										/>
+									);
+								})
+							) : (
+								<CircularProgress />
+							)}
+						</Grid>
+					</Grid>
 				</Container>
 			</Box>
 		</React.Fragment>

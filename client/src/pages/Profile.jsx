@@ -5,8 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ProfileCard from '../components/ProfileCard';
 import ArticleCard from '../components/ArticleCard';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
-// profile page component
 const Profile = (props) => {
 	// states
 	const [profile, setProfile] = useState();
@@ -65,45 +66,58 @@ const Profile = (props) => {
 		<React.Fragment>
 			<CssBaseline />
 
-			<Box ml={30} mt={3}>
-				<h1>My Profile</h1>
-				{profile ? (
-					<ProfileCard
-						profile={profile.profile}
-						userArticles={userArticles.length}
-						unreads={profile.user_unreads.length}
-						locals={profile.user_locals.length}
-						likes={profile.user_likes.length}
-						username={profile.username}
-					/>
-				) : undefined}
-				{userArticles ? (
-					userArticles.map((article) => {
-						return (
-							<div key={article.id}>
-								<ArticleCard
-									article={article}
-									username={props.user.username}
-									isUnread={findArticleStatus(
-										article.id,
-										profile.user_unreads
+			<Box mt={3}>
+				<Container fixed>
+					<h1>My Profile</h1>
+					<Grid container spacing={3}>
+						<Grid item xs={12} sm={9} md={8} lg={7}>
+							<Grid container>
+								<Grid item xs>
+									{userArticles ? (
+										userArticles.map((article) => {
+											return (
+												<ArticleCard
+													key={article.id}
+													article={article}
+													username={
+														props.user.username
+													}
+													isUnread={findArticleStatus(
+														article.id,
+														profile.user_unreads
+													)}
+													// isPrivate={findArticleStatus(
+													// 	article.id,
+													// 	profile.user_privates
+													// )}
+													isLocal={findArticleStatus(
+														article.id,
+														profile.user_locals
+													)}
+													isProfilePage={true}
+												/>
+											);
+										})
+									) : (
+										<CircularProgress />
 									)}
-									// isPrivate={findArticleStatus(
-									// 	article.id,
-									// 	profile.user_privates
-									// )}
-									isLocal={findArticleStatus(
-										article.id,
-										profile.user_locals
-									)}
-									isProfilePage={true}
+								</Grid>
+							</Grid>
+						</Grid>
+						<Grid item xs={12} sm={3} md={4} lg={5}>
+							{profile ? (
+								<ProfileCard
+									profile={profile.profile}
+									userArticles={userArticles.length}
+									unreads={profile.user_unreads.length}
+									locals={profile.user_locals.length}
+									likes={profile.user_likes.length}
+									username={profile.username}
 								/>
-							</div>
-						);
-					})
-				) : (
-					<CircularProgress />
-				)}
+							) : undefined}
+						</Grid>
+					</Grid>
+				</Container>
 			</Box>
 		</React.Fragment>
 	);
