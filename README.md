@@ -2,7 +2,7 @@
 
 ## About the app
 
-Article Dex is a progressive web application that allows busy users to save web articles of interest to read later. Users can further save articles locally to read it in the offline version of the application if an internet connection is unavailable.
+Article Dex is a progressive web application that allows busy users to save web articles of interest to read later. Users can further save articles locally to read it on the offline version of the application if an internet connection is unavailable.
 
 [Application Link](https://articledex.herokuapp.com/)
 
@@ -14,7 +14,7 @@ A Chrome extension for Article Dex is avaliable to allow users to save web artic
 
 ## Tech Stack
 
-This application is built with Django, React and PostgreSQL and MaterialUI.
+This application is built with Django, React, PostgreSQL and MaterialUI.
 
 ## Installation
 
