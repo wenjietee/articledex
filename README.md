@@ -18,7 +18,7 @@ This application is built with Django, React and PostgreSQL and MaterialUI.
 
 ## Installation
 
--   git clone `https://git.generalassemb.ly/wjtee89/bookStore.git`
+-   git clone `https://github.com/wenjietee/articledex.git`
 -   in terminal run these commands to start django server.
 -   `pipenv shell && install`
 -   `pipenv run python manage.py migrate`
