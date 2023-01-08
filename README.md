@@ -29,12 +29,6 @@ This application is built with Django, React, PostgreSQL and MaterialUI.
 -   `npm install`
 -   `npm start`
 
-## Miro Board
-
-Miro page for wireframes, ERD and roadmap.
-
-[Link to Miro](https://miro.com/app/board/o9J_lFLfIz4=/)
-
 ## Resources
 
 [Using service workers With React](https://blog.bitsrc.io/using-service-workers-with-react-27a4c5e2d1a9)
